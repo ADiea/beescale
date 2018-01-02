@@ -1,0 +1,1228 @@
+   1               		.file	"ADC.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.ADC_read,"ax",@progbits
+  17               	.global	ADC_read
+  19               	ADC_read:
+  20               	.LFB4:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 8B9A      		sbi 49-32,3
+  26               	.LSM2:
+  27 0002 839A      		sbi 48-32,3
+  28               	.LSM3:
+  29 0004 8091 7A00 		lds r24,122
+  30 0008 8068      		ori r24,lo8(-128)
+  31 000a 8093 7A00 		sts 122,r24
+  32               	.LSM4:
+  33 000e 8091 7A00 		lds r24,122
+  34 0012 8064      		ori r24,lo8(64)
+  35 0014 8093 7A00 		sts 122,r24
+  36               	.L2:
+  37               	.LSM5:
+  38 0018 8091 7A00 		lds r24,122
+  39 001c 84FF      		sbrs r24,4
+  40 001e 00C0      		rjmp .L2
+  41 0020 30E0      		ldi r19,lo8(0)
+  42               	.LVL0:
+  43 0022 40E0      		ldi r20,lo8(0)
+  44 0024 50E0      		ldi r21,hi8(0)
+  45               	.LVL1:
+  46               	.L4:
+  47               	.LSM6:
+  48 0026 8091 7A00 		lds r24,122
+  49 002a 8064      		ori r24,lo8(64)
+  50 002c 8093 7A00 		sts 122,r24
+  51               	.L3:
+  52               	.LSM7:
+  53 0030 8091 7A00 		lds r24,122
+  54 0034 84FF      		sbrs r24,4
+  55 0036 00C0      		rjmp .L3
+  56               	.LSM8:
+  57 0038 2091 7800 		lds r18,120
+  58               	.LSM9:
+  59 003c 8091 7900 		lds r24,121
+  60               	.LSM10:
+  61 0040 90E0      		ldi r25,lo8(0)
+  62 0042 982F      		mov r25,r24
+  63 0044 8827      		clr r24
+  64 0046 820F      		add r24,r18
+  65 0048 911D      		adc r25,__zero_reg__
+  66 004a 480F      		add r20,r24
+  67 004c 591F      		adc r21,r25
+  68               	.LSM11:
+  69 004e 3F5F      		subi r19,lo8(-(1))
+  70 0050 3830      		cpi r19,lo8(8)
+  71 0052 01F4      		brne .L4
+  72               	.LSM12:
+  73 0054 8B98      		cbi 49-32,3
+  74               	.LSM13:
+  75 0056 8398      		cbi 48-32,3
+  76               	.LSM14:
+  77 0058 8091 7A00 		lds r24,122
+  78 005c 8F77      		andi r24,lo8(127)
+  79 005e 8093 7A00 		sts 122,r24
+  80               	.LSM15:
+  81 0062 CA01      		movw r24,r20
+  82 0064 23E0      		ldi r18,3
+  83 0066 9595      	1:	asr r25
+  84 0068 8795      		ror r24
+  85 006a 2A95      		dec r18
+  86 006c 01F4      		brne 1b
+  87               	/* epilogue start */
+  88 006e 0895      		ret
+  89               	.LFE4:
+  91               		.section	.text.ADC_init,"ax",@progbits
+  92               	.global	ADC_init
+  94               	ADC_init:
+  95               	.LFB3:
+  96               	.LSM16:
+  97               	.LVL2:
+  98               	/* prologue: function */
+  99               	/* frame size = 0 */
+ 100               	.LSM17:
+ 101 0000 8093 7C00 		sts 124,r24
+ 102               	.LSM18:
+ 103 0004 83E8      		ldi r24,lo8(-125)
+ 104               	.LVL3:
+ 105 0006 8093 7A00 		sts 122,r24
+ 106               	.LSM19:
+ 107 000a 0E94 0000 		call ADC_read
+ 108               	/* epilogue start */
+ 109               	.LSM20:
+ 110 000e 0895      		ret
+ 111               	.LFE3:
+ 113               		.section	.text.LightFunc,"ax",@progbits
+ 114               	.global	LightFunc
+ 116               	LightFunc:
+ 117               	.LFB8:
+ 118               	.LSM21:
+ 119               	.LVL4:
+ 120 0000 1F93      		push r17
+ 121               	/* prologue: function */
+ 122               	/* frame size = 0 */
+ 123 0002 182F      		mov r17,r24
+ 124               	.LSM22:
+ 125 0004 8091 0000 		lds r24,enter.1579
+ 126               	.LVL5:
+ 127 0008 8823      		tst r24
+ 128 000a 01F0      		breq .L12
+ 129               	.LSM23:
+ 130 000c 1092 0000 		sts enter.1579,__zero_reg__
+ 131               	.LSM24:
+ 132 0010 82E0      		ldi r24,lo8(2)
+ 133 0012 0E94 0000 		call ADC_init
+ 134               	.LSM25:
+ 135 0016 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 136 0018 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 137 001a 0E94 0000 		call Timer0_RegisterCallbackFunction
+ 138 001e 00C0      		rjmp .L13
+ 139               	.L12:
+ 140               	.LSM26:
+ 141 0020 81E0      		ldi r24,lo8(1)
+ 142 0022 60E0      		ldi r22,lo8(0)
+ 143 0024 0E94 0000 		call LCD_UpdateRequired
+ 144               	.L13:
+ 145               	.LSM27:
+ 146 0028 1330      		cpi r17,lo8(3)
+ 147 002a 01F0      		breq .L14
+ 148 002c 81E5      		ldi r24,lo8(81)
+ 149 002e 00C0      		rjmp .L15
+ 150               	.L14:
+ 151               	.LSM28:
+ 152 0030 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 153 0032 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 154 0034 0E94 0000 		call Timer0_RemoveCallbackFunction
+ 155               	.LSM29:
+ 156 0038 81E0      		ldi r24,lo8(1)
+ 157 003a 8093 0000 		sts enter.1579,r24
+ 158 003e 80E5      		ldi r24,lo8(80)
+ 159               	.L15:
+ 160               	/* epilogue start */
+ 161               	.LSM30:
+ 162 0040 1F91      		pop r17
+ 163               	.LVL6:
+ 164 0042 0895      		ret
+ 165               	.LFE8:
+ 167               		.section	.text.VoltageFunc,"ax",@progbits
+ 168               	.global	VoltageFunc
+ 170               	VoltageFunc:
+ 171               	.LFB7:
+ 172               	.LSM31:
+ 173               	.LVL7:
+ 174 0000 1F93      		push r17
+ 175               	/* prologue: function */
+ 176               	/* frame size = 0 */
+ 177 0002 182F      		mov r17,r24
+ 178               	.LSM32:
+ 179 0004 8091 0000 		lds r24,enter.1573
+ 180               	.LVL8:
+ 181 0008 8823      		tst r24
+ 182 000a 01F0      		breq .L18
+ 183               	.LSM33:
+ 184 000c 1092 0000 		sts enter.1573,__zero_reg__
+ 185               	.LSM34:
+ 186 0010 81E0      		ldi r24,lo8(1)
+ 187 0012 0E94 0000 		call ADC_init
+ 188               	.LSM35:
+ 189 0016 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 190 0018 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 191 001a 0E94 0000 		call Timer0_RegisterCallbackFunction
+ 192 001e 00C0      		rjmp .L19
+ 193               	.L18:
+ 194               	.LSM36:
+ 195 0020 81E0      		ldi r24,lo8(1)
+ 196 0022 60E0      		ldi r22,lo8(0)
+ 197 0024 0E94 0000 		call LCD_UpdateRequired
+ 198               	.L19:
+ 199               	.LSM37:
+ 200 0028 1330      		cpi r17,lo8(3)
+ 201 002a 01F0      		breq .L20
+ 202 002c 87E4      		ldi r24,lo8(71)
+ 203 002e 00C0      		rjmp .L21
+ 204               	.L20:
+ 205               	.LSM38:
+ 206 0030 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 207 0032 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 208 0034 0E94 0000 		call Timer0_RemoveCallbackFunction
+ 209               	.LSM39:
+ 210 0038 81E0      		ldi r24,lo8(1)
+ 211 003a 8093 0000 		sts enter.1573,r24
+ 212 003e 86E4      		ldi r24,lo8(70)
+ 213               	.L21:
+ 214               	/* epilogue start */
+ 215               	.LSM40:
+ 216 0040 1F91      		pop r17
+ 217               	.LVL9:
+ 218 0042 0895      		ret
+ 219               	.LFE7:
+ 221               		.section	.text.TemperatureFunc,"ax",@progbits
+ 222               	.global	TemperatureFunc
+ 224               	TemperatureFunc:
+ 225               	.LFB6:
+ 226               	.LSM41:
+ 227               	.LVL10:
+ 228 0000 1F93      		push r17
+ 229               	/* prologue: function */
+ 230               	/* frame size = 0 */
+ 231 0002 182F      		mov r17,r24
+ 232               	.LSM42:
+ 233 0004 8091 0000 		lds r24,enter.1566
+ 234               	.LVL11:
+ 235 0008 8823      		tst r24
+ 236 000a 01F0      		breq .L24
+ 237               	.LSM43:
+ 238 000c 1092 0000 		sts enter.1566,__zero_reg__
+ 239               	.LSM44:
+ 240 0010 80E0      		ldi r24,lo8(0)
+ 241 0012 0E94 0000 		call ADC_init
+ 242               	.LSM45:
+ 243 0016 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 244 0018 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 245 001a 0E94 0000 		call Timer0_RegisterCallbackFunction
+ 246 001e 00C0      		rjmp .L25
+ 247               	.L24:
+ 248               	.LSM46:
+ 249 0020 81E0      		ldi r24,lo8(1)
+ 250 0022 60E0      		ldi r22,lo8(0)
+ 251 0024 0E94 0000 		call LCD_UpdateRequired
+ 252               	.L25:
+ 253               	.LSM47:
+ 254 0028 1330      		cpi r17,lo8(3)
+ 255 002a 01F4      		brne .L26
+ 256               	.LSM48:
+ 257 002c 80E0      		ldi r24,lo8(gs(ADC_periphery))
+ 258 002e 90E0      		ldi r25,hi8(gs(ADC_periphery))
+ 259 0030 0E94 0000 		call Timer0_RemoveCallbackFunction
+ 260               	.LSM49:
+ 261 0034 81E0      		ldi r24,lo8(1)
+ 262 0036 8093 0000 		sts enter.1566,r24
+ 263 003a 8CE3      		ldi r24,lo8(60)
+ 264 003c 00C0      		rjmp .L27
+ 265               	.L26:
+ 266               	.LSM50:
+ 267 003e 1430      		cpi r17,lo8(4)
+ 268 0040 01F4      		brne .L28
+ 269               	.LSM51:
+ 270 0042 8091 0000 		lds r24,degree
+ 271 0046 8430      		cpi r24,lo8(4)
+ 272 0048 01F0      		breq .L35
+ 273               	.L29:
+ 274               	.LSM52:
+ 275 004a 1093 0000 		sts degree,r17
+ 276 004e 00C0      		rjmp .L33
+ 277               	.L28:
+ 278               	.LSM53:
+ 279 0050 1530      		cpi r17,lo8(5)
+ 280 0052 01F4      		brne .L33
+ 281               	.L30:
+ 282               	.LSM54:
+ 283 0054 8091 0000 		lds r24,degree
+ 284 0058 8430      		cpi r24,lo8(4)
+ 285 005a 01F4      		brne .L31
+ 286               	.L35:
+ 287               	.LSM55:
+ 288 005c 83E0      		ldi r24,lo8(3)
+ 289 005e 00C0      		rjmp .L34
+ 290               	.L31:
+ 291               	.LSM56:
+ 292 0060 84E0      		ldi r24,lo8(4)
+ 293               	.L34:
+ 294 0062 8093 0000 		sts degree,r24
+ 295               	.L33:
+ 296 0066 8DE3      		ldi r24,lo8(61)
+ 297               	.L27:
+ 298               	/* epilogue start */
+ 299               	.LSM57:
+ 300 0068 1F91      		pop r17
+ 301               	.LVL12:
+ 302 006a 0895      		ret
+ 303               	.LFE6:
+ 305               		.section	.text.ADC_periphery,"ax",@progbits
+ 306               	.global	ADC_periphery
+ 308               	ADC_periphery:
+ 309               	.LFB5:
+ 310               	.LSM58:
+ 311 0000 9F92      		push r9
+ 312 0002 AF92      		push r10
+ 313 0004 BF92      		push r11
+ 314 0006 CF92      		push r12
+ 315 0008 DF92      		push r13
+ 316 000a EF92      		push r14
+ 317 000c FF92      		push r15
+ 318 000e 0F93      		push r16
+ 319 0010 1F93      		push r17
+ 320 0012 CF93      		push r28
+ 321 0014 DF93      		push r29
+ 322               	/* prologue: function */
+ 323               	/* frame size = 0 */
+ 324               	.LSM59:
+ 325 0016 0E94 0000 		call ADC_read
+ 326 001a EC01      		movw r28,r24
+ 327               	.LVL13:
+ 328               	.LSM60:
+ 329 001c 8091 7C00 		lds r24,124
+ 330 0020 8823      		tst r24
+ 331 0022 01F0      		breq .+2
+ 332 0024 00C0      		rjmp .L37
+ 333               	.LSM61:
+ 334 0026 8091 0000 		lds r24,degree
+ 335 002a 8330      		cpi r24,lo8(3)
+ 336 002c 01F0      		breq .+2
+ 337 002e 00C0      		rjmp .L38
+ 338               	.LSM62:
+ 339 0030 83E0      		ldi r24,hi8(811)
+ 340 0032 CB32      		cpi r28,lo8(811)
+ 341 0034 D807      		cpc r29,r24
+ 342 0036 04F0      		brlt .L39
+ 343 0038 20E0      		ldi r18,lo8(TEMP_Celsius_neg)
+ 344 003a 30E0      		ldi r19,hi8(TEMP_Celsius_neg)
+ 345 003c 10E0      		ldi r17,lo8(0)
+ 346               	.LVL14:
+ 347               	.L41:
+ 348               	.LBB10:
+ 349               	.LSM63:
+ 350 003e F901      		movw r30,r18
+ 351               	/* #APP */
+ 352               	 ;  193 "src/drv/ADC.c" 1
+ 353 0040 8591      		lpm r24, Z+
+ 354 0042 9491      		lpm r25, Z
+ 355               		
+ 356               	 ;  0 "" 2
+ 357               	/* #NOAPP */
+ 358               	.LBE10:
+ 359 0044 8C17      		cp r24,r28
+ 360 0046 9D07      		cpc r25,r29
+ 361 0048 04F4      		brge .L40
+ 362               	.LSM64:
+ 363 004a 1F5F      		subi r17,lo8(-(1))
+ 364 004c 2E5F      		subi r18,lo8(-(2))
+ 365 004e 3F4F      		sbci r19,hi8(-(2))
+ 366 0050 1A31      		cpi r17,lo8(26)
+ 367 0052 01F4      		brne .L41
+ 368               	.L40:
+ 369               	.LSM65:
+ 370 0054 81E0      		ldi r24,lo8(1)
+ 371               	.LVL15:
+ 372 0056 6DE2      		ldi r22,lo8(45)
+ 373 0058 00C0      		rjmp .L65
+ 374               	.LVL16:
+ 375               	.L39:
+ 376               	.LSM66:
+ 377 005a 93E0      		ldi r25,hi8(800)
+ 378 005c C032      		cpi r28,lo8(800)
+ 379 005e D907      		cpc r29,r25
+ 380 0060 04F4      		brge .L43
+ 381 0062 20E0      		ldi r18,lo8(TEMP_Celsius_pos)
+ 382 0064 30E0      		ldi r19,hi8(TEMP_Celsius_pos)
+ 383 0066 10E0      		ldi r17,lo8(0)
+ 384               	.LVL17:
+ 385               	.L45:
+ 386               	.LBB11:
+ 387               	.LSM67:
+ 388 0068 F901      		movw r30,r18
+ 389               	/* #APP */
+ 390               	 ;  206 "src/drv/ADC.c" 1
+ 391 006a 8591      		lpm r24, Z+
+ 392 006c 9491      		lpm r25, Z
+ 393               		
+ 394               	 ;  0 "" 2
+ 395               	/* #NOAPP */
+ 396               	.LBE11:
+ 397 006e C817      		cp r28,r24
+ 398 0070 D907      		cpc r29,r25
+ 399 0072 04F4      		brge .L44
+ 400               	.LSM68:
+ 401 0074 1F5F      		subi r17,lo8(-(1))
+ 402 0076 2E5F      		subi r18,lo8(-(2))
+ 403 0078 3F4F      		sbci r19,hi8(-(2))
+ 404 007a 1436      		cpi r17,lo8(100)
+ 405 007c 01F4      		brne .L45
+ 406               	.L44:
+ 407               	.LSM69:
+ 408 007e 81E0      		ldi r24,lo8(1)
+ 409               	.LVL18:
+ 410 0080 6BE2      		ldi r22,lo8(43)
+ 411               	.LVL19:
+ 412               	.L65:
+ 413 0082 0E94 0000 		call LCD_putc
+ 414               	.LVL20:
+ 415 0086 00C0      		rjmp .L42
+ 416               	.LVL21:
+ 417               	.L43:
+ 418               	.LSM70:
+ 419 0088 81E0      		ldi r24,lo8(1)
+ 420 008a 60E2      		ldi r22,lo8(32)
+ 421 008c 0E94 0000 		call LCD_putc
+ 422 0090 10E0      		ldi r17,lo8(0)
+ 423               	.LVL22:
+ 424               	.L42:
+ 425               	.LSM71:
+ 426 0092 812F      		mov r24,r17
+ 427 0094 0E94 0000 		call CHAR2BCD2
+ 428 0098 182F      		mov r17,r24
+ 429               	.LVL23:
+ 430               	.LSM72:
+ 431 009a 80E0      		ldi r24,lo8(0)
+ 432 009c 60E2      		ldi r22,lo8(32)
+ 433 009e 0E94 0000 		call LCD_putc
+ 434               	.LSM73:
+ 435 00a2 612F      		mov r22,r17
+ 436 00a4 6295      		swap r22
+ 437 00a6 6F70      		andi r22,lo8(15)
+ 438 00a8 605D      		subi r22,lo8(-(48))
+ 439 00aa 82E0      		ldi r24,lo8(2)
+ 440 00ac 0E94 0000 		call LCD_putc
+ 441               	.LSM74:
+ 442 00b0 1F70      		andi r17,lo8(15)
+ 443 00b2 105D      		subi r17,lo8(-(48))
+ 444 00b4 83E0      		ldi r24,lo8(3)
+ 445 00b6 612F      		mov r22,r17
+ 446 00b8 0E94 0000 		call LCD_putc
+ 447               	.LSM75:
+ 448 00bc 84E0      		ldi r24,lo8(4)
+ 449 00be 6AE2      		ldi r22,lo8(42)
+ 450 00c0 0E94 0000 		call LCD_putc
+ 451               	.LSM76:
+ 452 00c4 85E0      		ldi r24,lo8(5)
+ 453 00c6 63E4      		ldi r22,lo8(67)
+ 454 00c8 00C0      		rjmp .L68
+ 455               	.LVL24:
+ 456               	.L38:
+ 457               	.LSM77:
+ 458 00ca 8430      		cpi r24,lo8(4)
+ 459 00cc 01F0      		breq .+2
+ 460 00ce 00C0      		rjmp .L60
+ 461 00d0 20E0      		ldi r18,lo8(TEMP_Fahrenheit_pos)
+ 462 00d2 30E0      		ldi r19,hi8(TEMP_Fahrenheit_pos)
+ 463 00d4 10E0      		ldi r17,lo8(0)
+ 464               	.LVL25:
+ 465               	.L48:
+ 466               	.LBB12:
+ 467               	.LSM78:
+ 468 00d6 F901      		movw r30,r18
+ 469               	/* #APP */
+ 470               	 ;  238 "src/drv/ADC.c" 1
+ 471 00d8 8591      		lpm r24, Z+
+ 472 00da 9491      		lpm r25, Z
+ 473               		
+ 474               	 ;  0 "" 2
+ 475               	/* #NOAPP */
+ 476               	.LBE12:
+ 477 00dc 8C17      		cp r24,r28
+ 478 00de 9D07      		cpc r25,r29
+ 479 00e0 04F0      		brlt .L47
+ 480               	.LSM79:
+ 481 00e2 1F5F      		subi r17,lo8(-(1))
+ 482 00e4 2E5F      		subi r18,lo8(-(2))
+ 483 00e6 3F4F      		sbci r19,hi8(-(2))
+ 484 00e8 1E38      		cpi r17,lo8(-114)
+ 485 00ea 01F4      		brne .L48
+ 486               	.L47:
+ 487               	.LSM80:
+ 488 00ec 812F      		mov r24,r17
+ 489               	.LVL26:
+ 490 00ee 0E94 0000 		call CHAR2BCD3
+ 491               	.LVL27:
+ 492 00f2 EC01      		movw r28,r24
+ 493               	.LVL28:
+ 494               	.LSM81:
+ 495 00f4 1436      		cpi r17,lo8(100)
+ 496 00f6 00F0      		brlo .L49
+ 497               	.LSM82:
+ 498 00f8 80E0      		ldi r24,lo8(0)
+ 499 00fa 6BE2      		ldi r22,lo8(43)
+ 500 00fc 0E94 0000 		call LCD_putc
+ 501               	.LSM83:
+ 502 0100 6D2F      		mov r22,r29
+ 503 0102 7727      		clr r23
+ 504 0104 67FD      		sbrc r22,7
+ 505 0106 7A95      		dec r23
+ 506 0108 605D      		subi r22,lo8(-(48))
+ 507 010a 81E0      		ldi r24,lo8(1)
+ 508 010c 00C0      		rjmp .L66
+ 509               	.L49:
+ 510               	.LSM84:
+ 511 010e 80E0      		ldi r24,lo8(0)
+ 512 0110 60E2      		ldi r22,lo8(32)
+ 513 0112 0E94 0000 		call LCD_putc
+ 514               	.LSM85:
+ 515 0116 81E0      		ldi r24,lo8(1)
+ 516 0118 6BE2      		ldi r22,lo8(43)
+ 517               	.L66:
+ 518 011a 0E94 0000 		call LCD_putc
+ 519               	.LSM86:
+ 520 011e BE01      		movw r22,r28
+ 521 0120 E4E0      		ldi r30,4
+ 522 0122 7595      	1:	asr r23
+ 523 0124 6795      		ror r22
+ 524 0126 EA95      		dec r30
+ 525 0128 01F4      		brne 1b
+ 526 012a 6F70      		andi r22,lo8(15)
+ 527 012c 605D      		subi r22,lo8(-(48))
+ 528 012e 82E0      		ldi r24,lo8(2)
+ 529 0130 0E94 0000 		call LCD_putc
+ 530               	.LSM87:
+ 531 0134 CE01      		movw r24,r28
+ 532 0136 8F70      		andi r24,lo8(15)
+ 533 0138 682F      		mov r22,r24
+ 534 013a 605D      		subi r22,lo8(-(48))
+ 535 013c 83E0      		ldi r24,lo8(3)
+ 536 013e 0E94 0000 		call LCD_putc
+ 537               	.LSM88:
+ 538 0142 84E0      		ldi r24,lo8(4)
+ 539 0144 6AE2      		ldi r22,lo8(42)
+ 540 0146 0E94 0000 		call LCD_putc
+ 541               	.LSM89:
+ 542 014a 85E0      		ldi r24,lo8(5)
+ 543 014c 66E4      		ldi r22,lo8(70)
+ 544 014e 00C0      		rjmp .L68
+ 545               	.LVL29:
+ 546               	.L37:
+ 547               	.LSM90:
+ 548 0150 8091 7C00 		lds r24,124
+ 549 0154 8130      		cpi r24,lo8(1)
+ 550 0156 01F0      		breq .+2
+ 551 0158 00C0      		rjmp .L51
+ 552               	.LSM91:
+ 553 015a 82E0      		ldi r24,lo8(2)
+ 554 015c 0E94 0000 		call ADC_init
+ 555               	.LSM92:
+ 556 0160 0E94 0000 		call ADC_read
+ 557 0164 BC01      		movw r22,r24
+ 558               	.LVL30:
+ 559 0166 20E0      		ldi r18,lo8(LIGHT_ADC)
+ 560 0168 30E0      		ldi r19,hi8(LIGHT_ADC)
+ 561 016a 40E0      		ldi r20,lo8(0)
+ 562               	.LVL31:
+ 563               	.L53:
+ 564               	.LBB13:
+ 565               	.LSM93:
+ 566 016c F901      		movw r30,r18
+ 567               	/* #APP */
+ 568               	 ;  288 "src/drv/ADC.c" 1
+ 569 016e 8591      		lpm r24, Z+
+ 570 0170 9491      		lpm r25, Z
+ 571               		
+ 572               	 ;  0 "" 2
+ 573               	/* #NOAPP */
+ 574               	.LBE13:
+ 575 0172 8617      		cp r24,r22
+ 576 0174 9707      		cpc r25,r23
+ 577 0176 04F4      		brge .L52
+ 578               	.LSM94:
+ 579 0178 4F5F      		subi r20,lo8(-(1))
+ 580 017a 2E5F      		subi r18,lo8(-(2))
+ 581 017c 3F4F      		sbci r19,hi8(-(2))
+ 582 017e 4731      		cpi r20,lo8(23)
+ 583 0180 01F4      		brne .L53
+ 584 0182 00C0      		rjmp .L54
+ 585               	.L52:
+ 586               	.LSM95:
+ 587 0184 4423      		tst r20
+ 588 0186 01F4      		brne .L55
+ 589               	.LSM96:
+ 590 0188 86EF      		ldi r24,lo8(0x403428f6)
+ 591 018a 98E2      		ldi r25,hi8(0x403428f6)
+ 592 018c A4E3      		ldi r26,hlo8(0x403428f6)
+ 593 018e B0E4      		ldi r27,hhi8(0x403428f6)
+ 594               	.LVL32:
+ 595 0190 00C0      		rjmp .L67
+ 596               	.LVL33:
+ 597               	.L55:
+ 598               	.LSM97:
+ 599 0192 4531      		cpi r20,lo8(21)
+ 600 0194 00F0      		brlo .L57
+ 601               	.L54:
+ 602               	.LSM98:
+ 603 0196 8AEB      		ldi r24,lo8(0x403c49ba)
+ 604 0198 99E4      		ldi r25,hi8(0x403c49ba)
+ 605 019a ACE3      		ldi r26,hlo8(0x403c49ba)
+ 606 019c B0E4      		ldi r27,hhi8(0x403c49ba)
+ 607               	.LVL34:
+ 608               	.L67:
+ 609 019e 8093 0000 		sts Vref,r24
+ 610 01a2 9093 0000 		sts (Vref)+1,r25
+ 611 01a6 A093 0000 		sts (Vref)+2,r26
+ 612 01aa B093 0000 		sts (Vref)+3,r27
+ 613 01ae 00C0      		rjmp .L56
+ 614               	.LVL35:
+ 615               	.L57:
+ 616               	.LSM99:
+ 617 01b0 842F      		mov r24,r20
+ 618               	.LVL36:
+ 619 01b2 90E0      		ldi r25,lo8(0)
+ 620 01b4 880F      		lsl r24
+ 621 01b6 991F      		rol r25
+ 622 01b8 880F      		lsl r24
+ 623 01ba 991F      		rol r25
+ 624 01bc 8050      		subi r24,lo8(-(LIGHT_VOLTAGE))
+ 625 01be 9040      		sbci r25,hi8(-(LIGHT_VOLTAGE))
+ 626               	.LBB14:
+ 627               	.LBB15:
+ 628               	.LBB16:
+ 629               	.LSM100:
+ 630 01c0 FC01      		movw r30,r24
+ 631               	.LVL37:
+ 632               	/* #APP */
+ 633               	 ;  29 "inc/pgmspacehlp.h" 1
+ 634 01c2 6591      		lpm r22, Z+
+ 635 01c4 7491      		lpm r23, Z
+ 636               		
+ 637               	 ;  0 "" 2
+ 638               	.LVL38:
+ 639               	/* #NOAPP */
+ 640               	.LBE16:
+ 641 01c6 9B01      		movw r18,r22
+ 642               	.LVL39:
+ 643               	.LBB17:
+ 644               	.LSM101:
+ 645 01c8 FC01      		movw r30,r24
+ 646               	.LVL40:
+ 647 01ca 3296      		adiw r30,2
+ 648               	.LBE17:
+ 649               	/* #APP */
+ 650               	 ;  30 "inc/pgmspacehlp.h" 1
+ 651 01cc 4591      		lpm r20, Z+
+ 652 01ce 5491      		lpm r21, Z
+ 653               		
+ 654               	 ;  0 "" 2
+ 655               	.LVL41:
+ 656               	/* #NOAPP */
+ 657               	.LBE15:
+ 658               	.LBE14:
+ 659               	.LSM102:
+ 660 01d0 2093 0000 		sts Vref,r18
+ 661 01d4 3093 0000 		sts (Vref)+1,r19
+ 662 01d8 4093 0000 		sts (Vref)+2,r20
+ 663 01dc 5093 0000 		sts (Vref)+3,r21
+ 664               	.LVL42:
+ 665               	.L56:
+ 666               	.LSM103:
+ 667 01e0 81E0      		ldi r24,lo8(1)
+ 668 01e2 8093 7C00 		sts 124,r24
+ 669               	.LSM104:
+ 670 01e6 BE01      		movw r22,r28
+ 671 01e8 8827      		clr r24
+ 672 01ea 77FD      		sbrc r23,7
+ 673 01ec 8095      		com r24
+ 674 01ee 982F      		mov r25,r24
+ 675               	.LVL43:
+ 676 01f0 0E94 0000 		call __floatsisf
+ 677               	.LVL44:
+ 678 01f4 2091 0000 		lds r18,Vref
+ 679 01f8 3091 0000 		lds r19,(Vref)+1
+ 680 01fc 4091 0000 		lds r20,(Vref)+2
+ 681 0200 5091 0000 		lds r21,(Vref)+3
+ 682 0204 0E94 0000 		call __mulsf3
+ 683 0208 20E0      		ldi r18,lo8(0x3a800000)
+ 684 020a 30E0      		ldi r19,hi8(0x3a800000)
+ 685 020c 40E8      		ldi r20,hlo8(0x3a800000)
+ 686 020e 5AE3      		ldi r21,hhi8(0x3a800000)
+ 687 0210 0E94 0000 		call __mulsf3
+ 688               	.LSM105:
+ 689 0214 20E0      		ldi r18,lo8(0x40c00000)
+ 690 0216 30E0      		ldi r19,hi8(0x40c00000)
+ 691 0218 40EC      		ldi r20,hlo8(0x40c00000)
+ 692 021a 50E4      		ldi r21,hhi8(0x40c00000)
+ 693 021c 0E94 0000 		call __mulsf3
+ 694 0220 5B01      		movw r10,r22
+ 695 0222 6C01      		movw r12,r24
+ 696               	.LSM106:
+ 697 0224 0E94 0000 		call __fixunssfsi
+ 698 0228 DC01      		movw r26,r24
+ 699 022a CB01      		movw r24,r22
+ 700 022c E82E      		mov r14,r24
+ 701               	.LVL45:
+ 702               	.LSM107:
+ 703 022e 0E94 0000 		call CHAR2BCD2
+ 704 0232 982E      		mov r9,r24
+ 705               	.LVL46:
+ 706               	.LSM108:
+ 707 0234 FF24      		clr r15
+ 708               	.LVL47:
+ 709 0236 0027      		clr r16
+ 710 0238 F7FC      		sbrc r15,7
+ 711 023a 0095      		com r16
+ 712 023c 102F      		mov r17,r16
+ 713               	.LVL48:
+ 714 023e C801      		movw r24,r16
+ 715 0240 B701      		movw r22,r14
+ 716 0242 0E94 0000 		call __floatsisf
+ 717 0246 9B01      		movw r18,r22
+ 718 0248 AC01      		movw r20,r24
+ 719 024a C601      		movw r24,r12
+ 720 024c B501      		movw r22,r10
+ 721 024e 0E94 0000 		call __subsf3
+ 722 0252 20E0      		ldi r18,lo8(0x42c80000)
+ 723 0254 30E0      		ldi r19,hi8(0x42c80000)
+ 724 0256 48EC      		ldi r20,hlo8(0x42c80000)
+ 725 0258 52E4      		ldi r21,hhi8(0x42c80000)
+ 726 025a 0E94 0000 		call __mulsf3
+ 727 025e 0E94 0000 		call __fixunssfsi
+ 728 0262 DC01      		movw r26,r24
+ 729 0264 CB01      		movw r24,r22
+ 730 0266 0E94 0000 		call CHAR2BCD2
+ 731 026a 182F      		mov r17,r24
+ 732               	.LVL49:
+ 733               	.LSM109:
+ 734 026c 80E0      		ldi r24,lo8(0)
+ 735 026e 60E2      		ldi r22,lo8(32)
+ 736 0270 0E94 0000 		call LCD_putc
+ 737               	.LSM110:
+ 738 0274 81E0      		ldi r24,lo8(1)
+ 739 0276 60E2      		ldi r22,lo8(32)
+ 740 0278 0E94 0000 		call LCD_putc
+ 741               	.LSM111:
+ 742 027c 82E0      		ldi r24,lo8(2)
+ 743 027e 60E2      		ldi r22,lo8(32)
+ 744 0280 0E94 0000 		call LCD_putc
+ 745               	.LSM112:
+ 746 0284 9FE0      		ldi r25,lo8(15)
+ 747 0286 9922      		and r9,r25
+ 748               	.LVL50:
+ 749 0288 80E3      		ldi r24,lo8(48)
+ 750 028a 980E      		add r9,r24
+ 751 028c 83E0      		ldi r24,lo8(3)
+ 752 028e 692D      		mov r22,r9
+ 753 0290 0E94 0000 		call LCD_putc
+ 754               	.LSM113:
+ 755 0294 84E0      		ldi r24,lo8(4)
+ 756 0296 66E5      		ldi r22,lo8(86)
+ 757 0298 0E94 0000 		call LCD_putc
+ 758               	.LSM114:
+ 759 029c 1295      		swap r17
+ 760               	.LVL51:
+ 761 029e 1F70      		andi r17,lo8(15)
+ 762 02a0 105D      		subi r17,lo8(-(48))
+ 763 02a2 85E0      		ldi r24,lo8(5)
+ 764 02a4 612F      		mov r22,r17
+ 765 02a6 00C0      		rjmp .L68
+ 766               	.LVL52:
+ 767               	.L51:
+ 768               	.LSM115:
+ 769 02a8 8091 7C00 		lds r24,124
+ 770 02ac 8230      		cpi r24,lo8(2)
+ 771 02ae 01F4      		brne .L60
+ 772               	.LSM116:
+ 773 02b0 8091 7900 		lds r24,121
+ 774 02b4 0E94 0000 		call CHAR2BCD2
+ 775               	.LSM117:
+ 776 02b8 9091 7800 		lds r25,120
+ 777               	.LVL53:
+ 778               	.LSM118:
+ 779 02bc 892F      		mov r24,r25
+ 780 02be 8F70      		andi r24,lo8(15)
+ 781 02c0 082F      		mov r16,r24
+ 782               	.LVL54:
+ 783 02c2 005D      		subi r16,lo8(-(48))
+ 784               	.LSM119:
+ 785 02c4 0A33      		cpi r16,lo8(58)
+ 786 02c6 00F0      		brlo .L58
+ 787               	.LSM120:
+ 788 02c8 095F      		subi r16,lo8(-(7))
+ 789               	.L58:
+ 790               	.LSM121:
+ 791 02ca 892F      		mov r24,r25
+ 792 02cc 8295      		swap r24
+ 793 02ce 8F70      		andi r24,lo8(15)
+ 794 02d0 182F      		mov r17,r24
+ 795               	.LVL55:
+ 796 02d2 105D      		subi r17,lo8(-(48))
+ 797               	.LSM122:
+ 798 02d4 1A33      		cpi r17,lo8(58)
+ 799 02d6 00F0      		brlo .L59
+ 800               	.LSM123:
+ 801 02d8 195F      		subi r17,lo8(-(7))
+ 802               	.L59:
+ 803               	.LSM124:
+ 804 02da 80E0      		ldi r24,lo8(0)
+ 805 02dc 61E4      		ldi r22,lo8(65)
+ 806 02de 0E94 0000 		call LCD_putc
+ 807               	.LVL56:
+ 808               	.LSM125:
+ 809 02e2 81E0      		ldi r24,lo8(1)
+ 810 02e4 64E4      		ldi r22,lo8(68)
+ 811 02e6 0E94 0000 		call LCD_putc
+ 812               	.LSM126:
+ 813 02ea 82E0      		ldi r24,lo8(2)
+ 814 02ec 63E4      		ldi r22,lo8(67)
+ 815 02ee 0E94 0000 		call LCD_putc
+ 816               	.LSM127:
+ 817 02f2 6091 7900 		lds r22,121
+ 818 02f6 605D      		subi r22,lo8(-(48))
+ 819 02f8 83E0      		ldi r24,lo8(3)
+ 820 02fa 0E94 0000 		call LCD_putc
+ 821               	.LSM128:
+ 822 02fe 84E0      		ldi r24,lo8(4)
+ 823 0300 612F      		mov r22,r17
+ 824 0302 0E94 0000 		call LCD_putc
+ 825               	.LSM129:
+ 826 0306 85E0      		ldi r24,lo8(5)
+ 827 0308 602F      		mov r22,r16
+ 828               	.LVL57:
+ 829               	.L68:
+ 830 030a 0E94 0000 		call LCD_putc
+ 831               	.LSM130:
+ 832 030e 86E0      		ldi r24,lo8(6)
+ 833 0310 60E0      		ldi r22,lo8(0)
+ 834 0312 0E94 0000 		call LCD_putc
+ 835               	.L60:
+ 836               	/* epilogue start */
+ 837               	.LSM131:
+ 838 0316 DF91      		pop r29
+ 839 0318 CF91      		pop r28
+ 840               	.LVL58:
+ 841 031a 1F91      		pop r17
+ 842               	.LVL59:
+ 843 031c 0F91      		pop r16
+ 844               	.LVL60:
+ 845 031e FF90      		pop r15
+ 846               	.LVL61:
+ 847 0320 EF90      		pop r14
+ 848               	.LVL62:
+ 849 0322 DF90      		pop r13
+ 850 0324 CF90      		pop r12
+ 851 0326 BF90      		pop r11
+ 852 0328 AF90      		pop r10
+ 853 032a 9F90      		pop r9
+ 854 032c 0895      		ret
+ 855               	.LFE5:
+ 857               	.global	TEMP_Celsius_pos
+ 858               		.section	.progmem.data,"a",@progbits
+ 861               	TEMP_Celsius_pos:
+ 862 0000 2603      		.word	806
+ 863 0002 1C03      		.word	796
+ 864 0004 1203      		.word	786
+ 865 0006 0703      		.word	775
+ 866 0008 FD02      		.word	765
+ 867 000a F202      		.word	754
+ 868 000c E702      		.word	743
+ 869 000e DC02      		.word	732
+ 870 0010 D002      		.word	720
+ 871 0012 C502      		.word	709
+ 872 0014 B902      		.word	697
+ 873 0016 AD02      		.word	685
+ 874 0018 A102      		.word	673
+ 875 001a 9502      		.word	661
+ 876 001c 8902      		.word	649
+ 877 001e 7C02      		.word	636
+ 878 0020 7002      		.word	624
+ 879 0022 6302      		.word	611
+ 880 0024 5702      		.word	599
+ 881 0026 4A02      		.word	586
+ 882 0028 3E02      		.word	574
+ 883 002a 3202      		.word	562
+ 884 002c 2502      		.word	549
+ 885 002e 1902      		.word	537
+ 886 0030 0C02      		.word	524
+ 887 0032 0002      		.word	512
+ 888 0034 F401      		.word	500
+ 889 0036 E801      		.word	488
+ 890 0038 DC01      		.word	476
+ 891 003a D001      		.word	464
+ 892 003c C401      		.word	452
+ 893 003e B801      		.word	440
+ 894 0040 AD01      		.word	429
+ 895 0042 A201      		.word	418
+ 896 0044 9601      		.word	406
+ 897 0046 8C01      		.word	396
+ 898 0048 8101      		.word	385
+ 899 004a 7601      		.word	374
+ 900 004c 6C01      		.word	364
+ 901 004e 6201      		.word	354
+ 902 0050 5801      		.word	344
+ 903 0052 4E01      		.word	334
+ 904 0054 4401      		.word	324
+ 905 0056 3B01      		.word	315
+ 906 0058 3201      		.word	306
+ 907 005a 2901      		.word	297
+ 908 005c 2001      		.word	288
+ 909 005e 1701      		.word	279
+ 910 0060 0F01      		.word	271
+ 911 0062 0701      		.word	263
+ 912 0064 FF00      		.word	255
+ 913 0066 F700      		.word	247
+ 914 0068 F000      		.word	240
+ 915 006a E900      		.word	233
+ 916 006c E100      		.word	225
+ 917 006e DB00      		.word	219
+ 918 0070 D400      		.word	212
+ 919 0072 CD00      		.word	205
+ 920 0074 C700      		.word	199
+ 921 0076 C100      		.word	193
+ 922 0078 BB00      		.word	187
+ 923               	.global	TEMP_Celsius_neg
+ 926               	TEMP_Celsius_neg:
+ 927 007a 2F03      		.word	815
+ 928 007c 3903      		.word	825
+ 929 007e 4203      		.word	834
+ 930 0080 4B03      		.word	843
+ 931 0082 5303      		.word	851
+ 932 0084 5C03      		.word	860
+ 933 0086 6403      		.word	868
+ 934 0088 6C03      		.word	876
+ 935 008a 7303      		.word	883
+ 936 008c 7B03      		.word	891
+ 937 008e 8203      		.word	898
+ 938 0090 8803      		.word	904
+ 939 0092 8F03      		.word	911
+ 940 0094 9503      		.word	917
+ 941 0096 9B03      		.word	923
+ 942               	.global	TEMP_Fahrenheit_pos
+ 945               	TEMP_Fahrenheit_pos:
+ 946 0098 AA03      		.word	938
+ 947 009a A703      		.word	935
+ 948 009c A403      		.word	932
+ 949 009e A103      		.word	929
+ 950 00a0 9E03      		.word	926
+ 951 00a2 9B03      		.word	923
+ 952 00a4 9803      		.word	920
+ 953 00a6 9403      		.word	916
+ 954 00a8 9103      		.word	913
+ 955 00aa 8D03      		.word	909
+ 956 00ac 8A03      		.word	906
+ 957 00ae 8603      		.word	902
+ 958 00b0 8203      		.word	898
+ 959 00b2 7E03      		.word	894
+ 960 00b4 7B03      		.word	891
+ 961 00b6 7703      		.word	887
+ 962 00b8 7203      		.word	882
+ 963 00ba 6E03      		.word	878
+ 964 00bc 6A03      		.word	874
+ 965 00be 6603      		.word	870
+ 966 00c0 6103      		.word	865
+ 967 00c2 5D03      		.word	861
+ 968 00c4 5803      		.word	856
+ 969 00c6 5303      		.word	851
+ 970 00c8 4F03      		.word	847
+ 971 00ca 4A03      		.word	842
+ 972 00cc 4503      		.word	837
+ 973 00ce 4003      		.word	832
+ 974 00d0 3B03      		.word	827
+ 975 00d2 3603      		.word	822
+ 976 00d4 3003      		.word	816
+ 977 00d6 2B03      		.word	811
+ 978 00d8 2603      		.word	806
+ 979 00da 2003      		.word	800
+ 980 00dc 1B03      		.word	795
+ 981 00de 1503      		.word	789
+ 982 00e0 0F03      		.word	783
+ 983 00e2 0A03      		.word	778
+ 984 00e4 0403      		.word	772
+ 985 00e6 FE02      		.word	766
+ 986 00e8 F802      		.word	760
+ 987 00ea F202      		.word	754
+ 988 00ec EC02      		.word	748
+ 989 00ee E602      		.word	742
+ 990 00f0 DF02      		.word	735
+ 991 00f2 D902      		.word	729
+ 992 00f4 D302      		.word	723
+ 993 00f6 CC02      		.word	716
+ 994 00f8 C602      		.word	710
+ 995 00fa BF02      		.word	703
+ 996 00fc B902      		.word	697
+ 997 00fe B202      		.word	690
+ 998 0100 AC02      		.word	684
+ 999 0102 A502      		.word	677
+ 1000 0104 9E02      		.word	670
+ 1001 0106 9702      		.word	663
+ 1002 0108 9102      		.word	657
+ 1003 010a 8A02      		.word	650
+ 1004 010c 8302      		.word	643
+ 1005 010e 7C02      		.word	636
+ 1006 0110 7502      		.word	629
+ 1007 0112 6E02      		.word	622
+ 1008 0114 6802      		.word	616
+ 1009 0116 6102      		.word	609
+ 1010 0118 5A02      		.word	602
+ 1011 011a 5302      		.word	595
+ 1012 011c 4C02      		.word	588
+ 1013 011e 4502      		.word	581
+ 1014 0120 3E02      		.word	574
+ 1015 0122 3702      		.word	567
+ 1016 0124 3002      		.word	560
+ 1017 0126 2902      		.word	553
+ 1018 0128 2202      		.word	546
+ 1019 012a 1B02      		.word	539
+ 1020 012c 1502      		.word	533
+ 1021 012e 0E02      		.word	526
+ 1022 0130 0702      		.word	519
+ 1023 0132 0002      		.word	512
+ 1024 0134 F901      		.word	505
+ 1025 0136 F201      		.word	498
+ 1026 0138 EC01      		.word	492
+ 1027 013a E501      		.word	485
+ 1028 013c DE01      		.word	478
+ 1029 013e D801      		.word	472
+ 1030 0140 D101      		.word	465
+ 1031 0142 CB01      		.word	459
+ 1032 0144 C401      		.word	452
+ 1033 0146 BE01      		.word	446
+ 1034 0148 B701      		.word	439
+ 1035 014a B101      		.word	433
+ 1036 014c AA01      		.word	426
+ 1037 014e A401      		.word	420
+ 1038 0150 9E01      		.word	414
+ 1039 0152 9801      		.word	408
+ 1040 0154 9201      		.word	402
+ 1041 0156 8C01      		.word	396
+ 1042 0158 8601      		.word	390
+ 1043 015a 8001      		.word	384
+ 1044 015c 7A01      		.word	378
+ 1045 015e 7401      		.word	372
+ 1046 0160 6E01      		.word	366
+ 1047 0162 6801      		.word	360
+ 1048 0164 6301      		.word	355
+ 1049 0166 5D01      		.word	349
+ 1050 0168 5801      		.word	344
+ 1051 016a 5201      		.word	338
+ 1052 016c 4D01      		.word	333
+ 1053 016e 4701      		.word	327
+ 1054 0170 4201      		.word	322
+ 1055 0172 3D01      		.word	317
+ 1056 0174 3801      		.word	312
+ 1057 0176 3301      		.word	307
+ 1058 0178 2E01      		.word	302
+ 1059 017a 2901      		.word	297
+ 1060 017c 2401      		.word	292
+ 1061 017e 1F01      		.word	287
+ 1062 0180 1A01      		.word	282
+ 1063 0182 1501      		.word	277
+ 1064 0184 1101      		.word	273
+ 1065 0186 0C01      		.word	268
+ 1066 0188 0801      		.word	264
+ 1067 018a 0301      		.word	259
+ 1068 018c FF00      		.word	255
+ 1069 018e FB00      		.word	251
+ 1070 0190 F600      		.word	246
+ 1071 0192 F200      		.word	242
+ 1072 0194 EE00      		.word	238
+ 1073 0196 EA00      		.word	234
+ 1074 0198 E600      		.word	230
+ 1075 019a E200      		.word	226
+ 1076 019c DE00      		.word	222
+ 1077 019e DB00      		.word	219
+ 1078 01a0 D700      		.word	215
+ 1079 01a2 D300      		.word	211
+ 1080 01a4 CF00      		.word	207
+ 1081 01a6 CC00      		.word	204
+ 1082 01a8 C800      		.word	200
+ 1083 01aa C500      		.word	197
+ 1084 01ac C200      		.word	194
+ 1085 01ae BE00      		.word	190
+ 1086 01b0 BB00      		.word	187
+ 1087               	.global	LIGHT_ADC
+ 1090               	LIGHT_ADC:
+ 1091 01b2 3500      		.word	53
+ 1092 01b4 6000      		.word	96
+ 1093 01b6 8000      		.word	128
+ 1094 01b8 B000      		.word	176
+ 1095 01ba 1D01      		.word	285
+ 1096 01bc 3D01      		.word	317
+ 1097 01be 5A01      		.word	346
+ 1098 01c0 7A01      		.word	378
+ 1099 01c2 9701      		.word	407
+ 1100 01c4 B901      		.word	441
+ 1101 01c6 DA01      		.word	474
+ 1102 01c8 F901      		.word	505
+ 1103 01ca 1602      		.word	534
+ 1104 01cc 4002      		.word	576
+ 1105 01ce 6D02      		.word	621
+ 1106 01d0 8202      		.word	642
+ 1107 01d2 A202      		.word	674
+ 1108 01d4 EF02      		.word	751
+ 1109 01d6 3203      		.word	818
+ 1110 01d8 B003      		.word	944
+ 1111 01da F203      		.word	1010
+ 1112               	.global	LIGHT_VOLTAGE
+ 1115               	LIGHT_VOLTAGE:
+ 1116 01dc 1D        		.byte	29
+ 1117 01dd 5A        		.byte	90
+ 1118 01de 34        		.byte	52
+ 1119 01df 40        		.byte	64
+ 1120 01e0 E1        		.byte	-31
+ 1121 01e1 7A        		.byte	122
+ 1122 01e2 34        		.byte	52
+ 1123 01e3 40        		.byte	64
+ 1124 01e4 6A        		.byte	106
+ 1125 01e5 BC        		.byte	-68
+ 1126 01e6 34        		.byte	52
+ 1127 01e7 40        		.byte	64
+ 1128 01e8 91        		.byte	-111
+ 1129 01e9 ED        		.byte	-19
+ 1130 01ea 34        		.byte	52
+ 1131 01eb 40        		.byte	64
+ 1132 01ec 7D        		.byte	125
+ 1133 01ed 3F        		.byte	63
+ 1134 01ee 35        		.byte	53
+ 1135 01ef 40        		.byte	64
+ 1136 01f0 A4        		.byte	-92
+ 1137 01f1 70        		.byte	112
+ 1138 01f2 35        		.byte	53
+ 1139 01f3 40        		.byte	64
+ 1140 01f4 2D        		.byte	45
+ 1141 01f5 B2        		.byte	-78
+ 1142 01f6 35        		.byte	53
+ 1143 01f7 40        		.byte	64
+ 1144 01f8 F2        		.byte	-14
+ 1145 01f9 D2        		.byte	-46
+ 1146 01fa 35        		.byte	53
+ 1147 01fb 40        		.byte	64
+ 1148 01fc B6        		.byte	-74
+ 1149 01fd F3        		.byte	-13
+ 1150 01fe 35        		.byte	53
+ 1151 01ff 40        		.byte	64
+ 1152 0200 3F        		.byte	63
+ 1153 0201 35        		.byte	53
+ 1154 0202 36        		.byte	54
+ 1155 0203 40        		.byte	64
+ 1156 0204 66        		.byte	102
+ 1157 0205 66        		.byte	102
+ 1158 0206 36        		.byte	54
+ 1159 0207 40        		.byte	64
+ 1160 0208 8D        		.byte	-115
+ 1161 0209 97        		.byte	-105
+ 1162 020a 36        		.byte	54
+ 1163 020b 40        		.byte	64
+ 1164 020c 17        		.byte	23
+ 1165 020d D9        		.byte	-39
+ 1166 020e 36        		.byte	54
+ 1167 020f 40        		.byte	64
+ 1168 0210 64        		.byte	100
+ 1169 0211 3B        		.byte	59
+ 1170 0212 37        		.byte	55
+ 1171 0213 40        		.byte	64
+ 1172 0214 EE        		.byte	-18
+ 1173 0215 7C        		.byte	124
+ 1174 0216 37        		.byte	55
+ 1175 0217 40        		.byte	64
+ 1176 0218 14        		.byte	20
+ 1177 0219 AE        		.byte	-82
+ 1178 021a 37        		.byte	55
+ 1179 021b 40        		.byte	64
+ 1180 021c 9E        		.byte	-98
+ 1181 021d EF        		.byte	-17
+ 1182 021e 37        		.byte	55
+ 1183 021f 40        		.byte	64
+ 1184 0220 B0        		.byte	-80
+ 1185 0221 72        		.byte	114
+ 1186 0222 38        		.byte	56
+ 1187 0223 40        		.byte	64
+ 1188 0224 E9        		.byte	-23
+ 1189 0225 26        		.byte	38
+ 1190 0226 39        		.byte	57
+ 1191 0227 40        		.byte	64
+ 1192 0228 21        		.byte	33
+ 1193 0229 B0        		.byte	-80
+ 1194 022a 3A        		.byte	58
+ 1195 022b 40        		.byte	64
+ 1196 022c 93        		.byte	-109
+ 1197 022d 18        		.byte	24
+ 1198 022e 3C        		.byte	60
+ 1199 022f 40        		.byte	64
+ 1200               	.global	Vref
+ 1201               		.section	.data.Vref,"aw",@progbits
+ 1204               	Vref:
+ 1205 0000 9A        		.byte	-102
+ 1206 0001 99        		.byte	-103
+ 1207 0002 39        		.byte	57
+ 1208 0003 40        		.byte	64
+ 1209               	.global	degree
+ 1210               		.section	.data.degree,"aw",@progbits
+ 1213               	degree:
+ 1214 0000 03        		.byte	3
+ 1215               		.section	.data.enter.1579,"aw",@progbits
+ 1218               	enter.1579:
+ 1219 0000 01        		.byte	1
+ 1220               		.section	.data.enter.1573,"aw",@progbits
+ 1223               	enter.1573:
+ 1224 0000 01        		.byte	1
+ 1225               		.section	.data.enter.1566,"aw",@progbits
+ 1228               	enter.1566:
+ 1229 0000 01        		.byte	1
+ 1294               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC.c
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:19     .text.ADC_read:00000000 ADC_read
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:94     .text.ADC_init:00000000 ADC_init
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:116    .text.LightFunc:00000000 LightFunc
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1218   .data.enter.1579:00000000 enter.1579
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:308    .text.ADC_periphery:00000000 ADC_periphery
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:170    .text.VoltageFunc:00000000 VoltageFunc
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1223   .data.enter.1573:00000000 enter.1573
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:224    .text.TemperatureFunc:00000000 TemperatureFunc
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1228   .data.enter.1566:00000000 enter.1566
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1213   .data.degree:00000000 degree
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:926    .progmem.data:0000007a TEMP_Celsius_neg
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:861    .progmem.data:00000000 TEMP_Celsius_pos
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:945    .progmem.data:00000098 TEMP_Fahrenheit_pos
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1090   .progmem.data:000001b2 LIGHT_ADC
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1204   .data.Vref:00000000 Vref
+C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1115   .progmem.data:000001dc LIGHT_VOLTAGE
+
+UNDEFINED SYMBOLS
+Timer0_RegisterCallbackFunction
+LCD_UpdateRequired
+Timer0_RemoveCallbackFunction
+LCD_putc
+CHAR2BCD2
+CHAR2BCD3
+__floatsisf
+__mulsf3
+__fixunssfsi
+__subsf3
+__do_copy_data

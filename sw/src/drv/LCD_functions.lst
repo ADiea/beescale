@@ -1,0 +1,425 @@
+   1               		.file	"LCD_functions.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.LCD_puts_f,"ax",@progbits
+  17               	.global	LCD_puts_f
+  19               	LCD_puts_f:
+  20               	.LFB2:
+  21               	.LSM0:
+  22               	.LVL0:
+  23               	/* prologue: function */
+  24               	/* frame size = 0 */
+  25 0000 BC01      		movw r22,r24
+  26               	.LVL1:
+  27               	.LVL2:
+  28               	.L2:
+  29               	.LSM1:
+  30 0002 8091 0000 		lds r24,gLCD_Update_Required
+  31 0006 8823      		tst r24
+  32 0008 01F4      		brne .L2
+  33 000a 20E0      		ldi r18,lo8(0)
+  34 000c 30E0      		ldi r19,hi8(0)
+  35 000e 00C0      		rjmp .L3
+  36               	.LVL3:
+  37               	.L5:
+  38               	.LSM2:
+  39 0010 F901      		movw r30,r18
+  40               	.LVL4:
+  41 0012 E050      		subi r30,lo8(-(gTextBuffer))
+  42 0014 F040      		sbci r31,hi8(-(gTextBuffer))
+  43 0016 8083      		st Z,r24
+  44 0018 2F5F      		subi r18,lo8(-(1))
+  45 001a 3F4F      		sbci r19,hi8(-(1))
+  46               	.L3:
+  47 001c 422F      		mov r20,r18
+  48 001e FB01      		movw r30,r22
+  49               	.LVL5:
+  50 0020 E20F      		add r30,r18
+  51 0022 F31F      		adc r31,r19
+  52               	.LBB2:
+  53               	.LSM3:
+  54               	/* #APP */
+  55               	 ;  69 "src/drv/LCD_functions.c" 1
+  56 0024 8491      		lpm r24, Z
+  57               		
+  58               	 ;  0 "" 2
+  59               	/* #NOAPP */
+  60               	.LBE2:
+  61 0026 8823      		tst r24
+  62 0028 01F0      		breq .L4
+  63 002a 2931      		cpi r18,25
+  64 002c 3105      		cpc r19,__zero_reg__
+  65 002e 01F4      		brne .L5
+  66               	.L4:
+  67               	.LSM4:
+  68 0030 E42F      		mov r30,r20
+  69               	.LVL6:
+  70 0032 F0E0      		ldi r31,lo8(0)
+  71 0034 E050      		subi r30,lo8(-(gTextBuffer))
+  72 0036 F040      		sbci r31,hi8(-(gTextBuffer))
+  73 0038 1082      		st Z,__zero_reg__
+  74               	.LSM5:
+  75 003a 4730      		cpi r20,lo8(7)
+  76 003c 00F0      		brlo .L6
+  77               	.LSM6:
+  78 003e 81E0      		ldi r24,lo8(1)
+  79               	.LVL7:
+  80 0040 8093 0000 		sts gScrollMode,r24
+  81               	.LSM7:
+  82 0044 1092 0000 		sts gScroll,__zero_reg__
+  83               	.LSM8:
+  84 0048 83E0      		ldi r24,lo8(3)
+  85 004a 8093 0000 		sts gLCD_Start_Scroll_Timer,r24
+  86 004e 00C0      		rjmp .L7
+  87               	.LVL8:
+  88               	.L6:
+  89               	.LSM9:
+  90 0050 1092 0000 		sts gScrollMode,__zero_reg__
+  91               	.LSM10:
+  92 0054 1092 0000 		sts gScroll,__zero_reg__
+  93               	.L7:
+  94               	.LSM11:
+  95 0058 81E0      		ldi r24,lo8(1)
+  96               	.LVL9:
+  97 005a 8093 0000 		sts gLCD_Update_Required,r24
+  98               	/* epilogue start */
+  99               	.LSM12:
+ 100 005e 0895      		ret
+ 101               	.LFE2:
+ 103               		.section	.text.LCD_puts,"ax",@progbits
+ 104               	.global	LCD_puts
+ 106               	LCD_puts:
+ 107               	.LFB3:
+ 108               	.LSM13:
+ 109               	.LVL10:
+ 110               	/* prologue: function */
+ 111               	/* frame size = 0 */
+ 112 0000 BC01      		movw r22,r24
+ 113               	.LVL11:
+ 114               	.LVL12:
+ 115               	.L11:
+ 116               	.LSM14:
+ 117 0002 8091 0000 		lds r24,gLCD_Update_Required
+ 118 0006 8823      		tst r24
+ 119 0008 01F4      		brne .L11
+ 120 000a 20E0      		ldi r18,lo8(0)
+ 121 000c 30E0      		ldi r19,hi8(0)
+ 122 000e 00C0      		rjmp .L12
+ 123               	.LVL13:
+ 124               	.L14:
+ 125               	.LSM15:
+ 126 0010 F901      		movw r30,r18
+ 127 0012 E050      		subi r30,lo8(-(gTextBuffer))
+ 128 0014 F040      		sbci r31,hi8(-(gTextBuffer))
+ 129 0016 8083      		st Z,r24
+ 130 0018 2F5F      		subi r18,lo8(-(1))
+ 131 001a 3F4F      		sbci r19,hi8(-(1))
+ 132               	.L12:
+ 133 001c 422F      		mov r20,r18
+ 134               	.LSM16:
+ 135 001e FB01      		movw r30,r22
+ 136 0020 E20F      		add r30,r18
+ 137 0022 F31F      		adc r31,r19
+ 138 0024 8081      		ld r24,Z
+ 139 0026 8823      		tst r24
+ 140 0028 01F0      		breq .L13
+ 141 002a 2931      		cpi r18,25
+ 142 002c 3105      		cpc r19,__zero_reg__
+ 143 002e 01F4      		brne .L14
+ 144               	.L13:
+ 145               	.LSM17:
+ 146 0030 E42F      		mov r30,r20
+ 147 0032 F0E0      		ldi r31,lo8(0)
+ 148 0034 E050      		subi r30,lo8(-(gTextBuffer))
+ 149 0036 F040      		sbci r31,hi8(-(gTextBuffer))
+ 150 0038 1082      		st Z,__zero_reg__
+ 151               	.LSM18:
+ 152 003a 4730      		cpi r20,lo8(7)
+ 153 003c 00F0      		brlo .L15
+ 154               	.LSM19:
+ 155 003e 81E0      		ldi r24,lo8(1)
+ 156 0040 8093 0000 		sts gScrollMode,r24
+ 157               	.LSM20:
+ 158 0044 1092 0000 		sts gScroll,__zero_reg__
+ 159               	.LSM21:
+ 160 0048 83E0      		ldi r24,lo8(3)
+ 161 004a 8093 0000 		sts gLCD_Start_Scroll_Timer,r24
+ 162 004e 00C0      		rjmp .L16
+ 163               	.L15:
+ 164               	.LSM22:
+ 165 0050 1092 0000 		sts gScrollMode,__zero_reg__
+ 166               	.LSM23:
+ 167 0054 1092 0000 		sts gScroll,__zero_reg__
+ 168               	.L16:
+ 169               	.LSM24:
+ 170 0058 81E0      		ldi r24,lo8(1)
+ 171 005a 8093 0000 		sts gLCD_Update_Required,r24
+ 172               	/* epilogue start */
+ 173               	.LSM25:
+ 174 005e 0895      		ret
+ 175               	.LFE3:
+ 177               		.section	.text.LCD_putc,"ax",@progbits
+ 178               	.global	LCD_putc
+ 180               	LCD_putc:
+ 181               	.LFB4:
+ 182               	.LSM26:
+ 183               	.LVL14:
+ 184               	/* prologue: function */
+ 185               	/* frame size = 0 */
+ 186               	.LSM27:
+ 187 0000 8931      		cpi r24,lo8(25)
+ 188 0002 00F4      		brsh .L21
+ 189               	.LSM28:
+ 190 0004 E82F      		mov r30,r24
+ 191 0006 F0E0      		ldi r31,lo8(0)
+ 192 0008 E050      		subi r30,lo8(-(gTextBuffer))
+ 193 000a F040      		sbci r31,hi8(-(gTextBuffer))
+ 194 000c 6083      		st Z,r22
+ 195               	.L21:
+ 196 000e 0895      		ret
+ 197               	.LFE4:
+ 199               		.section	.text.LCD_Clear,"ax",@progbits
+ 200               	.global	LCD_Clear
+ 202               	LCD_Clear:
+ 203               	.LFB5:
+ 204               	.LSM29:
+ 205               	/* prologue: function */
+ 206               	/* frame size = 0 */
+ 207               	.LSM30:
+ 208 0000 80E0      		ldi r24,lo8(0)
+ 209 0002 90E0      		ldi r25,hi8(0)
+ 210               	.LSM31:
+ 211 0004 20E2      		ldi r18,lo8(32)
+ 212               	.L23:
+ 213 0006 FC01      		movw r30,r24
+ 214 0008 E050      		subi r30,lo8(-(gTextBuffer))
+ 215 000a F040      		sbci r31,hi8(-(gTextBuffer))
+ 216 000c 2083      		st Z,r18
+ 217 000e 0196      		adiw r24,1
+ 218               	.LSM32:
+ 219 0010 8931      		cpi r24,25
+ 220 0012 9105      		cpc r25,__zero_reg__
+ 221 0014 01F4      		brne .L23
+ 222               	.LSM33:
+ 223 0016 1092 0000 		sts gTextBuffer+24,__zero_reg__
+ 224               	/* epilogue start */
+ 225               	.LSM34:
+ 226 001a 0895      		ret
+ 227               	.LFE5:
+ 229               		.section	.text.LCD_Colon,"ax",@progbits
+ 230               	.global	LCD_Colon
+ 232               	LCD_Colon:
+ 233               	.LFB6:
+ 234               	.LSM35:
+ 235               	.LVL15:
+ 236               	/* prologue: function */
+ 237               	/* frame size = 0 */
+ 238               	.LSM36:
+ 239 0000 8093 0000 		sts gColon,r24
+ 240               	/* epilogue start */
+ 241               	.LSM37:
+ 242 0004 0895      		ret
+ 243               	.LFE6:
+ 245               		.section	.text.LCD_UpdateRequired,"ax",@progbits
+ 246               	.global	LCD_UpdateRequired
+ 248               	LCD_UpdateRequired:
+ 249               	.LFB7:
+ 250               	.LSM38:
+ 251               	.LVL16:
+ 252               	/* prologue: function */
+ 253               	/* frame size = 0 */
+ 254 0000 982F      		mov r25,r24
+ 255               	.LVL17:
+ 256               	.L29:
+ 257               	.LSM39:
+ 258 0002 8091 0000 		lds r24,gLCD_Update_Required
+ 259 0006 8823      		tst r24
+ 260 0008 01F4      		brne .L29
+ 261               	.LSM40:
+ 262 000a 6093 0000 		sts gScrollMode,r22
+ 263               	.LSM41:
+ 264 000e 1092 0000 		sts gScroll,__zero_reg__
+ 265               	.LSM42:
+ 266 0012 9093 0000 		sts gLCD_Update_Required,r25
+ 267               	/* epilogue start */
+ 268               	.LSM43:
+ 269 0016 0895      		ret
+ 270               	.LFE7:
+ 272               		.section	.text.LCD_FlashReset,"ax",@progbits
+ 273               	.global	LCD_FlashReset
+ 275               	LCD_FlashReset:
+ 276               	.LFB8:
+ 277               	.LSM44:
+ 278               	/* prologue: function */
+ 279               	/* frame size = 0 */
+ 280               	.LSM45:
+ 281 0000 1092 0000 		sts gFlashTimer,__zero_reg__
+ 282               	/* epilogue start */
+ 283               	.LSM46:
+ 284 0004 0895      		ret
+ 285               	.LFE8:
+ 287               		.section	.text.SetContrast,"ax",@progbits
+ 288               	.global	SetContrast
+ 290               	SetContrast:
+ 291               	.LFB9:
+ 292               	.LSM47:
+ 293               	.LVL18:
+ 294 0000 FF92      		push r15
+ 295 0002 0F93      		push r16
+ 296 0004 1F93      		push r17
+ 297               	/* prologue: function */
+ 298               	/* frame size = 0 */
+ 299 0006 F82E      		mov r15,r24
+ 300               	.LSM48:
+ 301 0008 8091 0000 		lds r24,enter.1458
+ 302               	.LVL19:
+ 303 000c 8823      		tst r24
+ 304 000e 01F0      		breq .L35
+ 305               	.LSM49:
+ 306 0010 0E94 0000 		call LCD_Clear
+ 307               	.LSM50:
+ 308 0014 1092 0000 		sts enter.1458,__zero_reg__
+ 309               	.L35:
+ 310               	.LSM51:
+ 311 0018 8091 0000 		lds r24,CONTRAST
+ 312 001c 0E94 0000 		call CHAR2BCD2
+ 313 0020 182F      		mov r17,r24
+ 314               	.LVL20:
+ 315               	.LSM52:
+ 316 0022 082F      		mov r16,r24
+ 317 0024 0295      		swap r16
+ 318 0026 0F70      		andi r16,lo8(15)
+ 319               	.LSM53:
+ 320 0028 80E0      		ldi r24,lo8(0)
+ 321 002a 63E4      		ldi r22,lo8(67)
+ 322 002c 0E94 0000 		call LCD_putc
+ 323               	.LSM54:
+ 324 0030 81E0      		ldi r24,lo8(1)
+ 325 0032 64E5      		ldi r22,lo8(84)
+ 326 0034 0E94 0000 		call LCD_putc
+ 327               	.LSM55:
+ 328 0038 82E0      		ldi r24,lo8(2)
+ 329 003a 62E5      		ldi r22,lo8(82)
+ 330 003c 0E94 0000 		call LCD_putc
+ 331               	.LSM56:
+ 332 0040 83E0      		ldi r24,lo8(3)
+ 333 0042 60E2      		ldi r22,lo8(32)
+ 334 0044 0E94 0000 		call LCD_putc
+ 335               	.LSM57:
+ 336 0048 005D      		subi r16,lo8(-(48))
+ 337 004a 84E0      		ldi r24,lo8(4)
+ 338 004c 602F      		mov r22,r16
+ 339 004e 0E94 0000 		call LCD_putc
+ 340               	.LSM58:
+ 341 0052 1F70      		andi r17,lo8(15)
+ 342 0054 105D      		subi r17,lo8(-(48))
+ 343 0056 85E0      		ldi r24,lo8(5)
+ 344 0058 612F      		mov r22,r17
+ 345 005a 0E94 0000 		call LCD_putc
+ 346               	.LSM59:
+ 347 005e 81E0      		ldi r24,lo8(1)
+ 348 0060 60E0      		ldi r22,lo8(0)
+ 349 0062 0E94 0000 		call LCD_UpdateRequired
+ 350               	.LSM60:
+ 351 0066 84E0      		ldi r24,lo8(4)
+ 352 0068 F816      		cp r15,r24
+ 353 006a 01F4      		brne .L36
+ 354               	.LSM61:
+ 355 006c 8091 0000 		lds r24,CONTRAST
+ 356 0070 8F5F      		subi r24,lo8(-(1))
+ 357 0072 00C0      		rjmp .L43
+ 358               	.L36:
+ 359               	.LSM62:
+ 360 0074 85E0      		ldi r24,lo8(5)
+ 361 0076 F816      		cp r15,r24
+ 362 0078 01F4      		brne .L37
+ 363               	.LSM63:
+ 364 007a 8091 0000 		lds r24,CONTRAST
+ 365 007e 8150      		subi r24,lo8(-(-1))
+ 366               	.L43:
+ 367 0080 8093 0000 		sts CONTRAST,r24
+ 368               	.L37:
+ 369               	.LSM64:
+ 370 0084 8091 0000 		lds r24,CONTRAST
+ 371 0088 8F3F      		cpi r24,lo8(-1)
+ 372 008a 01F4      		brne .L38
+ 373               	.LSM65:
+ 374 008c 1092 0000 		sts CONTRAST,__zero_reg__
+ 375               	.L38:
+ 376               	.LSM66:
+ 377 0090 8091 0000 		lds r24,CONTRAST
+ 378 0094 8031      		cpi r24,lo8(16)
+ 379 0096 00F0      		brlo .L39
+ 380               	.LSM67:
+ 381 0098 8FE0      		ldi r24,lo8(15)
+ 382 009a 8093 0000 		sts CONTRAST,r24
+ 383               	.L39:
+ 384               	.LSM68:
+ 385 009e 9091 E700 		lds r25,231
+ 386 00a2 8091 0000 		lds r24,CONTRAST
+ 387 00a6 8F70      		andi r24,lo8(15)
+ 388 00a8 907F      		andi r25,lo8(-16)
+ 389 00aa 892B      		or r24,r25
+ 390 00ac 8093 E700 		sts 231,r24
+ 391               	.LSM69:
+ 392 00b0 81E0      		ldi r24,lo8(1)
+ 393 00b2 F816      		cp r15,r24
+ 394 00b4 01F0      		breq .L40
+ 395 00b6 8DE5      		ldi r24,lo8(93)
+ 396 00b8 00C0      		rjmp .L41
+ 397               	.L40:
+ 398               	.LSM70:
+ 399 00ba F092 0000 		sts enter.1458,r15
+ 400 00be 8CE5      		ldi r24,lo8(92)
+ 401               	.L41:
+ 402               	/* epilogue start */
+ 403               	.LSM71:
+ 404 00c0 1F91      		pop r17
+ 405               	.LVL21:
+ 406 00c2 0F91      		pop r16
+ 407 00c4 FF90      		pop r15
+ 408               	.LVL22:
+ 409 00c6 0895      		ret
+ 410               	.LFE9:
+ 412               	.global	CONTRAST
+ 413               		.section	.data.CONTRAST,"aw",@progbits
+ 416               	CONTRAST:
+ 417 0000 0F        		.byte	15
+ 418               		.section	.data.enter.1458,"aw",@progbits
+ 421               	enter.1458:
+ 422 0000 01        		.byte	1
+ 503               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 LCD_functions.c
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:19     .text.LCD_puts_f:00000000 LCD_puts_f
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:106    .text.LCD_puts:00000000 LCD_puts
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:180    .text.LCD_putc:00000000 LCD_putc
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:202    .text.LCD_Clear:00000000 LCD_Clear
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:232    .text.LCD_Colon:00000000 LCD_Colon
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:248    .text.LCD_UpdateRequired:00000000 LCD_UpdateRequired
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:275    .text.LCD_FlashReset:00000000 LCD_FlashReset
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:290    .text.SetContrast:00000000 SetContrast
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:421    .data.enter.1458:00000000 enter.1458
+C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:416    .data.CONTRAST:00000000 CONTRAST
+
+UNDEFINED SYMBOLS
+gLCD_Update_Required
+gTextBuffer
+gScrollMode
+gScroll
+gLCD_Start_Scroll_Timer
+gColon
+gFlashTimer
+CHAR2BCD2
+__do_copy_data

@@ -1,0 +1,131 @@
+   1               		.file	"bfeeprom.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.LoadEEPROM,"ax",@progbits
+  17               	.global	LoadEEPROM
+  19               	LoadEEPROM:
+  20               	.LFB3:
+  21               	.LSM0:
+  22               	.LVL0:
+  23 0000 DF92      		push r13
+  24 0002 EF92      		push r14
+  25 0004 FF92      		push r15
+  26 0006 0F93      		push r16
+  27 0008 1F93      		push r17
+  28 000a CF93      		push r28
+  29 000c DF93      		push r29
+  30               	/* prologue: function */
+  31               	/* frame size = 0 */
+  32 000e 7C01      		movw r14,r24
+  33 0010 D62E      		mov r13,r22
+  34 0012 8A01      		movw r16,r20
+  35               	.LSM1:
+  36 0014 C0E0      		ldi r28,lo8(0)
+  37 0016 D0E0      		ldi r29,hi8(0)
+  38 0018 00C0      		rjmp .L2
+  39               	.LVL1:
+  40               	.L3:
+  41               	.LSM2:
+  42 001a 0E94 0000 		call __eerd_byte_m169
+  43               	.LVL2:
+  44 001e F701      		movw r30,r14
+  45 0020 EC0F      		add r30,r28
+  46 0022 FD1F      		adc r31,r29
+  47 0024 8083      		st Z,r24
+  48 0026 2196      		adiw r28,1
+  49               	.LVL3:
+  50               	.L2:
+  51 0028 C801      		movw r24,r16
+  52 002a 8C0F      		add r24,r28
+  53 002c 9D1F      		adc r25,r29
+  54               	.LVL4:
+  55               	.LSM3:
+  56 002e CD15      		cp r28,r13
+  57 0030 00F0      		brlo .L3
+  58               	/* epilogue start */
+  59               	.LSM4:
+  60 0032 DF91      		pop r29
+  61 0034 CF91      		pop r28
+  62 0036 1F91      		pop r17
+  63 0038 0F91      		pop r16
+  64 003a FF90      		pop r15
+  65 003c EF90      		pop r14
+  66               	.LVL5:
+  67 003e DF90      		pop r13
+  68               	.LVL6:
+  69 0040 0895      		ret
+  70               	.LFE3:
+  72               		.section	.text.StoreEEPROM,"ax",@progbits
+  73               	.global	StoreEEPROM
+  75               	StoreEEPROM:
+  76               	.LFB2:
+  77               	.LSM5:
+  78               	.LVL7:
+  79 0000 DF92      		push r13
+  80 0002 EF92      		push r14
+  81 0004 FF92      		push r15
+  82 0006 0F93      		push r16
+  83 0008 1F93      		push r17
+  84 000a CF93      		push r28
+  85 000c DF93      		push r29
+  86               	/* prologue: function */
+  87               	/* frame size = 0 */
+  88 000e 7C01      		movw r14,r24
+  89 0010 D62E      		mov r13,r22
+  90 0012 8A01      		movw r16,r20
+  91               	.LSM6:
+  92 0014 C0E0      		ldi r28,lo8(0)
+  93 0016 D0E0      		ldi r29,hi8(0)
+  94 0018 00C0      		rjmp .L6
+  95               	.LVL8:
+  96               	.L7:
+  97               	.LSM7:
+  98 001a F701      		movw r30,r14
+  99 001c EC0F      		add r30,r28
+ 100 001e FD1F      		adc r31,r29
+ 101 0020 C801      		movw r24,r16
+ 102 0022 6081      		ld r22,Z
+ 103 0024 0E94 0000 		call __eewr_byte_m169
+ 104               	.LSM8:
+ 105 0028 0F5F      		subi r16,lo8(-(1))
+ 106 002a 1F4F      		sbci r17,hi8(-(1))
+ 107 002c 2196      		adiw r28,1
+ 108               	.LVL9:
+ 109               	.L6:
+ 110               	.LSM9:
+ 111 002e CD15      		cp r28,r13
+ 112 0030 00F0      		brlo .L7
+ 113               	/* epilogue start */
+ 114               	.LSM10:
+ 115 0032 DF91      		pop r29
+ 116 0034 CF91      		pop r28
+ 117 0036 1F91      		pop r17
+ 118 0038 0F91      		pop r16
+ 119               	.LVL10:
+ 120 003a FF90      		pop r15
+ 121 003c EF90      		pop r14
+ 122               	.LVL11:
+ 123 003e DF90      		pop r13
+ 124               	.LVL12:
+ 125 0040 0895      		ret
+ 126               	.LFE2:
+ 160               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 bfeeprom.c
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:19     .text.LoadEEPROM:00000000 LoadEEPROM
+C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:75     .text.StoreEEPROM:00000000 StoreEEPROM
+
+UNDEFINED SYMBOLS
+__eerd_byte_m169
+__eewr_byte_m169

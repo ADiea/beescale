@@ -1,0 +1,682 @@
+   1               		.file	"dataflash.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.DF_SPI_init,"ax",@progbits
+  17               	.global	DF_SPI_init
+  19               	DF_SPI_init:
+  20               	.LFB2:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25 0000 85B1      		in r24,37-32
+  26 0002 8F60      		ori r24,lo8(15)
+  27 0004 85B9      		out 37-32,r24
+  28               	.LSM2:
+  29 0006 84B1      		in r24,36-32
+  30 0008 8760      		ori r24,lo8(7)
+  31 000a 84B9      		out 36-32,r24
+  32               	.LSM3:
+  33 000c 81E0      		ldi r24,lo8(1)
+  34 000e 8DBD      		out 77-32,r24
+  35               	.LSM4:
+  36 0010 8CE5      		ldi r24,lo8(92)
+  37 0012 8CBD      		out 76-32,r24
+  38               	/* epilogue start */
+  39               	.LSM5:
+  40 0014 0895      		ret
+  41               	.LFE2:
+  43               		.section	.text.DF_SPI_RW,"ax",@progbits
+  44               	.global	DF_SPI_RW
+  46               	DF_SPI_RW:
+  47               	.LFB3:
+  48               	.LSM6:
+  49               	.LVL0:
+  50               	/* prologue: function */
+  51               	/* frame size = 0 */
+  52               	.LSM7:
+  53 0000 8EBD      		out 78-32,r24
+  54               	.L4:
+  55               	.LSM8:
+  56 0002 0DB4      		in __tmp_reg__,77-32
+  57 0004 07FE      		sbrs __tmp_reg__,7
+  58 0006 00C0      		rjmp .L4
+  59               	.LSM9:
+  60 0008 8EB5      		in r24,78-32
+  61               	.LVL1:
+  62               	.LVL2:
+  63               	/* epilogue start */
+  64               	.LSM10:
+  65 000a 0895      		ret
+  66               	.LFE3:
+  68               		.section	.text.Read_DF_status,"ax",@progbits
+  69               	.global	Read_DF_status
+  71               	Read_DF_status:
+  72               	.LFB4:
+  73               	.LSM11:
+  74               	/* prologue: function */
+  75               	/* frame size = 0 */
+  76               	.LSM12:
+  77 0000 289A      		sbi 37-32,0
+  78               	.LSM13:
+  79 0002 2898      		cbi 37-32,0
+  80               	.LSM14:
+  81 0004 87E5      		ldi r24,lo8(87)
+  82 0006 0E94 0000 		call DF_SPI_RW
+  83               	.LSM15:
+  84 000a 80E0      		ldi r24,lo8(0)
+  85 000c 0E94 0000 		call DF_SPI_RW
+  86               	.LBB2:
+  87               	.LSM16:
+  88 0010 282F      		mov r18,r24
+  89               	.LVL3:
+  90 0012 30E0      		ldi r19,lo8(0)
+  91 0014 2873      		andi r18,lo8(56)
+  92 0016 3070      		andi r19,hi8(56)
+  93 0018 43E0      		ldi r20,3
+  94 001a 3695      	1:	lsr r19
+  95 001c 2795      		ror r18
+  96 001e 4A95      		dec r20
+  97 0020 01F4      		brne 1b
+  98 0022 F901      		movw r30,r18
+  99 0024 E050      		subi r30,lo8(-(DF_pagebits))
+ 100 0026 F040      		sbci r31,hi8(-(DF_pagebits))
+ 101               	/* #APP */
+ 102               	 ;  153 "src/drv/dataflash.c" 1
+ 103 0028 E491      		lpm r30, Z
+ 104               		
+ 105               	 ;  0 "" 2
+ 106               	.LVL4:
+ 107               	/* #NOAPP */
+ 108               	.LBE2:
+ 109 002a E093 0000 		sts PageBits,r30
+ 110               	.LBB3:
+ 111               	.LSM17:
+ 112 002e F901      		movw r30,r18
+ 113               	.LVL5:
+ 114 0030 EE0F      		lsl r30
+ 115 0032 FF1F      		rol r31
+ 116 0034 E050      		subi r30,lo8(-(DF_pagesize))
+ 117 0036 F040      		sbci r31,hi8(-(DF_pagesize))
+ 118               	/* #APP */
+ 119               	 ;  154 "src/drv/dataflash.c" 1
+ 120 0038 2591      		lpm r18, Z+
+ 121 003a 3491      		lpm r19, Z
+ 122               		
+ 123               	 ;  0 "" 2
+ 124               	.LVL6:
+ 125               	/* #NOAPP */
+ 126               	.LBE3:
+ 127 003c 3093 0000 		sts (PageSize)+1,r19
+ 128 0040 2093 0000 		sts PageSize,r18
+ 129               	.LVL7:
+ 130               	/* epilogue start */
+ 131               	.LSM18:
+ 132 0044 0895      		ret
+ 133               	.LFE4:
+ 135               		.section	.text.Page_To_Buffer,"ax",@progbits
+ 136               	.global	Page_To_Buffer
+ 138               	Page_To_Buffer:
+ 139               	.LFB5:
+ 140               	.LSM19:
+ 141               	.LVL8:
+ 142 0000 CF93      		push r28
+ 143 0002 DF93      		push r29
+ 144               	/* prologue: function */
+ 145               	/* frame size = 0 */
+ 146 0004 EC01      		movw r28,r24
+ 147               	.LSM20:
+ 148 0006 289A      		sbi 37-32,0
+ 149               	.LSM21:
+ 150 0008 2898      		cbi 37-32,0
+ 151               	.LSM22:
+ 152 000a 6130      		cpi r22,lo8(1)
+ 153 000c 01F4      		brne .L10
+ 154               	.LVL9:
+ 155               	.LSM23:
+ 156 000e 83E5      		ldi r24,lo8(83)
+ 157 0010 0E94 0000 		call DF_SPI_RW
+ 158               	.LVL10:
+ 159               	.LSM24:
+ 160 0014 2091 0000 		lds r18,PageBits
+ 161 0018 80E1      		ldi r24,lo8(16)
+ 162 001a 90E0      		ldi r25,hi8(16)
+ 163 001c 821B      		sub r24,r18
+ 164 001e 9109      		sbc r25,__zero_reg__
+ 165 0020 9E01      		movw r18,r28
+ 166 0022 00C0      		rjmp 2f
+ 167 0024 3695      	1:	lsr r19
+ 168 0026 2795      		ror r18
+ 169 0028 8A95      	2:	dec r24
+ 170 002a 02F4      		brpl 1b
+ 171 002c C901      		movw r24,r18
+ 172 002e 0E94 0000 		call DF_SPI_RW
+ 173               	.LSM25:
+ 174 0032 8091 0000 		lds r24,PageBits
+ 175 0036 90E0      		ldi r25,lo8(0)
+ 176 0038 0897      		sbiw r24,8
+ 177 003a 00C0      		rjmp 2f
+ 178 003c CC0F      	1:	lsl r28
+ 179 003e DD1F      		rol r29
+ 180 0040 8A95      	2:	dec r24
+ 181 0042 02F4      		brpl 1b
+ 182 0044 8C2F      		mov r24,r28
+ 183 0046 0E94 0000 		call DF_SPI_RW
+ 184               	.LSM26:
+ 185 004a 80E0      		ldi r24,lo8(0)
+ 186 004c 0E94 0000 		call DF_SPI_RW
+ 187               	.LVL11:
+ 188               	.L10:
+ 189               	.LSM27:
+ 190 0050 289A      		sbi 37-32,0
+ 191               	.LSM28:
+ 192 0052 2898      		cbi 37-32,0
+ 193               	.L11:
+ 194               	.LSM29:
+ 195 0054 0E94 0000 		call Read_DF_status
+ 196               	.LVL12:
+ 197 0058 87FF      		sbrs r24,7
+ 198 005a 00C0      		rjmp .L11
+ 199               	/* epilogue start */
+ 200               	.LSM30:
+ 201 005c DF91      		pop r29
+ 202 005e CF91      		pop r28
+ 203               	.LVL13:
+ 204 0060 0895      		ret
+ 205               	.LFE5:
+ 207               		.section	.text.Buffer_Read_Byte,"ax",@progbits
+ 208               	.global	Buffer_Read_Byte
+ 210               	Buffer_Read_Byte:
+ 211               	.LFB6:
+ 212               	.LSM31:
+ 213               	.LVL14:
+ 214 0000 CF93      		push r28
+ 215 0002 DF93      		push r29
+ 216               	/* prologue: function */
+ 217               	/* frame size = 0 */
+ 218 0004 EB01      		movw r28,r22
+ 219               	.LSM32:
+ 220 0006 289A      		sbi 37-32,0
+ 221               	.LSM33:
+ 222 0008 2898      		cbi 37-32,0
+ 223               	.LSM34:
+ 224 000a 8130      		cpi r24,lo8(1)
+ 225 000c 01F0      		breq .L15
+ 226               	.LVL15:
+ 227 000e 80E3      		ldi r24,lo8(48)
+ 228               	.LVL16:
+ 229 0010 00C0      		rjmp .L16
+ 230               	.LVL17:
+ 231               	.L15:
+ 232               	.LSM35:
+ 233 0012 84E5      		ldi r24,lo8(84)
+ 234               	.LVL18:
+ 235 0014 0E94 0000 		call DF_SPI_RW
+ 236               	.LSM36:
+ 237 0018 80E0      		ldi r24,lo8(0)
+ 238 001a 0E94 0000 		call DF_SPI_RW
+ 239               	.LSM37:
+ 240 001e 8D2F      		mov r24,r29
+ 241 0020 9927      		clr r25
+ 242 0022 0E94 0000 		call DF_SPI_RW
+ 243               	.LSM38:
+ 244 0026 8C2F      		mov r24,r28
+ 245 0028 0E94 0000 		call DF_SPI_RW
+ 246               	.LSM39:
+ 247 002c 80E0      		ldi r24,lo8(0)
+ 248 002e 0E94 0000 		call DF_SPI_RW
+ 249               	.LSM40:
+ 250 0032 80E0      		ldi r24,lo8(0)
+ 251 0034 0E94 0000 		call DF_SPI_RW
+ 252               	.LVL19:
+ 253               	.L16:
+ 254               	.LVL20:
+ 255               	/* epilogue start */
+ 256               	.LSM41:
+ 257 0038 DF91      		pop r29
+ 258 003a CF91      		pop r28
+ 259               	.LVL21:
+ 260 003c 0895      		ret
+ 261               	.LFE6:
+ 263               		.section	.text.Buffer_Read_Str,"ax",@progbits
+ 264               	.global	Buffer_Read_Str
+ 266               	Buffer_Read_Str:
+ 267               	.LFB7:
+ 268               	.LSM42:
+ 269               	.LVL22:
+ 270 0000 EF92      		push r14
+ 271 0002 FF92      		push r15
+ 272 0004 0F93      		push r16
+ 273 0006 1F93      		push r17
+ 274 0008 CF93      		push r28
+ 275 000a DF93      		push r29
+ 276               	/* prologue: function */
+ 277               	/* frame size = 0 */
+ 278 000c EB01      		movw r28,r22
+ 279 000e 7A01      		movw r14,r20
+ 280 0010 8901      		movw r16,r18
+ 281               	.LSM43:
+ 282 0012 289A      		sbi 37-32,0
+ 283               	.LSM44:
+ 284 0014 2898      		cbi 37-32,0
+ 285               	.LSM45:
+ 286 0016 8130      		cpi r24,lo8(1)
+ 287 0018 01F4      		brne .L22
+ 288               	.LVL23:
+ 289               	.LSM46:
+ 290 001a 84E5      		ldi r24,lo8(84)
+ 291               	.LVL24:
+ 292 001c 0E94 0000 		call DF_SPI_RW
+ 293               	.LSM47:
+ 294 0020 80E0      		ldi r24,lo8(0)
+ 295 0022 0E94 0000 		call DF_SPI_RW
+ 296               	.LSM48:
+ 297 0026 8D2F      		mov r24,r29
+ 298 0028 9927      		clr r25
+ 299 002a 0E94 0000 		call DF_SPI_RW
+ 300               	.LSM49:
+ 301 002e 8C2F      		mov r24,r28
+ 302 0030 0E94 0000 		call DF_SPI_RW
+ 303               	.LSM50:
+ 304 0034 80E0      		ldi r24,lo8(0)
+ 305 0036 0E94 0000 		call DF_SPI_RW
+ 306 003a C0E0      		ldi r28,lo8(0)
+ 307 003c D0E0      		ldi r29,hi8(0)
+ 308               	.LVL25:
+ 309 003e 00C0      		rjmp .L20
+ 310               	.L21:
+ 311               	.LSM51:
+ 312 0040 80E0      		ldi r24,lo8(0)
+ 313 0042 0E94 0000 		call DF_SPI_RW
+ 314 0046 F801      		movw r30,r16
+ 315 0048 8193      		st Z+,r24
+ 316 004a 8F01      		movw r16,r30
+ 317               	.LSM52:
+ 318 004c 2196      		adiw r28,1
+ 319               	.L20:
+ 320 004e CE15      		cp r28,r14
+ 321 0050 DF05      		cpc r29,r15
+ 322 0052 00F0      		brlo .L21
+ 323               	.LVL26:
+ 324               	.L22:
+ 325               	/* epilogue start */
+ 326               	.LSM53:
+ 327 0054 DF91      		pop r29
+ 328 0056 CF91      		pop r28
+ 329               	.LVL27:
+ 330 0058 1F91      		pop r17
+ 331 005a 0F91      		pop r16
+ 332               	.LVL28:
+ 333 005c FF90      		pop r15
+ 334 005e EF90      		pop r14
+ 335               	.LVL29:
+ 336 0060 0895      		ret
+ 337               	.LFE7:
+ 339               		.section	.text.Buffer_Write_Enable,"ax",@progbits
+ 340               	.global	Buffer_Write_Enable
+ 342               	Buffer_Write_Enable:
+ 343               	.LFB8:
+ 344               	.LSM54:
+ 345               	.LVL30:
+ 346 0000 CF93      		push r28
+ 347 0002 DF93      		push r29
+ 348               	/* prologue: function */
+ 349               	/* frame size = 0 */
+ 350 0004 EB01      		movw r28,r22
+ 351               	.LSM55:
+ 352 0006 289A      		sbi 37-32,0
+ 353               	.LSM56:
+ 354 0008 2898      		cbi 37-32,0
+ 355               	.LSM57:
+ 356 000a 8130      		cpi r24,lo8(1)
+ 357 000c 01F4      		brne .L25
+ 358               	.LVL31:
+ 359               	.LSM58:
+ 360 000e 84E8      		ldi r24,lo8(-124)
+ 361               	.LVL32:
+ 362 0010 0E94 0000 		call DF_SPI_RW
+ 363               	.LSM59:
+ 364 0014 80E0      		ldi r24,lo8(0)
+ 365 0016 0E94 0000 		call DF_SPI_RW
+ 366               	.LSM60:
+ 367 001a 8D2F      		mov r24,r29
+ 368 001c 9927      		clr r25
+ 369 001e 0E94 0000 		call DF_SPI_RW
+ 370               	.LSM61:
+ 371 0022 8C2F      		mov r24,r28
+ 372 0024 0E94 0000 		call DF_SPI_RW
+ 373               	.LVL33:
+ 374               	.L25:
+ 375               	/* epilogue start */
+ 376               	.LSM62:
+ 377 0028 DF91      		pop r29
+ 378 002a CF91      		pop r28
+ 379               	.LVL34:
+ 380 002c 0895      		ret
+ 381               	.LFE8:
+ 383               		.section	.text.Buffer_Write_Byte,"ax",@progbits
+ 384               	.global	Buffer_Write_Byte
+ 386               	Buffer_Write_Byte:
+ 387               	.LFB9:
+ 388               	.LSM63:
+ 389               	.LVL35:
+ 390 0000 1F93      		push r17
+ 391 0002 CF93      		push r28
+ 392 0004 DF93      		push r29
+ 393               	/* prologue: function */
+ 394               	/* frame size = 0 */
+ 395 0006 EB01      		movw r28,r22
+ 396 0008 142F      		mov r17,r20
+ 397               	.LSM64:
+ 398 000a 289A      		sbi 37-32,0
+ 399               	.LSM65:
+ 400 000c 2898      		cbi 37-32,0
+ 401               	.LSM66:
+ 402 000e 8130      		cpi r24,lo8(1)
+ 403 0010 01F4      		brne .L28
+ 404               	.LVL36:
+ 405               	.LSM67:
+ 406 0012 84E8      		ldi r24,lo8(-124)
+ 407               	.LVL37:
+ 408 0014 0E94 0000 		call DF_SPI_RW
+ 409               	.LSM68:
+ 410 0018 80E0      		ldi r24,lo8(0)
+ 411 001a 0E94 0000 		call DF_SPI_RW
+ 412               	.LSM69:
+ 413 001e 8D2F      		mov r24,r29
+ 414 0020 9927      		clr r25
+ 415 0022 0E94 0000 		call DF_SPI_RW
+ 416               	.LSM70:
+ 417 0026 8C2F      		mov r24,r28
+ 418 0028 0E94 0000 		call DF_SPI_RW
+ 419               	.LSM71:
+ 420 002c 812F      		mov r24,r17
+ 421 002e 0E94 0000 		call DF_SPI_RW
+ 422               	.LVL38:
+ 423               	.L28:
+ 424               	/* epilogue start */
+ 425               	.LSM72:
+ 426 0032 DF91      		pop r29
+ 427 0034 CF91      		pop r28
+ 428               	.LVL39:
+ 429 0036 1F91      		pop r17
+ 430               	.LVL40:
+ 431 0038 0895      		ret
+ 432               	.LFE9:
+ 434               		.section	.text.Buffer_Write_Str,"ax",@progbits
+ 435               	.global	Buffer_Write_Str
+ 437               	Buffer_Write_Str:
+ 438               	.LFB10:
+ 439               	.LSM73:
+ 440               	.LVL41:
+ 441 0000 EF92      		push r14
+ 442 0002 FF92      		push r15
+ 443 0004 0F93      		push r16
+ 444 0006 1F93      		push r17
+ 445 0008 CF93      		push r28
+ 446 000a DF93      		push r29
+ 447               	/* prologue: function */
+ 448               	/* frame size = 0 */
+ 449 000c EB01      		movw r28,r22
+ 450 000e 7A01      		movw r14,r20
+ 451 0010 8901      		movw r16,r18
+ 452               	.LSM74:
+ 453 0012 289A      		sbi 37-32,0
+ 454               	.LSM75:
+ 455 0014 2898      		cbi 37-32,0
+ 456               	.LSM76:
+ 457 0016 8130      		cpi r24,lo8(1)
+ 458 0018 01F4      		brne .L33
+ 459               	.LVL42:
+ 460               	.LSM77:
+ 461 001a 84E8      		ldi r24,lo8(-124)
+ 462               	.LVL43:
+ 463 001c 0E94 0000 		call DF_SPI_RW
+ 464               	.LSM78:
+ 465 0020 80E0      		ldi r24,lo8(0)
+ 466 0022 0E94 0000 		call DF_SPI_RW
+ 467               	.LSM79:
+ 468 0026 8D2F      		mov r24,r29
+ 469 0028 9927      		clr r25
+ 470 002a 0E94 0000 		call DF_SPI_RW
+ 471               	.LSM80:
+ 472 002e 8C2F      		mov r24,r28
+ 473 0030 0E94 0000 		call DF_SPI_RW
+ 474 0034 C0E0      		ldi r28,lo8(0)
+ 475 0036 D0E0      		ldi r29,hi8(0)
+ 476               	.LVL44:
+ 477 0038 00C0      		rjmp .L31
+ 478               	.L32:
+ 479               	.LSM81:
+ 480 003a F801      		movw r30,r16
+ 481 003c 8191      		ld r24,Z+
+ 482 003e 8F01      		movw r16,r30
+ 483 0040 0E94 0000 		call DF_SPI_RW
+ 484               	.LSM82:
+ 485 0044 2196      		adiw r28,1
+ 486               	.L31:
+ 487 0046 CE15      		cp r28,r14
+ 488 0048 DF05      		cpc r29,r15
+ 489 004a 00F0      		brlo .L32
+ 490               	.LVL45:
+ 491               	.L33:
+ 492               	/* epilogue start */
+ 493               	.LSM83:
+ 494 004c DF91      		pop r29
+ 495 004e CF91      		pop r28
+ 496               	.LVL46:
+ 497 0050 1F91      		pop r17
+ 498 0052 0F91      		pop r16
+ 499               	.LVL47:
+ 500 0054 FF90      		pop r15
+ 501 0056 EF90      		pop r14
+ 502               	.LVL48:
+ 503 0058 0895      		ret
+ 504               	.LFE10:
+ 506               		.section	.text.Buffer_To_Page,"ax",@progbits
+ 507               	.global	Buffer_To_Page
+ 509               	Buffer_To_Page:
+ 510               	.LFB11:
+ 511               	.LSM84:
+ 512               	.LVL49:
+ 513 0000 CF93      		push r28
+ 514 0002 DF93      		push r29
+ 515               	/* prologue: function */
+ 516               	/* frame size = 0 */
+ 517 0004 EB01      		movw r28,r22
+ 518               	.LSM85:
+ 519 0006 289A      		sbi 37-32,0
+ 520               	.LSM86:
+ 521 0008 2898      		cbi 37-32,0
+ 522               	.LSM87:
+ 523 000a 8130      		cpi r24,lo8(1)
+ 524 000c 01F4      		brne .L35
+ 525               	.LVL50:
+ 526               	.LSM88:
+ 527 000e 83E8      		ldi r24,lo8(-125)
+ 528               	.LVL51:
+ 529 0010 0E94 0000 		call DF_SPI_RW
+ 530               	.LSM89:
+ 531 0014 2091 0000 		lds r18,PageBits
+ 532 0018 80E1      		ldi r24,lo8(16)
+ 533 001a 90E0      		ldi r25,hi8(16)
+ 534 001c 821B      		sub r24,r18
+ 535 001e 9109      		sbc r25,__zero_reg__
+ 536 0020 9E01      		movw r18,r28
+ 537 0022 00C0      		rjmp 2f
+ 538 0024 3695      	1:	lsr r19
+ 539 0026 2795      		ror r18
+ 540 0028 8A95      	2:	dec r24
+ 541 002a 02F4      		brpl 1b
+ 542 002c C901      		movw r24,r18
+ 543 002e 0E94 0000 		call DF_SPI_RW
+ 544               	.LSM90:
+ 545 0032 8091 0000 		lds r24,PageBits
+ 546 0036 90E0      		ldi r25,lo8(0)
+ 547 0038 0897      		sbiw r24,8
+ 548 003a 00C0      		rjmp 2f
+ 549 003c CC0F      	1:	lsl r28
+ 550 003e DD1F      		rol r29
+ 551 0040 8A95      	2:	dec r24
+ 552 0042 02F4      		brpl 1b
+ 553 0044 8C2F      		mov r24,r28
+ 554 0046 0E94 0000 		call DF_SPI_RW
+ 555               	.LSM91:
+ 556 004a 80E0      		ldi r24,lo8(0)
+ 557 004c 0E94 0000 		call DF_SPI_RW
+ 558               	.LVL52:
+ 559               	.L35:
+ 560               	.LSM92:
+ 561 0050 289A      		sbi 37-32,0
+ 562               	.LSM93:
+ 563 0052 2898      		cbi 37-32,0
+ 564               	.L36:
+ 565               	.LSM94:
+ 566 0054 0E94 0000 		call Read_DF_status
+ 567               	.LVL53:
+ 568 0058 87FF      		sbrs r24,7
+ 569 005a 00C0      		rjmp .L36
+ 570               	/* epilogue start */
+ 571               	.LSM95:
+ 572 005c DF91      		pop r29
+ 573 005e CF91      		pop r28
+ 574               	.LVL54:
+ 575 0060 0895      		ret
+ 576               	.LFE11:
+ 578               		.section	.text.Cont_Flash_Read_Enable,"ax",@progbits
+ 579               	.global	Cont_Flash_Read_Enable
+ 581               	Cont_Flash_Read_Enable:
+ 582               	.LFB12:
+ 583               	.LSM96:
+ 584               	.LVL55:
+ 585 0000 EF92      		push r14
+ 586 0002 FF92      		push r15
+ 587 0004 0F93      		push r16
+ 588 0006 1F93      		push r17
+ 589               	/* prologue: function */
+ 590               	/* frame size = 0 */
+ 591 0008 8C01      		movw r16,r24
+ 592 000a 7B01      		movw r14,r22
+ 593               	.LSM97:
+ 594 000c 289A      		sbi 37-32,0
+ 595               	.LSM98:
+ 596 000e 2898      		cbi 37-32,0
+ 597               	.LSM99:
+ 598 0010 88E6      		ldi r24,lo8(104)
+ 599               	.LVL56:
+ 600 0012 0E94 0000 		call DF_SPI_RW
+ 601               	.LVL57:
+ 602               	.LSM100:
+ 603 0016 2091 0000 		lds r18,PageBits
+ 604 001a 80E1      		ldi r24,lo8(16)
+ 605 001c 90E0      		ldi r25,hi8(16)
+ 606 001e 821B      		sub r24,r18
+ 607 0020 9109      		sbc r25,__zero_reg__
+ 608 0022 9801      		movw r18,r16
+ 609 0024 00C0      		rjmp 2f
+ 610 0026 3695      	1:	lsr r19
+ 611 0028 2795      		ror r18
+ 612 002a 8A95      	2:	dec r24
+ 613 002c 02F4      		brpl 1b
+ 614 002e C901      		movw r24,r18
+ 615 0030 0E94 0000 		call DF_SPI_RW
+ 616               	.LSM101:
+ 617 0034 8F2D      		mov r24,r15
+ 618 0036 9927      		clr r25
+ 619 0038 2091 0000 		lds r18,PageBits
+ 620 003c 30E0      		ldi r19,lo8(0)
+ 621 003e 2850      		subi r18,lo8(-(-8))
+ 622 0040 3040      		sbci r19,hi8(-(-8))
+ 623 0042 00C0      		rjmp 2f
+ 624 0044 000F      	1:	lsl r16
+ 625 0046 111F      		rol r17
+ 626 0048 2A95      	2:	dec r18
+ 627 004a 02F4      		brpl 1b
+ 628 004c 800F      		add r24,r16
+ 629 004e 0E94 0000 		call DF_SPI_RW
+ 630               	.LSM102:
+ 631 0052 8E2D      		mov r24,r14
+ 632 0054 0E94 0000 		call DF_SPI_RW
+ 633               	.LSM103:
+ 634 0058 80E0      		ldi r24,lo8(0)
+ 635 005a 0E94 0000 		call DF_SPI_RW
+ 636               	.LSM104:
+ 637 005e 80E0      		ldi r24,lo8(0)
+ 638 0060 0E94 0000 		call DF_SPI_RW
+ 639               	.LSM105:
+ 640 0064 80E0      		ldi r24,lo8(0)
+ 641 0066 0E94 0000 		call DF_SPI_RW
+ 642               	.LSM106:
+ 643 006a 80E0      		ldi r24,lo8(0)
+ 644 006c 0E94 0000 		call DF_SPI_RW
+ 645               	/* epilogue start */
+ 646               	.LSM107:
+ 647 0070 1F91      		pop r17
+ 648 0072 0F91      		pop r16
+ 649               	.LVL58:
+ 650 0074 FF90      		pop r15
+ 651 0076 EF90      		pop r14
+ 652               	.LVL59:
+ 653 0078 0895      		ret
+ 654               	.LFE12:
+ 656               	.global	DF_pagebits
+ 657               		.section	.progmem.data,"a",@progbits
+ 660               	DF_pagebits:
+ 661 0000 09        		.byte	9
+ 662 0001 09        		.byte	9
+ 663 0002 09        		.byte	9
+ 664 0003 09        		.byte	9
+ 665 0004 09        		.byte	9
+ 666 0005 0A        		.byte	10
+ 667 0006 0A        		.byte	10
+ 668 0007 0B        		.byte	11
+ 669               	.global	DF_pagesize
+ 672               	DF_pagesize:
+ 673 0008 0801      		.word	264
+ 674 000a 0801      		.word	264
+ 675 000c 0801      		.word	264
+ 676 000e 0801      		.word	264
+ 677 0010 0801      		.word	264
+ 678 0012 1002      		.word	528
+ 679 0014 1002      		.word	528
+ 680 0016 2004      		.word	1056
+ 681               	.global	PageBits
+ 682               		.section	.bss.PageBits,"aw",@nobits
+ 685               	PageBits:
+ 686 0000 00        		.skip 1,0
+ 687               	.global	PageSize
+ 688               		.section	.bss.PageSize,"aw",@nobits
+ 691               	PageSize:
+ 692 0000 0000      		.skip 2,0
+ 797               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 dataflash.c
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:19     .text.DF_SPI_init:00000000 DF_SPI_init
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:46     .text.DF_SPI_RW:00000000 DF_SPI_RW
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:71     .text.Read_DF_status:00000000 Read_DF_status
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:660    .progmem.data:00000000 DF_pagebits
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:685    .bss.PageBits:00000000 PageBits
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:672    .progmem.data:00000008 DF_pagesize
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:691    .bss.PageSize:00000000 PageSize
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:138    .text.Page_To_Buffer:00000000 Page_To_Buffer
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:210    .text.Buffer_Read_Byte:00000000 Buffer_Read_Byte
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:266    .text.Buffer_Read_Str:00000000 Buffer_Read_Str
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:342    .text.Buffer_Write_Enable:00000000 Buffer_Write_Enable
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:386    .text.Buffer_Write_Byte:00000000 Buffer_Write_Byte
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:437    .text.Buffer_Write_Str:00000000 Buffer_Write_Str
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:509    .text.Buffer_To_Page:00000000 Buffer_To_Page
+C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:581    .text.Cont_Flash_Read_Enable:00000000 Cont_Flash_Read_Enable
+
+UNDEFINED SYMBOLS
+__do_clear_bss
