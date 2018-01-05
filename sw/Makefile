@@ -81,9 +81,9 @@ INC_DIR = inc
 OBJDIR = .
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = src/$(TARGET).c
+SRC = src/$(TARGET).c src/state_scale.c 
 SRC += src/drv/timer0.c src/util/BCD.c src/drv/usart.c src/drv/ADC.c src/drv/RTC.c 
-SRC += src/drv/bfeeprom.c src/drv/dataflash.c src/drv/button.c
+SRC += src/drv/bfeeprom.c src/drv/dataflash.c src/drv/button.c src/drv/hx711.c 
 SRC += src/drv/LCD_functions.c src/drv/LCD_driver.c 
 SRC += src/drv/sound.c 
 SRC += src/util/test.c
@@ -307,7 +307,7 @@ AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 # to submit bug reports.
 AVRDUDE_VERBOSE = -v -v
 
-AVRDUDE_FLAGS = -p $(MCU) -i 500 -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
+AVRDUDE_FLAGS = -p $(MCU) -i 500 -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) 
 AVRDUDE_FLAGS += $(AVRDUDE_NO_VERIFY)
 AVRDUDE_FLAGS += $(AVRDUDE_VERBOSE)
 AVRDUDE_FLAGS += $(AVRDUDE_ERASE_COUNTER)

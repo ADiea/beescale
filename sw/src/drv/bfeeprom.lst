@@ -117,14 +117,14 @@
  160               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 bfeeprom.c
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:19     .text.LoadEEPROM:00000000 LoadEEPROM
-C:\Users\MainUser\AppData\Local\Temp/ccZE3cQW.s:75     .text.StoreEEPROM:00000000 StoreEEPROM
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:19     .text.LoadEEPROM:00000000 LoadEEPROM
+C:\Users\MainUser\AppData\Local\Temp/ccDWFb0G.s:75     .text.StoreEEPROM:00000000 StoreEEPROM
 
 UNDEFINED SYMBOLS
 __eerd_byte_m169

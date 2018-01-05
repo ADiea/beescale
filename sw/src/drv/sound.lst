@@ -305,18 +305,18 @@
  319               	/* frame size = 0 */
  320 0002 182F      		mov r17,r24
  321               	.LSM45:
- 322 0004 8091 0000 		lds r24,enter.1447
+ 322 0004 8091 0000 		lds r24,enter.1451
  323               	.LVL34:
  324 0008 8823      		tst r24
  325 000a 01F0      		breq .L21
  326               	.LSM46:
- 327 000c 1092 0000 		sts enter.1447,__zero_reg__
+ 327 000c 1092 0000 		sts enter.1451,__zero_reg__
  328               	.LSM47:
- 329 0010 8091 0000 		lds r24,song.1448
+ 329 0010 8091 0000 		lds r24,song.1452
  330 0014 0E94 0000 		call showSongName
  331               	.LBB8:
  332               	.LSM48:
- 333 0018 8091 0000 		lds r24,song.1448
+ 333 0018 8091 0000 		lds r24,song.1452
  334 001c E82F      		mov r30,r24
  335               	.LVL35:
  336 001e F0E0      		ldi r31,lo8(0)
@@ -342,7 +342,7 @@
  356 0034 1430      		cpi r17,lo8(4)
  357 0036 01F4      		brne .L22
  358               	.LSM50:
- 359 0038 8091 0000 		lds r24,song.1448
+ 359 0038 8091 0000 		lds r24,song.1452
  360               	.LVL39:
  361 003c 8823      		tst r24
  362 003e 01F4      		brne .L23
@@ -378,23 +378,23 @@
  392               	.L24:
  393               	.LSM52:
  394 005e 2150      		subi r18,lo8(-(-1))
- 395 0060 2093 0000 		sts song.1448,r18
+ 395 0060 2093 0000 		sts song.1452,r18
  396 0064 00C0      		rjmp .L26
  397               	.LVL45:
  398               	.L23:
  399               	.LSM53:
  400 0066 8150      		subi r24,lo8(-(-1))
- 401 0068 8093 0000 		sts song.1448,r24
+ 401 0068 8093 0000 		sts song.1452,r24
  402               	.LVL46:
  403               	.L26:
  404               	.LSM54:
- 405 006c 8091 0000 		lds r24,song.1448
+ 405 006c 8091 0000 		lds r24,song.1452
  406               	.LVL47:
  407 0070 0E94 0000 		call showSongName
  408               	.LVL48:
  409               	.LBB10:
  410               	.LSM55:
- 411 0074 8091 0000 		lds r24,song.1448
+ 411 0074 8091 0000 		lds r24,song.1452
  412 0078 E82F      		mov r30,r24
  413               	.LVL49:
  414 007a F0E0      		ldi r31,lo8(0)
@@ -420,10 +420,10 @@
  434 008a 1530      		cpi r17,lo8(5)
  435 008c 01F4      		brne .L28
  436               	.LSM57:
- 437 008e 8091 0000 		lds r24,song.1448
+ 437 008e 8091 0000 		lds r24,song.1452
  438               	.LVL54:
  439 0092 8F5F      		subi r24,lo8(-(1))
- 440 0094 8093 0000 		sts song.1448,r24
+ 440 0094 8093 0000 		sts song.1452,r24
  441               	.LBB11:
  442               	.LSM58:
  443 0098 E82F      		mov r30,r24
@@ -447,16 +447,16 @@
  461 00a8 892B      		or r24,r25
  462 00aa 01F4      		brne .L29
  463               	.LSM59:
- 464 00ac 1092 0000 		sts song.1448,__zero_reg__
+ 464 00ac 1092 0000 		sts song.1452,__zero_reg__
  465               	.L29:
  466               	.LSM60:
- 467 00b0 8091 0000 		lds r24,song.1448
+ 467 00b0 8091 0000 		lds r24,song.1452
  468               	.LVL59:
  469 00b4 0E94 0000 		call showSongName
  470               	.LVL60:
  471               	.LBB12:
  472               	.LSM61:
- 473 00b8 8091 0000 		lds r24,song.1448
+ 473 00b8 8091 0000 		lds r24,song.1452
  474 00bc E82F      		mov r30,r24
  475               	.LVL61:
  476 00be F0E0      		ldi r31,lo8(0)
@@ -485,7 +485,7 @@
  499 00d6 1130      		cpi r17,lo8(1)
  500 00d8 01F4      		brne .L30
  501               	.LSM63:
- 502 00da 1093 0000 		sts enter.1447,r17
+ 502 00da 1093 0000 		sts enter.1451,r17
  503 00de 8BE2      		ldi r24,lo8(43)
  504               	.LVL66:
  505 00e0 00C0      		rjmp .L27
@@ -504,7 +504,7 @@
  518               	.LSM65:
  519 00ea 81E0      		ldi r24,lo8(1)
  520               	.LVL71:
- 521 00ec 8093 0000 		sts enter.1447,r24
+ 521 00ec 8093 0000 		sts enter.1451,r24
  522 00f0 88E2      		ldi r24,lo8(40)
  523               	.LVL72:
  524               	.L27:
@@ -557,12 +557,12 @@
  575               	/* frame size = 0 */
  576 0002 182F      		mov r17,r24
  577               	.LSM76:
- 578 0004 8091 0000 		lds r24,enter.1482
+ 578 0004 8091 0000 		lds r24,enter.1486
  579               	.LVL75:
  580 0008 8823      		tst r24
  581 000a 01F0      		breq .L38
  582               	.LSM77:
- 583 000c 1092 0000 		sts enter.1482,__zero_reg__
+ 583 000c 1092 0000 		sts enter.1486,__zero_reg__
  584               	.LSM78:
  585 0010 1092 0000 		sts Tone,__zero_reg__
  586               	.LSM79:
@@ -652,7 +652,7 @@
  670               	.LSM103:
  671 00a6 2D9A      		sbi 37-32,5
  672               	.LSM104:
- 673 00a8 1093 0000 		sts enter.1482,r17
+ 673 00a8 1093 0000 		sts enter.1486,r17
  674 00ac 00C0      		rjmp .L55
  675               	.L48:
  676               	.LSM105:
@@ -696,7 +696,7 @@
  714               	.L56:
  715               	.LSM117:
  716 00f2 81E0      		ldi r24,lo8(1)
- 717 00f4 8093 0000 		sts enter.1482,r24
+ 717 00f4 8093 0000 		sts enter.1486,r24
  718               	.L55:
  719 00f8 8AE2      		ldi r24,lo8(42)
  720               	.L40:
@@ -1450,14 +1450,14 @@
  1498               		.section	.data.Volume,"aw",@progbits
  1501               	Volume:
  1502 0000 50        		.byte	80
- 1503               		.section	.data.enter.1482,"aw",@progbits
- 1506               	enter.1482:
+ 1503               		.section	.data.enter.1486,"aw",@progbits
+ 1506               	enter.1486:
  1507 0000 01        		.byte	1
- 1508               		.section	.bss.song.1448,"aw",@nobits
- 1511               	song.1448:
+ 1508               		.section	.bss.song.1452,"aw",@nobits
+ 1511               	song.1452:
  1512 0000 00        		.skip 1,0
- 1513               		.section	.data.enter.1447,"aw",@progbits
- 1516               	enter.1447:
+ 1513               		.section	.data.enter.1451,"aw",@progbits
+ 1516               	enter.1451:
  1517 0000 01        		.byte	1
  1518               		.section	.bss.Tempo,"aw",@nobits
  1521               	Tempo:
@@ -1466,46 +1466,46 @@
  1588               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 sound.c
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:19     .text.PlayClick:00000000 PlayClick
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:55     .text.Play_Tune:00000000 Play_Tune
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1491   .bss.Tone:00000000 Tone
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1496   .bss.Duration:00000000 Duration
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:19     .text.PlayClick:00000000 PlayClick
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:55     .text.Play_Tune:00000000 Play_Tune
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1491   .bss.Tone:00000000 Tone
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1496   .bss.Duration:00000000 Duration
                             *COM*:00000002 pSong
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1521   .bss.Tempo:00000000 Tempo
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1486   .bss.gPlaying:00000000 gPlaying
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:276    .text.showSongName:00000000 showSongName
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1467   .progmem.data:00000574 TEXT_SONG_TBL
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:313    .text.SelectSound:00000000 SelectSound
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1516   .data.enter.1447:00000000 enter.1447
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1511   .bss.song.1448:00000000 song.1448
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1454   .progmem.data:00000562 Songs
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:535    .text.Sound_Init:00000000 Sound_Init
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1501   .data.Volume:00000000 Volume
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:569    .text.Sound:00000000 Sound
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1506   .data.enter.1482:00000000 enter.1482
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1480   .progmem.data:00000586 PLAYING
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:732    .progmem.data:00000000 TEXT_SONG1
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:737    .progmem.data:0000000a FurElise
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:824    .progmem.data:000000b0 TEXT_SONG2
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:829    .progmem.data:000000bd Mozart
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:924    .progmem.data:00000173 TEXT_SONG3
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:929    .progmem.data:0000017a Minuet
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1002   .progmem.data:00000204 TEXT_SONG4
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1007   .progmem.data:00000213 AuldLangSyne
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1078   .progmem.data:00000299 TEXT_SONG5
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1083   .progmem.data:000002a1 Sirene1
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1230   .progmem.data:000003bf TEXT_SONG6
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1235   .progmem.data:000003c7 Sirene2
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1246   .progmem.data:000003d5 TEXT_SONG7
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1251   .progmem.data:000003dd Whistle
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1366   .progmem.data:000004bb TEXT_SONG8
-C:\Users\MainUser\AppData\Local\Temp/cckRyx7C.s:1371   .progmem.data:000004c4 Exorcist
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1521   .bss.Tempo:00000000 Tempo
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1486   .bss.gPlaying:00000000 gPlaying
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:276    .text.showSongName:00000000 showSongName
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1467   .progmem.data:00000574 TEXT_SONG_TBL
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:313    .text.SelectSound:00000000 SelectSound
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1516   .data.enter.1451:00000000 enter.1451
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1511   .bss.song.1452:00000000 song.1452
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1454   .progmem.data:00000562 Songs
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:535    .text.Sound_Init:00000000 Sound_Init
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1501   .data.Volume:00000000 Volume
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:569    .text.Sound:00000000 Sound
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1506   .data.enter.1486:00000000 enter.1486
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1480   .progmem.data:00000586 PLAYING
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:732    .progmem.data:00000000 TEXT_SONG1
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:737    .progmem.data:0000000a FurElise
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:824    .progmem.data:000000b0 TEXT_SONG2
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:829    .progmem.data:000000bd Mozart
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:924    .progmem.data:00000173 TEXT_SONG3
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:929    .progmem.data:0000017a Minuet
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1002   .progmem.data:00000204 TEXT_SONG4
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1007   .progmem.data:00000213 AuldLangSyne
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1078   .progmem.data:00000299 TEXT_SONG5
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1083   .progmem.data:000002a1 Sirene1
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1230   .progmem.data:000003bf TEXT_SONG6
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1235   .progmem.data:000003c7 Sirene2
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1246   .progmem.data:000003d5 TEXT_SONG7
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1251   .progmem.data:000003dd Whistle
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1366   .progmem.data:000004bb TEXT_SONG8
+C:\Users\MainUser\AppData\Local\Temp/cchK3Bvf.s:1371   .progmem.data:000004c4 Exorcist
 
 UNDEFINED SYMBOLS
 Delay

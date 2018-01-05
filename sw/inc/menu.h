@@ -46,7 +46,7 @@ const char MT_OPTIONS_KEYCLICK[] PROGMEM          = "Key Click";
 const MENU_NEXTSTATE menu_nextstate[] PROGMEM = {
 //  STATE                       INPUT       NEXT STATE
 
-    {ST_TIME,                   KEY_PLUS,   ST_OPTIONS},
+    {ST_TIME,                   KEY_PLUS,   ST_SCALE_MEASURE},
     {ST_TIME,                   KEY_NEXT,   ST_TIME_CLOCK},
     {ST_TIME,                   KEY_MINUS,  ST_MUSIC},
 
@@ -101,7 +101,7 @@ const MENU_NEXTSTATE menu_nextstate[] PROGMEM = {
 
     {ST_OPTIONS,                KEY_PLUS,   ST_LIGHT},
     {ST_OPTIONS,                KEY_NEXT,   ST_OPTIONS_DISPLAY},
-    {ST_OPTIONS,                KEY_MINUS,  ST_TIME},
+    {ST_OPTIONS,                KEY_MINUS,  ST_SCALE_MEASURE},
 
     {ST_OPTIONS_DISPLAY,        KEY_PLUS,   ST_OPTIONS_KEYCLICK},
     {ST_OPTIONS_DISPLAY,        KEY_NEXT,   ST_OPTIONS_DISPLAY_CONTRAST},
@@ -130,6 +130,15 @@ const MENU_NEXTSTATE menu_nextstate[] PROGMEM = {
     {ST_OPTIONS_KEYCLICK,         KEY_NEXT,     ST_OPTIONS_KEYCLICK_FUNC},
     {ST_OPTIONS_KEYCLICK,         KEY_PREV,     ST_OPTIONS},
     {ST_OPTIONS_KEYCLICK,         KEY_MINUS,    ST_OPTIONS_DISPLAY},
+	
+	{ST_SCALE_MEASURE,         KEY_PLUS,     ST_OPTIONS},
+    {ST_SCALE_MEASURE,         KEY_NEXT,     ST_SCALE_CALIB},
+    //{ST_SCALE_MEASURE,         KEY_PREV,     ST_OPTIONS},
+    {ST_SCALE_MEASURE,         KEY_MINUS,    ST_TIME},
+	
+	
+    {ST_SCALE_CALIB,         KEY_PREV,     ST_SCALE_MEASURE},
+
         
     {0,                         0,          0}
 };
@@ -172,6 +181,9 @@ const MENU_STATE menu_state[] PROGMEM = {
     {ST_OPTIONS_AUTO_POWER_SAVE_FUNC,   NULL,                       AutoPower},
     {ST_OPTIONS_KEYCLICK,               MT_OPTIONS_KEYCLICK,        NULL},
     {ST_OPTIONS_KEYCLICK_FUNC,          NULL,                       KeyClick},
+	
+	{ST_SCALE_MEASURE, 					NULL, 						StateScaleMeasureFunc},
+	{ST_SCALE_CALIB, 					NULL, 						StateScaleCalibFunc},
 
     {0,                                 NULL,                       NULL},
 

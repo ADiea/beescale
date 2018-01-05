@@ -101,11 +101,11 @@
  109               	.L5:
  110               	.LSM16:
  111 00be 81E0      		ldi r24,lo8(1)
- 112 00c0 8093 0000 		sts LeapMonth.1664,r24
+ 112 00c0 8093 0000 		sts LeapMonth.1668,r24
  113 00c4 00C0      		rjmp .L7
  114               	.L3:
  115               	.LSM17:
- 116 00c6 1092 0000 		sts LeapMonth.1664,__zero_reg__
+ 116 00c6 1092 0000 		sts LeapMonth.1668,__zero_reg__
  117               	.L7:
  118               	.LSM18:
  119 00ca 2091 0000 		lds r18,gDAY
@@ -115,7 +115,7 @@
  123 00d6 E050      		subi r30,lo8(-(MonthLength))
  124 00d8 F040      		sbci r31,hi8(-(MonthLength))
  125 00da 4081      		ld r20,Z
- 126 00dc 8091 0000 		lds r24,LeapMonth.1664
+ 126 00dc 8091 0000 		lds r24,LeapMonth.1668
  127 00e0 90E0      		ldi r25,lo8(0)
  128 00e2 840F      		add r24,r20
  129 00e4 911D      		adc r25,__zero_reg__
@@ -173,12 +173,12 @@
  183               	/* frame size = 0 */
  184 0002 182F      		mov r17,r24
  185               	.LSM26:
- 186 0004 8091 0000 		lds r24,enter.1651
+ 186 0004 8091 0000 		lds r24,enter.1655
  187               	.LVL1:
  188 0008 8823      		tst r24
  189 000a 01F0      		breq .L10
  190               	.LSM27:
- 191 000c 1092 0000 		sts enter.1651,__zero_reg__
+ 191 000c 1092 0000 		sts enter.1655,__zero_reg__
  192               	.LSM28:
  193 0010 E091 0000 		lds r30,dateformat
  194 0014 F0E0      		ldi r31,lo8(0)
@@ -243,7 +243,7 @@
  253 0074 00C0      		rjmp .L14
  254               	.L18:
  255               	.LSM39:
- 256 0076 1093 0000 		sts enter.1651,r17
+ 256 0076 1093 0000 		sts enter.1655,r17
  257 007a 8CE1      		ldi r24,lo8(28)
  258               	.L14:
  259               	/* epilogue start */
@@ -263,24 +263,24 @@
  275               	/* frame size = 0 */
  276 0002 182F      		mov r17,r24
  277               	.LSM42:
- 278 0004 8091 0000 		lds r24,enter.1535
+ 278 0004 8091 0000 		lds r24,enter.1539
  279               	.LVL4:
  280 0008 8823      		tst r24
  281 000a 01F0      		breq .L24
  282               	.LSM43:
- 283 000c 1092 0000 		sts enter.1535,__zero_reg__
+ 283 000c 1092 0000 		sts enter.1539,__zero_reg__
  284               	.LSM44:
  285 0010 8091 0000 		lds r24,clockformat
  286 0014 8130      		cpi r24,lo8(1)
  287 0016 01F4      		brne .L25
  288               	.LSM45:
- 289 0018 80E0      		ldi r24,lo8(__c.1536)
- 290 001a 90E0      		ldi r25,hi8(__c.1536)
+ 289 0018 80E0      		ldi r24,lo8(__c.1540)
+ 290 001a 90E0      		ldi r25,hi8(__c.1540)
  291 001c 00C0      		rjmp .L33
  292               	.L25:
  293               	.LSM46:
- 294 001e 80E0      		ldi r24,lo8(__c.1538)
- 295 0020 90E0      		ldi r25,hi8(__c.1538)
+ 294 001e 80E0      		ldi r24,lo8(__c.1542)
+ 295 0020 90E0      		ldi r25,hi8(__c.1542)
  296               	.L33:
  297 0022 61E0      		ldi r22,lo8(1)
  298 0024 0E94 0000 		call LCD_puts_f
@@ -295,16 +295,16 @@
  307               	.LSM49:
  308 0034 1092 0000 		sts clockformat,__zero_reg__
  309               	.LSM50:
- 310 0038 80E0      		ldi r24,lo8(__c.1540)
- 311 003a 90E0      		ldi r25,hi8(__c.1540)
+ 310 0038 80E0      		ldi r24,lo8(__c.1544)
+ 311 003a 90E0      		ldi r25,hi8(__c.1544)
  312 003c 00C0      		rjmp .L34
  313               	.L27:
  314               	.LSM51:
  315 003e 81E0      		ldi r24,lo8(1)
  316 0040 8093 0000 		sts clockformat,r24
  317               	.LSM52:
- 318 0044 80E0      		ldi r24,lo8(__c.1542)
- 319 0046 90E0      		ldi r25,hi8(__c.1542)
+ 318 0044 80E0      		ldi r24,lo8(__c.1546)
+ 319 0046 90E0      		ldi r25,hi8(__c.1546)
  320 0048 00C0      		rjmp .L34
  321               	.L26:
  322               	.LSM53:
@@ -318,15 +318,15 @@
  330 0056 81E0      		ldi r24,lo8(1)
  331 0058 8093 0000 		sts clockformat,r24
  332               	.LSM56:
- 333 005c 80E0      		ldi r24,lo8(__c.1544)
- 334 005e 90E0      		ldi r25,hi8(__c.1544)
+ 333 005c 80E0      		ldi r24,lo8(__c.1548)
+ 334 005e 90E0      		ldi r25,hi8(__c.1548)
  335 0060 00C0      		rjmp .L34
  336               	.L30:
  337               	.LSM57:
  338 0062 1092 0000 		sts clockformat,__zero_reg__
  339               	.LSM58:
- 340 0066 80E0      		ldi r24,lo8(__c.1546)
- 341 0068 90E0      		ldi r25,hi8(__c.1546)
+ 340 0066 80E0      		ldi r24,lo8(__c.1550)
+ 341 0068 90E0      		ldi r25,hi8(__c.1550)
  342               	.L34:
  343 006a 61E0      		ldi r22,lo8(1)
  344 006c 0E94 0000 		call LCD_puts_f
@@ -339,7 +339,7 @@
  351 0076 01F4      		brne .L35
  352               	.L31:
  353               	.LSM60:
- 354 0078 1093 0000 		sts enter.1535,r17
+ 354 0078 1093 0000 		sts enter.1539,r17
  355 007c 86E1      		ldi r24,lo8(22)
  356               	.L28:
  357               	/* epilogue start */
@@ -361,27 +361,27 @@
  375               	/* frame size = 0 */
  376 0006 F82E      		mov r15,r24
  377               	.LSM63:
- 378 0008 8091 0000 		lds r24,enter_function.1603
+ 378 0008 8091 0000 		lds r24,enter_function.1607
  379               	.LVL7:
  380 000c 8823      		tst r24
  381 000e 01F0      		breq .L37
  382               	.LSM64:
  383 0010 8091 0000 		lds r24,gYEAR
  384 0014 9091 0000 		lds r25,(gYEAR)+1
- 385 0018 8093 0000 		sts date.1604,r24
+ 385 0018 8093 0000 		sts date.1608,r24
  386               	.LSM65:
  387 001c 8091 0000 		lds r24,gMONTH
- 388 0020 8093 0000 		sts date.1604+1,r24
+ 388 0020 8093 0000 		sts date.1608+1,r24
  389               	.LSM66:
  390 0024 8091 0000 		lds r24,gDAY
- 391 0028 8093 0000 		sts date.1604+2,r24
+ 391 0028 8093 0000 		sts date.1608+2,r24
  392               	.L37:
  393               	.LSM67:
- 394 002c 8091 0000 		lds r24,mode.1605
+ 394 002c 8091 0000 		lds r24,mode.1609
  395 0030 8823      		tst r24
  396 0032 01F4      		brne .L38
  397               	.LSM68:
- 398 0034 8091 0000 		lds r24,date.1604
+ 398 0034 8091 0000 		lds r24,date.1608
  399 0038 0E94 0000 		call CHAR2BCD2
  400 003c 182F      		mov r17,r24
  401               	.LVL8:
@@ -411,7 +411,7 @@
  425 0062 8130      		cpi r24,lo8(1)
  426 0064 01F4      		brne .L40
  427               	.LSM75:
- 428 0066 8091 0000 		lds r24,date.1604+1
+ 428 0066 8091 0000 		lds r24,date.1608+1
  429 006a 0E94 0000 		call CHAR2BCD2
  430 006e 182F      		mov r17,r24
  431               	.LVL10:
@@ -441,7 +441,7 @@
  455 0094 8230      		cpi r24,lo8(2)
  456 0096 01F4      		brne .L39
  457               	.LSM82:
- 458 0098 8091 0000 		lds r24,date.1604+2
+ 458 0098 8091 0000 		lds r24,date.1608+2
  459 009c 0E94 0000 		call CHAR2BCD2
  460 00a0 182F      		mov r17,r24
  461               	.LVL12:
@@ -499,16 +499,16 @@
  513 00f8 0E94 0000 		call LCD_UpdateRequired
  514               	.LSM95:
  515 00fc 81E0      		ldi r24,lo8(1)
- 516 00fe 8093 0000 		sts enter_function.1603,r24
+ 516 00fe 8093 0000 		sts enter_function.1607,r24
  517               	.LSM96:
  518 0102 84E0      		ldi r24,lo8(4)
  519 0104 F816      		cp r15,r24
  520 0106 01F4      		brne .L42
  521               	.LSM97:
- 522 0108 E091 0000 		lds r30,mode.1605
+ 522 0108 E091 0000 		lds r30,mode.1609
  523 010c F0E0      		ldi r31,lo8(0)
- 524 010e E050      		subi r30,lo8(-(date.1604))
- 525 0110 F040      		sbci r31,hi8(-(date.1604))
+ 524 010e E050      		subi r30,lo8(-(date.1608))
+ 525 0110 F040      		sbci r31,hi8(-(date.1608))
  526 0112 8081      		ld r24,Z
  527 0114 8F5F      		subi r24,lo8(-(1))
  528 0116 00C0      		rjmp .L62
@@ -518,10 +518,10 @@
  532 011a F816      		cp r15,r24
  533 011c 01F4      		brne .L44
  534               	.LSM99:
- 535 011e E091 0000 		lds r30,mode.1605
+ 535 011e E091 0000 		lds r30,mode.1609
  536 0122 F0E0      		ldi r31,lo8(0)
- 537 0124 E050      		subi r30,lo8(-(date.1604))
- 538 0126 F040      		sbci r31,hi8(-(date.1604))
+ 537 0124 E050      		subi r30,lo8(-(date.1608))
+ 538 0126 F040      		sbci r31,hi8(-(date.1608))
  539 0128 8081      		ld r24,Z
  540 012a 8150      		subi r24,lo8(-(-1))
  541               	.L62:
@@ -533,7 +533,7 @@
  547 0132 F816      		cp r15,r24
  548 0134 01F4      		brne .L45
  549               	.LSM101:
- 550 0136 8091 0000 		lds r24,mode.1605
+ 550 0136 8091 0000 		lds r24,mode.1609
  551 013a 8823      		tst r24
  552 013c 01F4      		brne .L46
  553               	.LSM102:
@@ -549,17 +549,17 @@
  563 0148 F816      		cp r15,r24
  564 014a 01F4      		brne .L47
  565               	.LSM105:
- 566 014c 8091 0000 		lds r24,mode.1605
+ 566 014c 8091 0000 		lds r24,mode.1609
  567 0150 8230      		cpi r24,lo8(2)
  568 0152 01F4      		brne .L48
  569               	.LSM106:
- 570 0154 1092 0000 		sts mode.1605,__zero_reg__
+ 570 0154 1092 0000 		sts mode.1609,__zero_reg__
  571 0158 00C0      		rjmp .L43
  572               	.L48:
  573               	.LSM107:
  574 015a 8F5F      		subi r24,lo8(-(1))
  575               	.L61:
- 576 015c 8093 0000 		sts mode.1605,r24
+ 576 015c 8093 0000 		sts mode.1609,r24
  577 0160 00C0      		rjmp .L43
  578               	.L47:
  579               	.LSM108:
@@ -573,15 +573,15 @@
  587               	 ;  0 "" 2
  588               	.LSM110:
  589               	/* #NOAPP */
- 590 016a 8091 0000 		lds r24,date.1604
+ 590 016a 8091 0000 		lds r24,date.1608
  591 016e 90E0      		ldi r25,lo8(0)
  592 0170 9093 0000 		sts (gYEAR)+1,r25
  593 0174 8093 0000 		sts gYEAR,r24
  594               	.LSM111:
- 595 0178 8091 0000 		lds r24,date.1604+1
+ 595 0178 8091 0000 		lds r24,date.1608+1
  596 017c 8093 0000 		sts gMONTH,r24
  597               	.LSM112:
- 598 0180 8091 0000 		lds r24,date.1604+2
+ 598 0180 8091 0000 		lds r24,date.1608+2
  599 0184 8093 0000 		sts gDAY,r24
  600               	.LSM113:
  601               	/* #APP */
@@ -590,40 +590,40 @@
  604               	 ;  0 "" 2
  605               	.LSM114:
  606               	/* #NOAPP */
- 607 018a 1092 0000 		sts mode.1605,__zero_reg__
+ 607 018a 1092 0000 		sts mode.1609,__zero_reg__
  608 018e 8CE1      		ldi r24,lo8(28)
  609 0190 00C0      		rjmp .L49
  610               	.L43:
  611               	.LSM115:
- 612 0192 8091 0000 		lds r24,date.1604
+ 612 0192 8091 0000 		lds r24,date.1608
  613 0196 8F3F      		cpi r24,lo8(-1)
  614 0198 01F4      		brne .L50
  615               	.LSM116:
  616 019a 83E6      		ldi r24,lo8(99)
- 617 019c 8093 0000 		sts date.1604,r24
+ 617 019c 8093 0000 		sts date.1608,r24
  618               	.L50:
  619               	.LSM117:
- 620 01a0 8091 0000 		lds r24,date.1604
+ 620 01a0 8091 0000 		lds r24,date.1608
  621 01a4 8436      		cpi r24,lo8(100)
  622 01a6 00F0      		brlo .L51
  623               	.LSM118:
- 624 01a8 1092 0000 		sts date.1604,__zero_reg__
+ 624 01a8 1092 0000 		sts date.1608,__zero_reg__
  625               	.L51:
  626               	.LSM119:
- 627 01ac 8091 0000 		lds r24,date.1604+1
+ 627 01ac 8091 0000 		lds r24,date.1608+1
  628 01b0 8823      		tst r24
  629 01b2 01F4      		brne .L52
  630               	.LSM120:
  631 01b4 8CE0      		ldi r24,lo8(12)
- 632 01b6 8093 0000 		sts date.1604+1,r24
+ 632 01b6 8093 0000 		sts date.1608+1,r24
  633               	.L52:
  634               	.LSM121:
- 635 01ba 8091 0000 		lds r24,date.1604+1
+ 635 01ba 8091 0000 		lds r24,date.1608+1
  636 01be 8D30      		cpi r24,lo8(13)
  637 01c0 00F0      		brlo .L53
  638               	.LSM122:
  639 01c2 81E0      		ldi r24,lo8(1)
- 640 01c4 8093 0000 		sts date.1604+1,r24
+ 640 01c4 8093 0000 		sts date.1608+1,r24
  641               	.L53:
  642               	.LSM123:
  643 01c8 8091 0000 		lds r24,gMONTH
@@ -654,7 +654,7 @@
  668 0206 01F0      		breq .L55
  669               	.L54:
  670               	.LSM127:
- 671 0208 E091 0000 		lds r30,date.1604+1
+ 671 0208 E091 0000 		lds r30,date.1608+1
  672 020c F0E0      		ldi r31,lo8(0)
  673 020e E050      		subi r30,lo8(-(MonthLength))
  674 0210 F040      		sbci r31,hi8(-(MonthLength))
@@ -667,22 +667,22 @@
  681               	.LVL17:
  682               	.L56:
  683               	.LSM128:
- 684 0218 8091 0000 		lds r24,date.1604+2
+ 684 0218 8091 0000 		lds r24,date.1608+2
  685 021c 8823      		tst r24
  686 021e 01F4      		brne .L57
  687               	.LSM129:
- 688 0220 E093 0000 		sts date.1604+2,r30
+ 688 0220 E093 0000 		sts date.1608+2,r30
  689               	.L57:
  690               	.LSM130:
- 691 0224 8091 0000 		lds r24,date.1604+2
+ 691 0224 8091 0000 		lds r24,date.1608+2
  692 0228 E817      		cp r30,r24
  693 022a 00F4      		brsh .L58
  694               	.LSM131:
  695 022c 81E0      		ldi r24,lo8(1)
- 696 022e 8093 0000 		sts date.1604+2,r24
+ 696 022e 8093 0000 		sts date.1608+2,r24
  697               	.L58:
  698               	.LSM132:
- 699 0232 1092 0000 		sts enter_function.1603,__zero_reg__
+ 699 0232 1092 0000 		sts enter_function.1607,__zero_reg__
  700 0236 8EE1      		ldi r24,lo8(30)
  701               	.L49:
  702               	/* epilogue start */
@@ -942,26 +942,26 @@
  960               	/* frame size = 0 */
  961 0008 E82E      		mov r14,r24
  962               	.LSM155:
- 963 000a 8091 0000 		lds r24,enter_function.1471
+ 963 000a 8091 0000 		lds r24,enter_function.1475
  964               	.LVL50:
  965 000e 8823      		tst r24
  966 0010 01F0      		breq .L69
  967               	.LSM156:
  968 0012 8091 0000 		lds r24,gHOUR
- 969 0016 8093 0000 		sts time.1472,r24
+ 969 0016 8093 0000 		sts time.1476,r24
  970               	.LSM157:
  971 001a 8091 0000 		lds r24,gMINUTE
- 972 001e 8093 0000 		sts time.1472+1,r24
+ 972 001e 8093 0000 		sts time.1476+1,r24
  973               	.LSM158:
  974 0022 8091 0000 		lds r24,gSECOND
- 975 0026 8093 0000 		sts time.1472+2,r24
+ 975 0026 8093 0000 		sts time.1476+2,r24
  976               	.L69:
  977               	.LSM159:
  978 002a 8091 0000 		lds r24,clockformat
  979 002e 8823      		tst r24
  980 0030 01F4      		brne .L70
  981               	.LSM160:
- 982 0032 E091 0000 		lds r30,time.1472
+ 982 0032 E091 0000 		lds r30,time.1476
  983 0036 F0E0      		ldi r31,lo8(0)
  984 0038 E050      		subi r30,lo8(-(TBL_CLOCK_12))
  985 003a F040      		sbci r31,hi8(-(TBL_CLOCK_12))
@@ -969,23 +969,23 @@
  987 003e 00C0      		rjmp .L100
  988               	.L70:
  989               	.LSM161:
- 990 0040 8091 0000 		lds r24,time.1472
+ 990 0040 8091 0000 		lds r24,time.1476
  991               	.L100:
  992 0044 0E94 0000 		call CHAR2BCD2
  993 0048 182F      		mov r17,r24
  994               	.LVL51:
  995               	.LSM162:
- 996 004a 8091 0000 		lds r24,time.1472+1
+ 996 004a 8091 0000 		lds r24,time.1476+1
  997 004e 0E94 0000 		call CHAR2BCD2
  998 0052 082F      		mov r16,r24
  999               	.LVL52:
  1000               	.LSM163:
- 1001 0054 8091 0000 		lds r24,time.1472+2
+ 1001 0054 8091 0000 		lds r24,time.1476+2
  1002 0058 0E94 0000 		call CHAR2BCD2
  1003 005c F82E      		mov r15,r24
  1004               	.LVL53:
  1005               	.LSM164:
- 1006 005e 8091 0000 		lds r24,mode.1473
+ 1006 005e 8091 0000 		lds r24,mode.1477
  1007 0062 8823      		tst r24
  1008 0064 01F0      		breq .L72
  1009 0066 60E0      		ldi r22,lo8(0)
@@ -1003,7 +1003,7 @@
  1021 0076 80E0      		ldi r24,lo8(0)
  1022 0078 0E94 0000 		call LCD_putc
  1023               	.LSM167:
- 1024 007c 8091 0000 		lds r24,mode.1473
+ 1024 007c 8091 0000 		lds r24,mode.1477
  1025 0080 8823      		tst r24
  1026 0082 01F0      		breq .L74
  1027 0084 60E0      		ldi r22,lo8(0)
@@ -1017,7 +1017,7 @@
  1035 0090 81E0      		ldi r24,lo8(1)
  1036 0092 0E94 0000 		call LCD_putc
  1037               	.LSM168:
- 1038 0096 8091 0000 		lds r24,mode.1473
+ 1038 0096 8091 0000 		lds r24,mode.1477
  1039 009a 8130      		cpi r24,lo8(1)
  1040 009c 01F0      		breq .L76
  1041 009e 60E0      		ldi r22,lo8(0)
@@ -1035,7 +1035,7 @@
  1053 00ae 82E0      		ldi r24,lo8(2)
  1054 00b0 0E94 0000 		call LCD_putc
  1055               	.LSM171:
- 1056 00b4 8091 0000 		lds r24,mode.1473
+ 1056 00b4 8091 0000 		lds r24,mode.1477
  1057 00b8 8130      		cpi r24,lo8(1)
  1058 00ba 01F0      		breq .L78
  1059 00bc 60E0      		ldi r22,lo8(0)
@@ -1049,7 +1049,7 @@
  1067 00c8 83E0      		ldi r24,lo8(3)
  1068 00ca 0E94 0000 		call LCD_putc
  1069               	.LSM172:
- 1070 00ce 8091 0000 		lds r24,mode.1473
+ 1070 00ce 8091 0000 		lds r24,mode.1477
  1071 00d2 8230      		cpi r24,lo8(2)
  1072 00d4 01F0      		breq .L80
  1073 00d6 60E0      		ldi r22,lo8(0)
@@ -1067,7 +1067,7 @@
  1085 00e6 84E0      		ldi r24,lo8(4)
  1086 00e8 0E94 0000 		call LCD_putc
  1087               	.LSM175:
- 1088 00ec 8091 0000 		lds r24,mode.1473
+ 1088 00ec 8091 0000 		lds r24,mode.1477
  1089 00f0 8230      		cpi r24,lo8(2)
  1090 00f2 01F0      		breq .L82
  1091 00f4 60E0      		ldi r22,lo8(0)
@@ -1101,16 +1101,16 @@
  1119 0124 0E94 0000 		call LCD_UpdateRequired
  1120               	.LSM181:
  1121 0128 81E0      		ldi r24,lo8(1)
- 1122 012a 8093 0000 		sts enter_function.1471,r24
+ 1122 012a 8093 0000 		sts enter_function.1475,r24
  1123               	.LSM182:
  1124 012e 84E0      		ldi r24,lo8(4)
  1125 0130 E816      		cp r14,r24
  1126 0132 01F4      		brne .L85
  1127               	.LSM183:
- 1128 0134 E091 0000 		lds r30,mode.1473
+ 1128 0134 E091 0000 		lds r30,mode.1477
  1129 0138 F0E0      		ldi r31,lo8(0)
- 1130 013a E050      		subi r30,lo8(-(time.1472))
- 1131 013c F040      		sbci r31,hi8(-(time.1472))
+ 1130 013a E050      		subi r30,lo8(-(time.1476))
+ 1131 013c F040      		sbci r31,hi8(-(time.1476))
  1132 013e 8081      		ld r24,Z
  1133 0140 8F5F      		subi r24,lo8(-(1))
  1134 0142 00C0      		rjmp .L102
@@ -1120,10 +1120,10 @@
  1138 0146 E816      		cp r14,r24
  1139 0148 01F4      		brne .L87
  1140               	.LSM185:
- 1141 014a E091 0000 		lds r30,mode.1473
+ 1141 014a E091 0000 		lds r30,mode.1477
  1142 014e F0E0      		ldi r31,lo8(0)
- 1143 0150 E050      		subi r30,lo8(-(time.1472))
- 1144 0152 F040      		sbci r31,hi8(-(time.1472))
+ 1143 0150 E050      		subi r30,lo8(-(time.1476))
+ 1144 0152 F040      		sbci r31,hi8(-(time.1476))
  1145 0154 8081      		ld r24,Z
  1146 0156 8150      		subi r24,lo8(-(-1))
  1147               	.L102:
@@ -1135,7 +1135,7 @@
  1153 015e E816      		cp r14,r24
  1154 0160 01F4      		brne .L88
  1155               	.LSM187:
- 1156 0162 8091 0000 		lds r24,mode.1473
+ 1156 0162 8091 0000 		lds r24,mode.1477
  1157 0166 8823      		tst r24
  1158 0168 01F4      		brne .L89
  1159               	.LSM188:
@@ -1151,17 +1151,17 @@
  1169 0174 E816      		cp r14,r24
  1170 0176 01F4      		brne .L90
  1171               	.LSM191:
- 1172 0178 8091 0000 		lds r24,mode.1473
+ 1172 0178 8091 0000 		lds r24,mode.1477
  1173 017c 8230      		cpi r24,lo8(2)
  1174 017e 01F4      		brne .L91
  1175               	.LSM192:
- 1176 0180 1092 0000 		sts mode.1473,__zero_reg__
+ 1176 0180 1092 0000 		sts mode.1477,__zero_reg__
  1177 0184 00C0      		rjmp .L86
  1178               	.L91:
  1179               	.LSM193:
  1180 0186 8F5F      		subi r24,lo8(-(1))
  1181               	.L101:
- 1182 0188 8093 0000 		sts mode.1473,r24
+ 1182 0188 8093 0000 		sts mode.1477,r24
  1183 018c 00C0      		rjmp .L86
  1184               	.L90:
  1185               	.LSM194:
@@ -1175,13 +1175,13 @@
  1193               	 ;  0 "" 2
  1194               	.LSM196:
  1195               	/* #NOAPP */
- 1196 0196 8091 0000 		lds r24,time.1472
+ 1196 0196 8091 0000 		lds r24,time.1476
  1197 019a 8093 0000 		sts gHOUR,r24
  1198               	.LSM197:
- 1199 019e 8091 0000 		lds r24,time.1472+1
+ 1199 019e 8091 0000 		lds r24,time.1476+1
  1200 01a2 8093 0000 		sts gMINUTE,r24
  1201               	.LSM198:
- 1202 01a6 8091 0000 		lds r24,time.1472+2
+ 1202 01a6 8091 0000 		lds r24,time.1476+2
  1203 01aa 8093 0000 		sts gSECOND,r24
  1204               	.LSM199:
  1205               	/* #APP */
@@ -1190,57 +1190,57 @@
  1208               	 ;  0 "" 2
  1209               	.LSM200:
  1210               	/* #NOAPP */
- 1211 01b0 1092 0000 		sts mode.1473,__zero_reg__
+ 1211 01b0 1092 0000 		sts mode.1477,__zero_reg__
  1212 01b4 86E1      		ldi r24,lo8(22)
  1213 01b6 00C0      		rjmp .L92
  1214               	.L86:
  1215               	.LSM201:
- 1216 01b8 8091 0000 		lds r24,time.1472
+ 1216 01b8 8091 0000 		lds r24,time.1476
  1217 01bc 8F3F      		cpi r24,lo8(-1)
  1218 01be 01F4      		brne .L93
  1219               	.LSM202:
  1220 01c0 87E1      		ldi r24,lo8(23)
- 1221 01c2 8093 0000 		sts time.1472,r24
+ 1221 01c2 8093 0000 		sts time.1476,r24
  1222               	.L93:
  1223               	.LSM203:
- 1224 01c6 8091 0000 		lds r24,time.1472
+ 1224 01c6 8091 0000 		lds r24,time.1476
  1225 01ca 8831      		cpi r24,lo8(24)
  1226 01cc 00F0      		brlo .L94
  1227               	.LSM204:
- 1228 01ce 1092 0000 		sts time.1472,__zero_reg__
+ 1228 01ce 1092 0000 		sts time.1476,__zero_reg__
  1229               	.L94:
  1230               	.LSM205:
- 1231 01d2 8091 0000 		lds r24,time.1472+1
+ 1231 01d2 8091 0000 		lds r24,time.1476+1
  1232 01d6 8F3F      		cpi r24,lo8(-1)
  1233 01d8 01F4      		brne .L95
  1234               	.LSM206:
  1235 01da 8BE3      		ldi r24,lo8(59)
- 1236 01dc 8093 0000 		sts time.1472+1,r24
+ 1236 01dc 8093 0000 		sts time.1476+1,r24
  1237               	.L95:
  1238               	.LSM207:
- 1239 01e0 8091 0000 		lds r24,time.1472+1
+ 1239 01e0 8091 0000 		lds r24,time.1476+1
  1240 01e4 8C33      		cpi r24,lo8(60)
  1241 01e6 00F0      		brlo .L96
  1242               	.LSM208:
- 1243 01e8 1092 0000 		sts time.1472+1,__zero_reg__
+ 1243 01e8 1092 0000 		sts time.1476+1,__zero_reg__
  1244               	.L96:
  1245               	.LSM209:
- 1246 01ec 8091 0000 		lds r24,time.1472+2
+ 1246 01ec 8091 0000 		lds r24,time.1476+2
  1247 01f0 8F3F      		cpi r24,lo8(-1)
  1248 01f2 01F4      		brne .L97
  1249               	.LSM210:
  1250 01f4 8BE3      		ldi r24,lo8(59)
- 1251 01f6 8093 0000 		sts time.1472+2,r24
+ 1251 01f6 8093 0000 		sts time.1476+2,r24
  1252               	.L97:
  1253               	.LSM211:
- 1254 01fa 8091 0000 		lds r24,time.1472+2
+ 1254 01fa 8091 0000 		lds r24,time.1476+2
  1255 01fe 8C33      		cpi r24,lo8(60)
  1256 0200 00F0      		brlo .L98
  1257               	.LSM212:
- 1258 0202 1092 0000 		sts time.1472+2,__zero_reg__
+ 1258 0202 1092 0000 		sts time.1476+2,__zero_reg__
  1259               	.L98:
  1260               	.LSM213:
- 1261 0206 1092 0000 		sts enter_function.1471,__zero_reg__
+ 1261 0206 1092 0000 		sts enter_function.1475,__zero_reg__
  1262 020a 88E1      		ldi r24,lo8(24)
  1263               	.L92:
  1264               	/* epilogue start */
@@ -1577,45 +1577,45 @@
  1623 0027 0000      		.word	EUROPEAN_DATE_NR
  1624 0029 0000      		.word	AMERICAN_DATE_NR
  1625 002b 0000      		.word	CANADIAN_DATE_NR
- 1626               		.section	.bss.LeapMonth.1664,"aw",@nobits
- 1629               	LeapMonth.1664:
+ 1626               		.section	.bss.LeapMonth.1668,"aw",@nobits
+ 1629               	LeapMonth.1668:
  1630 0000 00        		.skip 1,0
- 1631               		.section	.data.enter.1651,"aw",@progbits
- 1634               	enter.1651:
+ 1631               		.section	.data.enter.1655,"aw",@progbits
+ 1634               	enter.1655:
  1635 0000 01        		.byte	1
- 1636               		.section	.data.mode.1605,"aw",@progbits
- 1639               	mode.1605:
+ 1636               		.section	.data.mode.1609,"aw",@progbits
+ 1639               	mode.1609:
  1640 0000 02        		.byte	2
- 1641               		.section	.bss.date.1604,"aw",@nobits
- 1644               	date.1604:
+ 1641               		.section	.bss.date.1608,"aw",@nobits
+ 1644               	date.1608:
  1645 0000 0000 00   		.skip 3,0
- 1646               		.section	.data.enter_function.1603,"aw",@progbits
- 1649               	enter_function.1603:
+ 1646               		.section	.data.enter_function.1607,"aw",@progbits
+ 1649               	enter_function.1607:
  1650 0000 01        		.byte	1
  1651               		.section	.progmem.data
- 1654               	__c.1546:
+ 1654               	__c.1550:
  1655 002d 3132 4800 		.string	"12H"
- 1658               	__c.1544:
+ 1658               	__c.1548:
  1659 0031 3234 4800 		.string	"24H"
- 1662               	__c.1542:
+ 1662               	__c.1546:
  1663 0035 3234 4800 		.string	"24H"
- 1666               	__c.1540:
+ 1666               	__c.1544:
  1667 0039 3132 4800 		.string	"12H"
- 1670               	__c.1538:
+ 1670               	__c.1542:
  1671 003d 3132 4800 		.string	"12H"
- 1674               	__c.1536:
+ 1674               	__c.1540:
  1675 0041 3234 4800 		.string	"24H"
- 1676               		.section	.data.enter.1535,"aw",@progbits
- 1679               	enter.1535:
+ 1676               		.section	.data.enter.1539,"aw",@progbits
+ 1679               	enter.1539:
  1680 0000 01        		.byte	1
- 1681               		.section	.bss.mode.1473,"aw",@nobits
- 1684               	mode.1473:
+ 1681               		.section	.bss.mode.1477,"aw",@nobits
+ 1684               	mode.1477:
  1685 0000 00        		.skip 1,0
- 1686               		.section	.bss.time.1472,"aw",@nobits
- 1689               	time.1472:
+ 1686               		.section	.bss.time.1476,"aw",@nobits
+ 1689               	time.1476:
  1690 0000 0000 00   		.skip 3,0
- 1691               		.section	.data.enter_function.1471,"aw",@progbits
- 1694               	enter_function.1471:
+ 1691               		.section	.data.enter_function.1475,"aw",@progbits
+ 1694               	enter_function.1475:
  1695 0000 01        		.byte	1
  1696               		.comm gSECOND,1,1
  1697               		.comm gMINUTE,1,1
@@ -1626,54 +1626,54 @@
  1782               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 RTC.c
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:19     .text.__vector_5:00000000 __vector_5
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:19     .text.__vector_5:00000000 __vector_5
                             *COM*:00000001 gSECOND
                             *COM*:00000001 gMINUTE
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1503   .bss.gPowerSaveTimer:00000000 gPowerSaveTimer
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1503   .bss.gPowerSaveTimer:00000000 gPowerSaveTimer
                             *COM*:00000001 gHOUR
                             *COM*:00000001 gDAY
                             *COM*:00000001 gMONTH
                             *COM*:00000002 gYEAR
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1629   .bss.LeapMonth.1664:00000000 LeapMonth.1664
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1515   .data.MonthLength:00000000 MonthLength
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:177    .text.SetDateFormat:00000000 SetDateFormat
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1634   .data.enter.1651:00000000 enter.1651
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1509   .bss.dateformat:00000000 dateformat
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1614   .data.DATEFORMAT_TEXT:00000000 DATEFORMAT_TEXT
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:269    .text.SetClockFormat:00000000 SetClockFormat
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1679   .data.enter.1535:00000000 enter.1535
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1562   .data.clockformat:00000000 clockformat
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1674   .progmem.data:00000041 __c.1536
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1670   .progmem.data:0000003d __c.1538
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1666   .progmem.data:00000039 __c.1540
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1662   .progmem.data:00000035 __c.1542
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1658   .progmem.data:00000031 __c.1544
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1654   .progmem.data:0000002d __c.1546
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:367    .text.SetDate:00000000 SetDate
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1649   .data.enter_function.1603:00000000 enter_function.1603
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1644   .bss.date.1604:00000000 date.1604
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1639   .data.mode.1605:00000000 mode.1605
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:715    .text.ShowDate:00000000 ShowDate
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1622   .progmem.data:00000027 DATE_FORMAT_NR
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:951    .text.SetClock:00000000 SetClock
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1694   .data.enter_function.1471:00000000 enter_function.1471
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1689   .bss.time.1472:00000000 time.1472
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1533   .data.TBL_CLOCK_12:00000000 TBL_CLOCK_12
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1684   .bss.mode.1473:00000000 mode.1473
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1280   .text.ShowClock:00000000 ShowClock
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1422   .text.RTC_init:00000000 RTC_init
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1568   .progmem.data:00000000 EUROPEAN_DATE_TEXT
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1573   .progmem.data:00000007 AMERICAN_DATE_TEXT
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1578   .progmem.data:0000000e CANADIAN_DATE_TEXT
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1583   .progmem.data:00000015 EUROPEAN_DATE_NR
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1593   .progmem.data:0000001b AMERICAN_DATE_NR
-C:\Users\MainUser\AppData\Local\Temp/ccVMiSEE.s:1603   .progmem.data:00000021 CANADIAN_DATE_NR
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1629   .bss.LeapMonth.1668:00000000 LeapMonth.1668
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1515   .data.MonthLength:00000000 MonthLength
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:177    .text.SetDateFormat:00000000 SetDateFormat
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1634   .data.enter.1655:00000000 enter.1655
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1509   .bss.dateformat:00000000 dateformat
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1614   .data.DATEFORMAT_TEXT:00000000 DATEFORMAT_TEXT
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:269    .text.SetClockFormat:00000000 SetClockFormat
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1679   .data.enter.1539:00000000 enter.1539
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1562   .data.clockformat:00000000 clockformat
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1674   .progmem.data:00000041 __c.1540
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1670   .progmem.data:0000003d __c.1542
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1666   .progmem.data:00000039 __c.1544
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1662   .progmem.data:00000035 __c.1546
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1658   .progmem.data:00000031 __c.1548
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1654   .progmem.data:0000002d __c.1550
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:367    .text.SetDate:00000000 SetDate
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1649   .data.enter_function.1607:00000000 enter_function.1607
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1644   .bss.date.1608:00000000 date.1608
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1639   .data.mode.1609:00000000 mode.1609
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:715    .text.ShowDate:00000000 ShowDate
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1622   .progmem.data:00000027 DATE_FORMAT_NR
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:951    .text.SetClock:00000000 SetClock
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1694   .data.enter_function.1475:00000000 enter_function.1475
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1689   .bss.time.1476:00000000 time.1476
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1533   .data.TBL_CLOCK_12:00000000 TBL_CLOCK_12
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1684   .bss.mode.1477:00000000 mode.1477
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1280   .text.ShowClock:00000000 ShowClock
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1422   .text.RTC_init:00000000 RTC_init
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1568   .progmem.data:00000000 EUROPEAN_DATE_TEXT
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1573   .progmem.data:00000007 AMERICAN_DATE_TEXT
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1578   .progmem.data:0000000e CANADIAN_DATE_TEXT
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1583   .progmem.data:00000015 EUROPEAN_DATE_NR
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1593   .progmem.data:0000001b AMERICAN_DATE_NR
+C:\Users\MainUser\AppData\Local\Temp/ccJ7KmUv.s:1603   .progmem.data:00000021 CANADIAN_DATE_NR
 
 UNDEFINED SYMBOLS
 __udivmodhi4

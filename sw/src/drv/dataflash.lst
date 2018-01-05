@@ -656,27 +656,27 @@
  797               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 dataflash.c
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:19     .text.DF_SPI_init:00000000 DF_SPI_init
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:46     .text.DF_SPI_RW:00000000 DF_SPI_RW
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:71     .text.Read_DF_status:00000000 Read_DF_status
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:660    .progmem.data:00000000 DF_pagebits
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:685    .bss.PageBits:00000000 PageBits
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:672    .progmem.data:00000008 DF_pagesize
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:691    .bss.PageSize:00000000 PageSize
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:138    .text.Page_To_Buffer:00000000 Page_To_Buffer
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:210    .text.Buffer_Read_Byte:00000000 Buffer_Read_Byte
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:266    .text.Buffer_Read_Str:00000000 Buffer_Read_Str
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:342    .text.Buffer_Write_Enable:00000000 Buffer_Write_Enable
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:386    .text.Buffer_Write_Byte:00000000 Buffer_Write_Byte
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:437    .text.Buffer_Write_Str:00000000 Buffer_Write_Str
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:509    .text.Buffer_To_Page:00000000 Buffer_To_Page
-C:\Users\MainUser\AppData\Local\Temp/ccVy6WM2.s:581    .text.Cont_Flash_Read_Enable:00000000 Cont_Flash_Read_Enable
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:19     .text.DF_SPI_init:00000000 DF_SPI_init
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:46     .text.DF_SPI_RW:00000000 DF_SPI_RW
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:71     .text.Read_DF_status:00000000 Read_DF_status
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:660    .progmem.data:00000000 DF_pagebits
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:685    .bss.PageBits:00000000 PageBits
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:672    .progmem.data:00000008 DF_pagesize
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:691    .bss.PageSize:00000000 PageSize
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:138    .text.Page_To_Buffer:00000000 Page_To_Buffer
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:210    .text.Buffer_Read_Byte:00000000 Buffer_Read_Byte
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:266    .text.Buffer_Read_Str:00000000 Buffer_Read_Str
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:342    .text.Buffer_Write_Enable:00000000 Buffer_Write_Enable
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:386    .text.Buffer_Write_Byte:00000000 Buffer_Write_Byte
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:437    .text.Buffer_Write_Str:00000000 Buffer_Write_Str
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:509    .text.Buffer_To_Page:00000000 Buffer_To_Page
+C:\Users\MainUser\AppData\Local\Temp/ccLSUe3R.s:581    .text.Cont_Flash_Read_Enable:00000000 Cont_Flash_Read_Enable
 
 UNDEFINED SYMBOLS
 __do_clear_bss

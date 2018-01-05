@@ -110,12 +110,12 @@
  122               	/* frame size = 0 */
  123 0002 182F      		mov r17,r24
  124               	.LSM22:
- 125 0004 8091 0000 		lds r24,enter.1579
+ 125 0004 8091 0000 		lds r24,enter.1583
  126               	.LVL5:
  127 0008 8823      		tst r24
  128 000a 01F0      		breq .L12
  129               	.LSM23:
- 130 000c 1092 0000 		sts enter.1579,__zero_reg__
+ 130 000c 1092 0000 		sts enter.1583,__zero_reg__
  131               	.LSM24:
  132 0010 82E0      		ldi r24,lo8(2)
  133 0012 0E94 0000 		call ADC_init
@@ -142,7 +142,7 @@
  154 0034 0E94 0000 		call Timer0_RemoveCallbackFunction
  155               	.LSM29:
  156 0038 81E0      		ldi r24,lo8(1)
- 157 003a 8093 0000 		sts enter.1579,r24
+ 157 003a 8093 0000 		sts enter.1583,r24
  158 003e 80E5      		ldi r24,lo8(80)
  159               	.L15:
  160               	/* epilogue start */
@@ -162,12 +162,12 @@
  176               	/* frame size = 0 */
  177 0002 182F      		mov r17,r24
  178               	.LSM32:
- 179 0004 8091 0000 		lds r24,enter.1573
+ 179 0004 8091 0000 		lds r24,enter.1577
  180               	.LVL8:
  181 0008 8823      		tst r24
  182 000a 01F0      		breq .L18
  183               	.LSM33:
- 184 000c 1092 0000 		sts enter.1573,__zero_reg__
+ 184 000c 1092 0000 		sts enter.1577,__zero_reg__
  185               	.LSM34:
  186 0010 81E0      		ldi r24,lo8(1)
  187 0012 0E94 0000 		call ADC_init
@@ -194,7 +194,7 @@
  208 0034 0E94 0000 		call Timer0_RemoveCallbackFunction
  209               	.LSM39:
  210 0038 81E0      		ldi r24,lo8(1)
- 211 003a 8093 0000 		sts enter.1573,r24
+ 211 003a 8093 0000 		sts enter.1577,r24
  212 003e 86E4      		ldi r24,lo8(70)
  213               	.L21:
  214               	/* epilogue start */
@@ -214,12 +214,12 @@
  230               	/* frame size = 0 */
  231 0002 182F      		mov r17,r24
  232               	.LSM42:
- 233 0004 8091 0000 		lds r24,enter.1566
+ 233 0004 8091 0000 		lds r24,enter.1570
  234               	.LVL11:
  235 0008 8823      		tst r24
  236 000a 01F0      		breq .L24
  237               	.LSM43:
- 238 000c 1092 0000 		sts enter.1566,__zero_reg__
+ 238 000c 1092 0000 		sts enter.1570,__zero_reg__
  239               	.LSM44:
  240 0010 80E0      		ldi r24,lo8(0)
  241 0012 0E94 0000 		call ADC_init
@@ -243,7 +243,7 @@
  259 0030 0E94 0000 		call Timer0_RemoveCallbackFunction
  260               	.LSM49:
  261 0034 81E0      		ldi r24,lo8(1)
- 262 0036 8093 0000 		sts enter.1566,r24
+ 262 0036 8093 0000 		sts enter.1570,r24
  263 003a 8CE3      		ldi r24,lo8(60)
  264 003c 00C0      		rjmp .L27
  265               	.L26:
@@ -1179,40 +1179,40 @@
  1210               		.section	.data.degree,"aw",@progbits
  1213               	degree:
  1214 0000 03        		.byte	3
- 1215               		.section	.data.enter.1579,"aw",@progbits
- 1218               	enter.1579:
+ 1215               		.section	.data.enter.1583,"aw",@progbits
+ 1218               	enter.1583:
  1219 0000 01        		.byte	1
- 1220               		.section	.data.enter.1573,"aw",@progbits
- 1223               	enter.1573:
+ 1220               		.section	.data.enter.1577,"aw",@progbits
+ 1223               	enter.1577:
  1224 0000 01        		.byte	1
- 1225               		.section	.data.enter.1566,"aw",@progbits
- 1228               	enter.1566:
+ 1225               		.section	.data.enter.1570,"aw",@progbits
+ 1228               	enter.1570:
  1229 0000 01        		.byte	1
  1294               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 ADC.c
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:19     .text.ADC_read:00000000 ADC_read
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:94     .text.ADC_init:00000000 ADC_init
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:116    .text.LightFunc:00000000 LightFunc
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1218   .data.enter.1579:00000000 enter.1579
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:308    .text.ADC_periphery:00000000 ADC_periphery
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:170    .text.VoltageFunc:00000000 VoltageFunc
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1223   .data.enter.1573:00000000 enter.1573
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:224    .text.TemperatureFunc:00000000 TemperatureFunc
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1228   .data.enter.1566:00000000 enter.1566
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1213   .data.degree:00000000 degree
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:926    .progmem.data:0000007a TEMP_Celsius_neg
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:861    .progmem.data:00000000 TEMP_Celsius_pos
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:945    .progmem.data:00000098 TEMP_Fahrenheit_pos
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1090   .progmem.data:000001b2 LIGHT_ADC
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1204   .data.Vref:00000000 Vref
-C:\Users\MainUser\AppData\Local\Temp/cc5JR3Vr.s:1115   .progmem.data:000001dc LIGHT_VOLTAGE
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:19     .text.ADC_read:00000000 ADC_read
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:94     .text.ADC_init:00000000 ADC_init
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:116    .text.LightFunc:00000000 LightFunc
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1218   .data.enter.1583:00000000 enter.1583
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:308    .text.ADC_periphery:00000000 ADC_periphery
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:170    .text.VoltageFunc:00000000 VoltageFunc
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1223   .data.enter.1577:00000000 enter.1577
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:224    .text.TemperatureFunc:00000000 TemperatureFunc
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1228   .data.enter.1570:00000000 enter.1570
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1213   .data.degree:00000000 degree
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:926    .progmem.data:0000007a TEMP_Celsius_neg
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:861    .progmem.data:00000000 TEMP_Celsius_pos
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:945    .progmem.data:00000098 TEMP_Fahrenheit_pos
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1090   .progmem.data:000001b2 LIGHT_ADC
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1204   .data.Vref:00000000 Vref
+C:\Users\MainUser\AppData\Local\Temp/cctxcKhn.s:1115   .progmem.data:000001dc LIGHT_VOLTAGE
 
 UNDEFINED SYMBOLS
 Timer0_RegisterCallbackFunction

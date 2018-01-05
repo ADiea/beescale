@@ -15,6 +15,9 @@ char KeyClick(char input);
 void Delay(unsigned int millisec);
 void OSCCAL_calibration(void);
 
+char StateScaleCalibFunc(char input);
+char StateScaleMeasureFunc(char input);
+
 #define BOOL    char
 
 #ifndef FALSE
@@ -78,4 +81,5 @@ void OSCCAL_calibration(void);
 #define ST_OPTIONS_KEYCLICK             100
 #define ST_OPTIONS_KEYCLICK_FUNC        101
 
-
+#define ST_SCALE_MEASURE				102
+#define ST_SCALE_CALIB					103

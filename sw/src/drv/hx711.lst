@@ -1,0 +1,577 @@
+   1               		.file	"hx711.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.section	.text.shiftIn,"ax",@progbits
+  17               	.global	shiftIn
+  19               	shiftIn:
+  20               	.LFB2:
+  21               	.LSM0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24               	.LSM1:
+  25               	/* #APP */
+  26               	 ;  27 "src/drv/hx711.c" 1
+  27 0000 0000      		nop
+  28               	 ;  0 "" 2
+  29               	.LSM2:
+  30               	 ;  28 "src/drv/hx711.c" 1
+  31 0002 0000      		nop
+  32               	 ;  0 "" 2
+  33               	/* #NOAPP */
+  34 0004 40E0      		ldi r20,lo8(0)
+  35               	.LVL0:
+  36 0006 27E0      		ldi r18,lo8(7)
+  37 0008 30E0      		ldi r19,hi8(7)
+  38               	.LSM3:
+  39 000a 61E0      		ldi r22,lo8(1)
+  40 000c 70E0      		ldi r23,hi8(1)
+  41               	.L3:
+  42               	.LSM4:
+  43 000e 769A      		sbi 46-32,6
+  44               	.LSM5:
+  45               	/* #APP */
+  46               	 ;  32 "src/drv/hx711.c" 1
+  47 0010 0000      		nop
+  48               	 ;  0 "" 2
+  49               	.LSM6:
+  50               	 ;  33 "src/drv/hx711.c" 1
+  51 0012 0000      		nop
+  52               	 ;  0 "" 2
+  53               	.LSM7:
+  54               	/* #NOAPP */
+  55 0014 659B      		sbis 44-32,5
+  56 0016 00C0      		rjmp .L2
+  57               	.LSM8:
+  58 0018 CB01      		movw r24,r22
+  59 001a 022E      		mov r0,r18
+  60 001c 00C0      		rjmp 2f
+  61 001e 880F      	1:	lsl r24
+  62 0020 991F      		rol r25
+  63 0022 0A94      	2:	dec r0
+  64 0024 02F4      		brpl 1b
+  65 0026 482B      		or r20,r24
+  66               	.L2:
+  67               	.LSM9:
+  68 0028 7698      		cbi 46-32,6
+  69               	.LSM10:
+  70               	/* #APP */
+  71               	 ;  37 "src/drv/hx711.c" 1
+  72 002a 0000      		nop
+  73               	 ;  0 "" 2
+  74               	.LSM11:
+  75               	 ;  38 "src/drv/hx711.c" 1
+  76 002c 0000      		nop
+  77               	 ;  0 "" 2
+  78               	/* #NOAPP */
+  79 002e 2150      		subi r18,lo8(-(-1))
+  80 0030 3040      		sbci r19,hi8(-(-1))
+  81               	.LSM12:
+  82 0032 8FEF      		ldi r24,hi8(-1)
+  83 0034 2F3F      		cpi r18,lo8(-1)
+  84 0036 3807      		cpc r19,r24
+  85 0038 01F4      		brne .L3
+  86               	.LSM13:
+  87 003a 842F      		mov r24,r20
+  88               	/* epilogue start */
+  89 003c 0895      		ret
+  90               	.LFE2:
+  92               		.section	.text.HX711_is_ready,"ax",@progbits
+  93               	.global	HX711_is_ready
+  95               	HX711_is_ready:
+  96               	.LFB4:
+  97               	.LSM14:
+  98               	/* prologue: function */
+  99               	/* frame size = 0 */
+ 100               	.LSM15:
+ 101 0000 8CB1      		in r24,44-32
+ 102 0002 8295      		swap r24
+ 103 0004 8695      		lsr r24
+ 104 0006 8770      		andi r24,lo8(7)
+ 105 0008 8095      		com r24
+ 106               	.LSM16:
+ 107 000a 8170      		andi r24,lo8(1)
+ 108               	/* epilogue start */
+ 109 000c 0895      		ret
+ 110               	.LFE4:
+ 112               		.section	.text.HX711_read,"ax",@progbits
+ 113               	.global	HX711_read
+ 115               	HX711_read:
+ 116               	.LFB6:
+ 117               	.LSM17:
+ 118 0000 0F93      		push r16
+ 119 0002 1F93      		push r17
+ 120               	/* prologue: function */
+ 121               	/* frame size = 0 */
+ 122               	.L9:
+ 123               	.LSM18:
+ 124 0004 0E94 0000 		call HX711_is_ready
+ 125 0008 8823      		tst r24
+ 126 000a 01F0      		breq .L9
+ 127               	.LSM19:
+ 128 000c 0E94 0000 		call shiftIn
+ 129 0010 182F      		mov r17,r24
+ 130               	.LSM20:
+ 131 0012 0E94 0000 		call shiftIn
+ 132 0016 082F      		mov r16,r24
+ 133               	.LSM21:
+ 134 0018 0E94 0000 		call shiftIn
+ 135 001c E82F      		mov r30,r24
+ 136               	.LBB2:
+ 137               	.LSM22:
+ 138 001e 8091 0000 		lds r24,GAIN
+ 139 0022 90E0      		ldi r25,lo8(0)
+ 140 0024 20E0      		ldi r18,lo8(0)
+ 141 0026 30E0      		ldi r19,hi8(0)
+ 142               	.LVL1:
+ 143 0028 00C0      		rjmp .L10
+ 144               	.L11:
+ 145               	.LSM23:
+ 146 002a 769A      		sbi 46-32,6
+ 147               	.LSM24:
+ 148               	/* #APP */
+ 149               	 ;  90 "src/drv/hx711.c" 1
+ 150 002c 0000      		nop
+ 151               	 ;  0 "" 2
+ 152               	.LSM25:
+ 153               	 ;  91 "src/drv/hx711.c" 1
+ 154 002e 0000      		nop
+ 155               	 ;  0 "" 2
+ 156               	.LSM26:
+ 157               	/* #NOAPP */
+ 158 0030 7698      		cbi 46-32,6
+ 159               	.LSM27:
+ 160               	/* #APP */
+ 161               	 ;  93 "src/drv/hx711.c" 1
+ 162 0032 0000      		nop
+ 163               	 ;  0 "" 2
+ 164               	.LSM28:
+ 165               	 ;  94 "src/drv/hx711.c" 1
+ 166 0034 0000      		nop
+ 167               	 ;  0 "" 2
+ 168               	.LSM29:
+ 169               	/* #NOAPP */
+ 170 0036 2F5F      		subi r18,lo8(-(1))
+ 171 0038 3F4F      		sbci r19,hi8(-(1))
+ 172               	.L10:
+ 173 003a 2817      		cp r18,r24
+ 174 003c 3907      		cpc r19,r25
+ 175 003e 00F0      		brlo .L11
+ 176               	.LBE2:
+ 177               	.LSM30:
+ 178 0040 612F      		mov r22,r17
+ 179 0042 70E0      		ldi r23,lo8(0)
+ 180 0044 80E0      		ldi r24,lo8(0)
+ 181 0046 90E0      		ldi r25,hi8(0)
+ 182 0048 CB01      		movw r24,r22
+ 183 004a 7727      		clr r23
+ 184 004c 6627      		clr r22
+ 185 004e 202F      		mov r18,r16
+ 186               	.LVL2:
+ 187 0050 30E0      		ldi r19,lo8(0)
+ 188 0052 40E0      		ldi r20,lo8(0)
+ 189 0054 50E0      		ldi r21,hi8(0)
+ 190 0056 542F      		mov r21,r20
+ 191 0058 432F      		mov r20,r19
+ 192 005a 322F      		mov r19,r18
+ 193 005c 2227      		clr r18
+ 194 005e 622B      		or r22,r18
+ 195 0060 732B      		or r23,r19
+ 196 0062 842B      		or r24,r20
+ 197 0064 952B      		or r25,r21
+ 198 0066 2E2F      		mov r18,r30
+ 199 0068 30E0      		ldi r19,lo8(0)
+ 200 006a 40E0      		ldi r20,lo8(0)
+ 201 006c 50E0      		ldi r21,hi8(0)
+ 202 006e 622B      		or r22,r18
+ 203 0070 732B      		or r23,r19
+ 204 0072 842B      		or r24,r20
+ 205 0074 952B      		or r25,r21
+ 206 0076 110F      		lsl r17
+ 207 0078 110B      		sbc r17,r17
+ 208 007a 212F      		mov r18,r17
+ 209               	.LVL3:
+ 210 007c 30E0      		ldi r19,lo8(0)
+ 211               	.LVL4:
+ 212 007e 40E0      		ldi r20,lo8(0)
+ 213 0080 50E0      		ldi r21,hi8(0)
+ 214               	.LVL5:
+ 215 0082 522F      		mov r21,r18
+ 216 0084 4427      		clr r20
+ 217 0086 3327      		clr r19
+ 218 0088 2227      		clr r18
+ 219               	.LVL6:
+ 220 008a 622B      		or r22,r18
+ 221 008c 732B      		or r23,r19
+ 222 008e 842B      		or r24,r20
+ 223 0090 952B      		or r25,r21
+ 224               	/* epilogue start */
+ 225               	.LSM31:
+ 226 0092 1F91      		pop r17
+ 227 0094 0F91      		pop r16
+ 228 0096 0895      		ret
+ 229               	.LFE6:
+ 231               		.section	.text.HX711_set_gain,"ax",@progbits
+ 232               	.global	HX711_set_gain
+ 234               	HX711_set_gain:
+ 235               	.LFB5:
+ 236               	.LSM32:
+ 237               	.LVL7:
+ 238               	/* prologue: function */
+ 239               	/* frame size = 0 */
+ 240               	.LSM33:
+ 241 0000 8034      		cpi r24,lo8(64)
+ 242 0002 01F0      		breq .L19
+ 243 0004 8038      		cpi r24,lo8(-128)
+ 244 0006 01F0      		breq .L20
+ 245 0008 8032      		cpi r24,lo8(32)
+ 246 000a 01F4      		brne .L17
+ 247 000c 00C0      		rjmp .L23
+ 248               	.L20:
+ 249               	.LSM34:
+ 250 000e 81E0      		ldi r24,lo8(1)
+ 251               	.LVL8:
+ 252 0010 00C0      		rjmp .L22
+ 253               	.LVL9:
+ 254               	.L19:
+ 255               	.LSM35:
+ 256 0012 83E0      		ldi r24,lo8(3)
+ 257               	.LVL10:
+ 258 0014 00C0      		rjmp .L22
+ 259               	.LVL11:
+ 260               	.L23:
+ 261               	.LSM36:
+ 262 0016 82E0      		ldi r24,lo8(2)
+ 263               	.LVL12:
+ 264               	.L22:
+ 265 0018 8093 0000 		sts GAIN,r24
+ 266               	.LVL13:
+ 267               	.L17:
+ 268               	.LSM37:
+ 269 001c 7698      		cbi 46-32,6
+ 270               	.LSM38:
+ 271 001e 0E94 0000 		call HX711_read
+ 272               	.LVL14:
+ 273               	/* epilogue start */
+ 274               	.LSM39:
+ 275 0022 0895      		ret
+ 276               	.LFE5:
+ 278               		.section	.text.HX711_begin,"ax",@progbits
+ 279               	.global	HX711_begin
+ 281               	HX711_begin:
+ 282               	.LFB3:
+ 283               	.LSM40:
+ 284               	.LVL15:
+ 285               	/* prologue: function */
+ 286               	/* frame size = 0 */
+ 287               	.LSM41:
+ 288 0000 6E9A      		sbi 45-32,6
+ 289               	.LSM42:
+ 290 0002 6D98      		cbi 45-32,5
+ 291               	.LSM43:
+ 292 0004 0E94 0000 		call HX711_set_gain
+ 293               	.LVL16:
+ 294               	/* epilogue start */
+ 295               	.LSM44:
+ 296 0008 0895      		ret
+ 297               	.LFE3:
+ 299               		.section	.text.HX711_read_average,"ax",@progbits
+ 300               	.global	HX711_read_average
+ 302               	HX711_read_average:
+ 303               	.LFB7:
+ 304               	.LSM45:
+ 305               	.LVL17:
+ 306 0000 CF92      		push r12
+ 307 0002 DF92      		push r13
+ 308 0004 EF92      		push r14
+ 309 0006 FF92      		push r15
+ 310 0008 0F93      		push r16
+ 311 000a 1F93      		push r17
+ 312               	/* prologue: function */
+ 313               	/* frame size = 0 */
+ 314 000c C82E      		mov r12,r24
+ 315               	.LSM46:
+ 316 000e EE24      		clr r14
+ 317 0010 FF24      		clr r15
+ 318 0012 8701      		movw r16,r14
+ 319               	.LVL18:
+ 320 0014 DD24      		clr r13
+ 321               	.LVL19:
+ 322 0016 00C0      		rjmp .L27
+ 323               	.LVL20:
+ 324               	.L28:
+ 325               	.LBB3:
+ 326               	.LSM47:
+ 327 0018 0E94 0000 		call HX711_read
+ 328 001c E60E      		add r14,r22
+ 329 001e F71E      		adc r15,r23
+ 330 0020 081F      		adc r16,r24
+ 331 0022 191F      		adc r17,r25
+ 332               	.LSM48:
+ 333 0024 D394      		inc r13
+ 334               	.LVL21:
+ 335               	.L27:
+ 336 0026 DC14      		cp r13,r12
+ 337 0028 00F0      		brlo .L28
+ 338 002a 2C2D      		mov r18,r12
+ 339 002c 30E0      		ldi r19,lo8(0)
+ 340               	.LVL22:
+ 341 002e 40E0      		ldi r20,lo8(0)
+ 342 0030 50E0      		ldi r21,hi8(0)
+ 343               	.LVL23:
+ 344 0032 C801      		movw r24,r16
+ 345 0034 B701      		movw r22,r14
+ 346 0036 0E94 0000 		call __divmodsi4
+ 347               	.LBE3:
+ 348               	.LSM49:
+ 349 003a CA01      		movw r24,r20
+ 350 003c B901      		movw r22,r18
+ 351               	/* epilogue start */
+ 352 003e 1F91      		pop r17
+ 353 0040 0F91      		pop r16
+ 354 0042 FF90      		pop r15
+ 355 0044 EF90      		pop r14
+ 356               	.LVL24:
+ 357 0046 DF90      		pop r13
+ 358               	.LVL25:
+ 359 0048 CF90      		pop r12
+ 360               	.LVL26:
+ 361 004a 0895      		ret
+ 362               	.LFE7:
+ 364               		.section	.text.HX711_get_value,"ax",@progbits
+ 365               	.global	HX711_get_value
+ 367               	HX711_get_value:
+ 368               	.LFB8:
+ 369               	.LSM50:
+ 370               	.LVL27:
+ 371               	/* prologue: function */
+ 372               	/* frame size = 0 */
+ 373               	.LSM51:
+ 374 0000 0E94 0000 		call HX711_read_average
+ 375               	.LVL28:
+ 376 0004 2091 0000 		lds r18,OFFSET
+ 377 0008 3091 0000 		lds r19,(OFFSET)+1
+ 378 000c 4091 0000 		lds r20,(OFFSET)+2
+ 379 0010 5091 0000 		lds r21,(OFFSET)+3
+ 380 0014 621B      		sub r22,r18
+ 381 0016 730B      		sbc r23,r19
+ 382 0018 840B      		sbc r24,r20
+ 383 001a 950B      		sbc r25,r21
+ 384               	/* epilogue start */
+ 385               	.LSM52:
+ 386 001c 0895      		ret
+ 387               	.LFE8:
+ 389               		.section	.text.HX711_get_units,"ax",@progbits
+ 390               	.global	HX711_get_units
+ 392               	HX711_get_units:
+ 393               	.LFB9:
+ 394               	.LSM53:
+ 395               	.LVL29:
+ 396               	/* prologue: function */
+ 397               	/* frame size = 0 */
+ 398               	.LSM54:
+ 399 0000 0E94 0000 		call HX711_get_value
+ 400               	.LVL30:
+ 401 0004 0E94 0000 		call __floatsisf
+ 402 0008 2091 0000 		lds r18,SCALE
+ 403 000c 3091 0000 		lds r19,(SCALE)+1
+ 404 0010 4091 0000 		lds r20,(SCALE)+2
+ 405 0014 5091 0000 		lds r21,(SCALE)+3
+ 406 0018 0E94 0000 		call __divsf3
+ 407               	/* epilogue start */
+ 408               	.LSM55:
+ 409 001c 0895      		ret
+ 410               	.LFE9:
+ 412               		.section	.text.HX711_set_scale,"ax",@progbits
+ 413               	.global	HX711_set_scale
+ 415               	HX711_set_scale:
+ 416               	.LFB11:
+ 417               	.LSM56:
+ 418               	.LVL31:
+ 419               	/* prologue: function */
+ 420               	/* frame size = 0 */
+ 421               	.LSM57:
+ 422 0000 6093 0000 		sts SCALE,r22
+ 423 0004 7093 0000 		sts (SCALE)+1,r23
+ 424 0008 8093 0000 		sts (SCALE)+2,r24
+ 425 000c 9093 0000 		sts (SCALE)+3,r25
+ 426               	/* epilogue start */
+ 427               	.LSM58:
+ 428 0010 0895      		ret
+ 429               	.LFE11:
+ 431               		.section	.text.HX711_get_scale,"ax",@progbits
+ 432               	.global	HX711_get_scale
+ 434               	HX711_get_scale:
+ 435               	.LFB12:
+ 436               	.LSM59:
+ 437               	/* prologue: function */
+ 438               	/* frame size = 0 */
+ 439               	.LSM60:
+ 440 0000 6091 0000 		lds r22,SCALE
+ 441 0004 7091 0000 		lds r23,(SCALE)+1
+ 442 0008 8091 0000 		lds r24,(SCALE)+2
+ 443 000c 9091 0000 		lds r25,(SCALE)+3
+ 444               	/* epilogue start */
+ 445               	.LSM61:
+ 446 0010 0895      		ret
+ 447               	.LFE12:
+ 449               		.section	.text.HX711_set_offset,"ax",@progbits
+ 450               	.global	HX711_set_offset
+ 452               	HX711_set_offset:
+ 453               	.LFB13:
+ 454               	.LSM62:
+ 455               	.LVL32:
+ 456               	/* prologue: function */
+ 457               	/* frame size = 0 */
+ 458               	.LSM63:
+ 459 0000 6093 0000 		sts OFFSET,r22
+ 460 0004 7093 0000 		sts (OFFSET)+1,r23
+ 461 0008 8093 0000 		sts (OFFSET)+2,r24
+ 462 000c 9093 0000 		sts (OFFSET)+3,r25
+ 463               	/* epilogue start */
+ 464               	.LSM64:
+ 465 0010 0895      		ret
+ 466               	.LFE13:
+ 468               		.section	.text.HX711_tare,"ax",@progbits
+ 469               	.global	HX711_tare
+ 471               	HX711_tare:
+ 472               	.LFB10:
+ 473               	.LSM65:
+ 474               	.LVL33:
+ 475               	/* prologue: function */
+ 476               	/* frame size = 0 */
+ 477               	.LSM66:
+ 478 0000 0E94 0000 		call HX711_read_average
+ 479               	.LVL34:
+ 480               	.LSM67:
+ 481 0004 0E94 0000 		call __floatsisf
+ 482 0008 0E94 0000 		call __fixsfsi
+ 483 000c 0E94 0000 		call HX711_set_offset
+ 484               	/* epilogue start */
+ 485               	.LSM68:
+ 486 0010 0895      		ret
+ 487               	.LFE10:
+ 489               		.section	.text.HX711_get_offset,"ax",@progbits
+ 490               	.global	HX711_get_offset
+ 492               	HX711_get_offset:
+ 493               	.LFB14:
+ 494               	.LSM69:
+ 495               	/* prologue: function */
+ 496               	/* frame size = 0 */
+ 497               	.LSM70:
+ 498 0000 6091 0000 		lds r22,OFFSET
+ 499 0004 7091 0000 		lds r23,(OFFSET)+1
+ 500 0008 8091 0000 		lds r24,(OFFSET)+2
+ 501 000c 9091 0000 		lds r25,(OFFSET)+3
+ 502               	/* epilogue start */
+ 503               	.LSM71:
+ 504 0010 0895      		ret
+ 505               	.LFE14:
+ 507               		.section	.text.HX711_power_down,"ax",@progbits
+ 508               	.global	HX711_power_down
+ 510               	HX711_power_down:
+ 511               	.LFB15:
+ 512               	.LSM72:
+ 513               	/* prologue: function */
+ 514               	/* frame size = 0 */
+ 515               	.LSM73:
+ 516 0000 7698      		cbi 46-32,6
+ 517               	.LSM74:
+ 518               	/* #APP */
+ 519               	 ;  152 "src/drv/hx711.c" 1
+ 520 0002 0000      		nop
+ 521               	 ;  0 "" 2
+ 522               	.LSM75:
+ 523               	 ;  153 "src/drv/hx711.c" 1
+ 524 0004 0000      		nop
+ 525               	 ;  0 "" 2
+ 526               	.LSM76:
+ 527               	/* #NOAPP */
+ 528 0006 769A      		sbi 46-32,6
+ 529               	.LSM77:
+ 530               	/* #APP */
+ 531               	 ;  155 "src/drv/hx711.c" 1
+ 532 0008 0000      		nop
+ 533               	 ;  0 "" 2
+ 534               	.LSM78:
+ 535               	 ;  156 "src/drv/hx711.c" 1
+ 536 000a 0000      		nop
+ 537               	 ;  0 "" 2
+ 538               	/* epilogue start */
+ 539               	.LSM79:
+ 540               	/* #NOAPP */
+ 541 000c 0895      		ret
+ 542               	.LFE15:
+ 544               		.section	.text.HX711_power_up,"ax",@progbits
+ 545               	.global	HX711_power_up
+ 547               	HX711_power_up:
+ 548               	.LFB16:
+ 549               	.LSM80:
+ 550               	/* prologue: function */
+ 551               	/* frame size = 0 */
+ 552               	.LSM81:
+ 553 0000 7698      		cbi 46-32,6
+ 554               	.LSM82:
+ 555               	/* #APP */
+ 556               	 ;  161 "src/drv/hx711.c" 1
+ 557 0002 0000      		nop
+ 558               	 ;  0 "" 2
+ 559               	/* epilogue start */
+ 560               	.LSM83:
+ 561               	/* #NOAPP */
+ 562 0004 0895      		ret
+ 563               	.LFE16:
+ 565               	.global	GAIN
+ 566               		.section	.data.GAIN,"aw",@progbits
+ 569               	GAIN:
+ 570 0000 01        		.byte	1
+ 571               	.global	OFFSET
+ 572               		.section	.bss.OFFSET,"aw",@nobits
+ 575               	OFFSET:
+ 576 0000 0000 0000 		.skip 4,0
+ 577               	.global	SCALE
+ 578               		.section	.data.SCALE,"aw",@progbits
+ 581               	SCALE:
+ 582 0000 00        		.byte	0
+ 583 0001 00        		.byte	0
+ 584 0002 80        		.byte	-128
+ 585 0003 3F        		.byte	63
+ 722               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 hx711.c
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:19     .text.shiftIn:00000000 shiftIn
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:95     .text.HX711_is_ready:00000000 HX711_is_ready
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:115    .text.HX711_read:00000000 HX711_read
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:569    .data.GAIN:00000000 GAIN
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:234    .text.HX711_set_gain:00000000 HX711_set_gain
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:281    .text.HX711_begin:00000000 HX711_begin
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:302    .text.HX711_read_average:00000000 HX711_read_average
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:367    .text.HX711_get_value:00000000 HX711_get_value
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:575    .bss.OFFSET:00000000 OFFSET
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:392    .text.HX711_get_units:00000000 HX711_get_units
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:581    .data.SCALE:00000000 SCALE
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:415    .text.HX711_set_scale:00000000 HX711_set_scale
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:434    .text.HX711_get_scale:00000000 HX711_get_scale
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:452    .text.HX711_set_offset:00000000 HX711_set_offset
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:471    .text.HX711_tare:00000000 HX711_tare
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:492    .text.HX711_get_offset:00000000 HX711_get_offset
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:510    .text.HX711_power_down:00000000 HX711_power_down
+C:\Users\MainUser\AppData\Local\Temp/ccPccmHj.s:547    .text.HX711_power_up:00000000 HX711_power_up
+
+UNDEFINED SYMBOLS
+__divmodsi4
+__floatsisf
+__divsf3
+__fixsfsi
+__do_copy_data
+__do_clear_bss

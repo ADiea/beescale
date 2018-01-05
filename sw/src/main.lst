@@ -270,15 +270,15 @@
  284               	/* frame size = 0 */
  285 0000 982F      		mov r25,r24
  286               	.LSM49:
- 287 0002 8091 0000 		lds r24,enter.1671
+ 287 0002 8091 0000 		lds r24,enter.1675
  288               	.LVL27:
  289 0006 8823      		tst r24
  290 0008 01F0      		breq .L26
  291               	.LSM50:
- 292 000a 1092 0000 		sts enter.1671,__zero_reg__
+ 292 000a 1092 0000 		sts enter.1675,__zero_reg__
  293               	.LSM51:
- 294 000e 80E0      		ldi r24,lo8(__c.1672)
- 295 0010 90E0      		ldi r25,hi8(__c.1672)
+ 294 000e 80E0      		ldi r24,lo8(__c.1676)
+ 295 0010 90E0      		ldi r25,hi8(__c.1676)
  296 0012 61E0      		ldi r22,lo8(1)
  297 0014 0E94 0000 		call LCD_puts_f
  298               	.LVL28:
@@ -291,7 +291,7 @@
  305               	.LSM53:
  306 001e 9093 0000 		sts PowerSave,r25
  307               	.LSM54:
- 308 0022 9093 0000 		sts enter.1671,r25
+ 308 0022 9093 0000 		sts enter.1675,r25
  309 0026 8AE0      		ldi r24,lo8(10)
  310 0028 0895      		ret
  311               	.L28:
@@ -304,7 +304,7 @@
  318               	.L29:
  319               	.LSM56:
  320 0032 81E0      		ldi r24,lo8(1)
- 321 0034 8093 0000 		sts enter.1671,r24
+ 321 0034 8093 0000 		sts enter.1675,r24
  322 0038 80E6      		ldi r24,lo8(96)
  323               	.LSM57:
  324 003a 0895      		ret
@@ -319,15 +319,15 @@
  335               	/* frame size = 0 */
  336 0000 982F      		mov r25,r24
  337               	.LSM59:
- 338 0002 8091 0000 		lds r24,enter.1661
+ 338 0002 8091 0000 		lds r24,enter.1665
  339               	.LVL31:
  340 0006 8823      		tst r24
  341 0008 01F0      		breq .L33
  342               	.LSM60:
- 343 000a 1092 0000 		sts enter.1661,__zero_reg__
+ 343 000a 1092 0000 		sts enter.1665,__zero_reg__
  344               	.LSM61:
- 345 000e 80E0      		ldi r24,lo8(__c.1662)
- 346 0010 90E0      		ldi r25,hi8(__c.1662)
+ 345 000e 80E0      		ldi r24,lo8(__c.1666)
+ 346 0010 90E0      		ldi r25,hi8(__c.1666)
  347 0012 61E0      		ldi r22,lo8(1)
  348 0014 0E94 0000 		call LCD_puts_f
  349               	.LVL32:
@@ -352,7 +352,7 @@
  368               	.L37:
  369               	.LSM65:
  370 002e 81E0      		ldi r24,lo8(1)
- 371 0030 8093 0000 		sts enter.1661,r24
+ 371 0030 8093 0000 		sts enter.1665,r24
  372 0034 8EE5      		ldi r24,lo8(94)
  373               	.LSM66:
  374 0036 0895      		ret
@@ -367,12 +367,12 @@
  385               	/* frame size = 0 */
  386 0000 982F      		mov r25,r24
  387               	.LSM68:
- 388 0002 8091 0000 		lds r24,enter.1702
+ 388 0002 8091 0000 		lds r24,enter.1706
  389               	.LVL35:
  390 0006 8823      		tst r24
  391 0008 01F0      		breq .L42
  392               	.LSM69:
- 393 000a 1092 0000 		sts enter.1702,__zero_reg__
+ 393 000a 1092 0000 		sts enter.1706,__zero_reg__
  394 000e 81E0      		ldi r24,lo8(1)
  395               	.LVL36:
  396               	.L42:
@@ -380,7 +380,7 @@
  398 0010 9130      		cpi r25,lo8(1)
  399 0012 01F4      		brne .L43
  400               	.LSM71:
- 401 0014 9093 0000 		sts enter.1702,r25
+ 401 0014 9093 0000 		sts enter.1706,r25
  402 0018 84E6      		ldi r24,lo8(100)
  403               	.LVL37:
  404 001a 0895      		ret
@@ -412,13 +412,13 @@
  430 003a 8823      		tst r24
  431 003c 01F0      		breq .L47
  432               	.LSM76:
- 433 003e 80E0      		ldi r24,lo8(__c.1704)
- 434 0040 90E0      		ldi r25,hi8(__c.1704)
+ 433 003e 80E0      		ldi r24,lo8(__c.1708)
+ 434 0040 90E0      		ldi r25,hi8(__c.1708)
  435 0042 00C0      		rjmp .L50
  436               	.L47:
  437               	.LSM77:
- 438 0044 80E0      		ldi r24,lo8(__c.1706)
- 439 0046 90E0      		ldi r25,hi8(__c.1706)
+ 438 0044 80E0      		ldi r24,lo8(__c.1710)
+ 439 0046 90E0      		ldi r25,hi8(__c.1710)
  440               	.L50:
  441 0048 61E0      		ldi r22,lo8(1)
  442 004a 0E94 0000 		call LCD_puts_f
@@ -500,27 +500,27 @@
  522               	/* frame size = 0 */
  523 0000 982F      		mov r25,r24
  524               	.LSM93:
- 525 0002 8091 0000 		lds r24,enter.1688
+ 525 0002 8091 0000 		lds r24,enter.1692
  526               	.LVL48:
  527 0006 8823      		tst r24
  528 0008 01F0      		breq .L54
  529               	.LSM94:
- 530 000a 1092 0000 		sts enter.1688,__zero_reg__
+ 530 000a 1092 0000 		sts enter.1692,__zero_reg__
  531               	.LSM95:
  532 000e 8091 0000 		lds r24,AutoPowerSave
  533 0012 8823      		tst r24
  534 0014 01F4      		brne .L66
  535               	.L55:
  536               	.LSM96:
- 537 0016 80E0      		ldi r24,lo8(__c.1689)
- 538 0018 90E0      		ldi r25,hi8(__c.1689)
+ 537 0016 80E0      		ldi r24,lo8(__c.1693)
+ 538 0018 90E0      		ldi r25,hi8(__c.1693)
  539 001a 00C0      		rjmp .L64
  540               	.L54:
  541               	.LSM97:
  542 001c 9130      		cpi r25,lo8(1)
  543 001e 01F4      		brne .L57
  544               	.LSM98:
- 545 0020 9093 0000 		sts enter.1688,r25
+ 545 0020 9093 0000 		sts enter.1692,r25
  546 0024 82E6      		ldi r24,lo8(98)
  547 0026 0895      		ret
  548               	.L57:
@@ -570,8 +570,8 @@
  592               	.LSM110:
  593 006c 1092 0000 		sts PowerSaveTimeout,__zero_reg__
  594               	.LSM111:
- 595 0070 80E0      		ldi r24,lo8(__c.1691)
- 596 0072 90E0      		ldi r25,hi8(__c.1691)
+ 595 0070 80E0      		ldi r24,lo8(__c.1695)
+ 596 0072 90E0      		ldi r25,hi8(__c.1695)
  597               	.L64:
  598 0074 61E0      		ldi r22,lo8(1)
  599 0076 0E94 0000 		call LCD_puts_f
@@ -1046,7 +1046,7 @@
  1077               	menu_nextstate:
  1078 00c6 14        		.byte	20
  1079 00c7 04        		.byte	4
- 1080 00c8 5A        		.byte	90
+ 1080 00c8 66        		.byte	102
  1081 00c9 14        		.byte	20
  1082 00ca 02        		.byte	2
  1083 00cb 15        		.byte	21
@@ -1175,7 +1175,7 @@
  1206 0146 5B        		.byte	91
  1207 0147 5A        		.byte	90
  1208 0148 05        		.byte	5
- 1209 0149 14        		.byte	20
+ 1209 0149 66        		.byte	102
  1210 014a 5B        		.byte	91
  1211 014b 04        		.byte	4
  1212 014c 64        		.byte	100
@@ -1242,224 +1242,242 @@
  1273 0189 64        		.byte	100
  1274 018a 05        		.byte	5
  1275 018b 5B        		.byte	91
- 1276 018c 00        		.byte	0
- 1277 018d 00        		.byte	0
- 1278 018e 00        		.byte	0
- 1279               	.global	menu_state
- 1282               	menu_state:
- 1283 018f 14        		.byte	20
- 1284 0190 0000      		.word	MT_TIME
- 1285 0192 0000      		.word	0
- 1286 0194 15        		.byte	21
- 1287 0195 0000      		.word	MT_TIME_CLOCK
- 1288 0197 0000      		.word	0
- 1289 0199 16        		.byte	22
- 1290 019a 0000      		.word	0
- 1291 019c 0000      		.word	gs(ShowClock)
- 1292 019e 17        		.byte	23
- 1293 019f 0000      		.word	MT_TIME_CLOCK_ADJUST
- 1294 01a1 0000      		.word	0
- 1295 01a3 18        		.byte	24
- 1296 01a4 0000      		.word	0
- 1297 01a6 0000      		.word	gs(SetClock)
- 1298 01a8 19        		.byte	25
- 1299 01a9 0000      		.word	MT_TIME_CLOCKFORMAT_ADJUST
- 1300 01ab 0000      		.word	0
- 1301 01ad 24        		.byte	36
- 1302 01ae 0000      		.word	0
- 1303 01b0 0000      		.word	gs(SetClockFormat)
- 1304 01b2 1B        		.byte	27
- 1305 01b3 0000      		.word	MT_TIME_DATE
- 1306 01b5 0000      		.word	0
- 1307 01b7 1C        		.byte	28
- 1308 01b8 0000      		.word	0
- 1309 01ba 0000      		.word	gs(ShowDate)
- 1310 01bc 1D        		.byte	29
- 1311 01bd 0000      		.word	MT_TIME_DATE_ADJUST
- 1312 01bf 0000      		.word	0
- 1313 01c1 1E        		.byte	30
- 1314 01c2 0000      		.word	0
- 1315 01c4 0000      		.word	gs(SetDate)
- 1316 01c6 1F        		.byte	31
- 1317 01c7 0000      		.word	MT_TIME_DATEFORMAT_ADJUST
- 1318 01c9 0000      		.word	0
- 1319 01cb 20        		.byte	32
- 1320 01cc 0000      		.word	0
- 1321 01ce 0000      		.word	gs(SetDateFormat)
- 1322 01d0 28        		.byte	40
- 1323 01d1 0000      		.word	MT_MUSIC
- 1324 01d3 0000      		.word	0
- 1325 01d5 2A        		.byte	42
- 1326 01d6 0000      		.word	0
- 1327 01d8 0000      		.word	gs(SelectSound)
- 1328 01da 2B        		.byte	43
- 1329 01db 0000      		.word	0
- 1330 01dd 0000      		.word	gs(Sound)
- 1331 01df 3C        		.byte	60
- 1332 01e0 0000      		.word	MT_TEMPERATURE
- 1333 01e2 0000      		.word	0
- 1334 01e4 3D        		.byte	61
- 1335 01e5 0000      		.word	0
- 1336 01e7 0000      		.word	gs(TemperatureFunc)
- 1337 01e9 46        		.byte	70
- 1338 01ea 0000      		.word	MT_VOLTAGE
- 1339 01ec 0000      		.word	0
- 1340 01ee 47        		.byte	71
- 1341 01ef 0000      		.word	0
- 1342 01f1 0000      		.word	gs(VoltageFunc)
- 1343 01f3 50        		.byte	80
- 1344 01f4 0000      		.word	MT_LIGHT
- 1345 01f6 0000      		.word	0
- 1346 01f8 51        		.byte	81
- 1347 01f9 0000      		.word	0
- 1348 01fb 0000      		.word	gs(LightFunc)
- 1349 01fd 5A        		.byte	90
- 1350 01fe 0000      		.word	MT_OPTIONS
- 1351 0200 0000      		.word	0
- 1352 0202 5B        		.byte	91
- 1353 0203 0000      		.word	MT_OPTIONS_DISPLAY
- 1354 0205 0000      		.word	0
- 1355 0207 5C        		.byte	92
- 1356 0208 0000      		.word	MT_OPTIONS_DISPLAY_CONTRAST
- 1357 020a 0000      		.word	0
- 1358 020c 5D        		.byte	93
- 1359 020d 0000      		.word	0
- 1360 020f 0000      		.word	gs(SetContrast)
- 1361 0211 5E        		.byte	94
- 1362 0212 0000      		.word	MT_OPTIONS_BOOT
- 1363 0214 0000      		.word	0
- 1364 0216 5F        		.byte	95
- 1365 0217 0000      		.word	0
- 1366 0219 0000      		.word	gs(BootFunc)
- 1367 021b 60        		.byte	96
- 1368 021c 0000      		.word	MT_OPTIONS_POWER_SAVE
- 1369 021e 0000      		.word	0
- 1370 0220 61        		.byte	97
- 1371 0221 0000      		.word	0
- 1372 0223 0000      		.word	gs(PowerSaveFunc)
- 1373 0225 62        		.byte	98
- 1374 0226 0000      		.word	MT_OPTIONS_AUTO_POWER_SAVE
- 1375 0228 0000      		.word	0
- 1376 022a 63        		.byte	99
- 1377 022b 0000      		.word	0
- 1378 022d 0000      		.word	gs(AutoPower)
- 1379 022f 64        		.byte	100
- 1380 0230 0000      		.word	MT_OPTIONS_KEYCLICK
- 1381 0232 0000      		.word	0
- 1382 0234 65        		.byte	101
- 1383 0235 0000      		.word	0
- 1384 0237 0000      		.word	gs(KeyClick)
- 1385 0239 00        		.byte	0
- 1386 023a 0000      		.word	0
- 1387 023c 0000      		.word	0
- 1388               	.global	PowerSaveTimeout
- 1389               		.section	.data.PowerSaveTimeout,"aw",@progbits
- 1392               	PowerSaveTimeout:
- 1393 0000 1E        		.byte	30
- 1394               	.global	AutoPowerSave
- 1395               		.section	.data.AutoPowerSave,"aw",@progbits
- 1398               	AutoPowerSave:
- 1399 0000 01        		.byte	1
- 1400               	.global	gKeyClickStatus
- 1401               		.section	.bss.gKeyClickStatus,"aw",@nobits
- 1404               	gKeyClickStatus:
- 1405 0000 00        		.skip 1,0
- 1406               	.global	PowerSave
- 1407               		.section	.bss.PowerSave,"aw",@nobits
- 1410               	PowerSave:
- 1411 0000 00        		.skip 1,0
- 1412               		.section	.progmem.data
- 1415               	__c.1706:
- 1416 023e 4F66 6600 		.string	"Off"
- 1419               	__c.1704:
- 1420 0242 4F6E 00   		.string	"On"
- 1421               		.section	.data.enter.1702,"aw",@progbits
- 1424               	enter.1702:
- 1425 0000 01        		.byte	1
- 1426               		.section	.progmem.data
- 1429               	__c.1691:
- 1430 0245 4F66 6600 		.string	"Off"
- 1433               	__c.1689:
- 1434 0249 4F66 6600 		.string	"Off"
- 1435               		.section	.data.enter.1688,"aw",@progbits
- 1438               	enter.1688:
- 1439 0000 01        		.byte	1
- 1440               		.section	.progmem.data
- 1443               	__c.1672:
- 1444 024d 5072 6573 		.string	"Press enter to sleep"
- 1444      7320 656E 
- 1444      7465 7220 
- 1444      746F 2073 
- 1444      6C65 6570 
- 1445               		.section	.data.enter.1671,"aw",@progbits
- 1448               	enter.1671:
- 1449 0000 01        		.byte	1
- 1450               		.section	.progmem.data
- 1453               	__c.1662:
- 1454 0262 4A75 6D70 		.string	"Jump to bootloader"
- 1454      2074 6F20 
- 1454      626F 6F74 
- 1454      6C6F 6164 
- 1454      6572 00
- 1455               		.section	.data.enter.1661,"aw",@progbits
- 1458               	enter.1661:
- 1459 0000 01        		.byte	1
- 1460               		.comm state,1,1
- 1557               	.Letext0:
+ 1276 018c 66        		.byte	102
+ 1277 018d 04        		.byte	4
+ 1278 018e 5A        		.byte	90
+ 1279 018f 66        		.byte	102
+ 1280 0190 02        		.byte	2
+ 1281 0191 67        		.byte	103
+ 1282 0192 66        		.byte	102
+ 1283 0193 05        		.byte	5
+ 1284 0194 14        		.byte	20
+ 1285 0195 67        		.byte	103
+ 1286 0196 03        		.byte	3
+ 1287 0197 66        		.byte	102
+ 1288 0198 00        		.byte	0
+ 1289 0199 00        		.byte	0
+ 1290 019a 00        		.byte	0
+ 1291               	.global	menu_state
+ 1294               	menu_state:
+ 1295 019b 14        		.byte	20
+ 1296 019c 0000      		.word	MT_TIME
+ 1297 019e 0000      		.word	0
+ 1298 01a0 15        		.byte	21
+ 1299 01a1 0000      		.word	MT_TIME_CLOCK
+ 1300 01a3 0000      		.word	0
+ 1301 01a5 16        		.byte	22
+ 1302 01a6 0000      		.word	0
+ 1303 01a8 0000      		.word	gs(ShowClock)
+ 1304 01aa 17        		.byte	23
+ 1305 01ab 0000      		.word	MT_TIME_CLOCK_ADJUST
+ 1306 01ad 0000      		.word	0
+ 1307 01af 18        		.byte	24
+ 1308 01b0 0000      		.word	0
+ 1309 01b2 0000      		.word	gs(SetClock)
+ 1310 01b4 19        		.byte	25
+ 1311 01b5 0000      		.word	MT_TIME_CLOCKFORMAT_ADJUST
+ 1312 01b7 0000      		.word	0
+ 1313 01b9 24        		.byte	36
+ 1314 01ba 0000      		.word	0
+ 1315 01bc 0000      		.word	gs(SetClockFormat)
+ 1316 01be 1B        		.byte	27
+ 1317 01bf 0000      		.word	MT_TIME_DATE
+ 1318 01c1 0000      		.word	0
+ 1319 01c3 1C        		.byte	28
+ 1320 01c4 0000      		.word	0
+ 1321 01c6 0000      		.word	gs(ShowDate)
+ 1322 01c8 1D        		.byte	29
+ 1323 01c9 0000      		.word	MT_TIME_DATE_ADJUST
+ 1324 01cb 0000      		.word	0
+ 1325 01cd 1E        		.byte	30
+ 1326 01ce 0000      		.word	0
+ 1327 01d0 0000      		.word	gs(SetDate)
+ 1328 01d2 1F        		.byte	31
+ 1329 01d3 0000      		.word	MT_TIME_DATEFORMAT_ADJUST
+ 1330 01d5 0000      		.word	0
+ 1331 01d7 20        		.byte	32
+ 1332 01d8 0000      		.word	0
+ 1333 01da 0000      		.word	gs(SetDateFormat)
+ 1334 01dc 28        		.byte	40
+ 1335 01dd 0000      		.word	MT_MUSIC
+ 1336 01df 0000      		.word	0
+ 1337 01e1 2A        		.byte	42
+ 1338 01e2 0000      		.word	0
+ 1339 01e4 0000      		.word	gs(SelectSound)
+ 1340 01e6 2B        		.byte	43
+ 1341 01e7 0000      		.word	0
+ 1342 01e9 0000      		.word	gs(Sound)
+ 1343 01eb 3C        		.byte	60
+ 1344 01ec 0000      		.word	MT_TEMPERATURE
+ 1345 01ee 0000      		.word	0
+ 1346 01f0 3D        		.byte	61
+ 1347 01f1 0000      		.word	0
+ 1348 01f3 0000      		.word	gs(TemperatureFunc)
+ 1349 01f5 46        		.byte	70
+ 1350 01f6 0000      		.word	MT_VOLTAGE
+ 1351 01f8 0000      		.word	0
+ 1352 01fa 47        		.byte	71
+ 1353 01fb 0000      		.word	0
+ 1354 01fd 0000      		.word	gs(VoltageFunc)
+ 1355 01ff 50        		.byte	80
+ 1356 0200 0000      		.word	MT_LIGHT
+ 1357 0202 0000      		.word	0
+ 1358 0204 51        		.byte	81
+ 1359 0205 0000      		.word	0
+ 1360 0207 0000      		.word	gs(LightFunc)
+ 1361 0209 5A        		.byte	90
+ 1362 020a 0000      		.word	MT_OPTIONS
+ 1363 020c 0000      		.word	0
+ 1364 020e 5B        		.byte	91
+ 1365 020f 0000      		.word	MT_OPTIONS_DISPLAY
+ 1366 0211 0000      		.word	0
+ 1367 0213 5C        		.byte	92
+ 1368 0214 0000      		.word	MT_OPTIONS_DISPLAY_CONTRAST
+ 1369 0216 0000      		.word	0
+ 1370 0218 5D        		.byte	93
+ 1371 0219 0000      		.word	0
+ 1372 021b 0000      		.word	gs(SetContrast)
+ 1373 021d 5E        		.byte	94
+ 1374 021e 0000      		.word	MT_OPTIONS_BOOT
+ 1375 0220 0000      		.word	0
+ 1376 0222 5F        		.byte	95
+ 1377 0223 0000      		.word	0
+ 1378 0225 0000      		.word	gs(BootFunc)
+ 1379 0227 60        		.byte	96
+ 1380 0228 0000      		.word	MT_OPTIONS_POWER_SAVE
+ 1381 022a 0000      		.word	0
+ 1382 022c 61        		.byte	97
+ 1383 022d 0000      		.word	0
+ 1384 022f 0000      		.word	gs(PowerSaveFunc)
+ 1385 0231 62        		.byte	98
+ 1386 0232 0000      		.word	MT_OPTIONS_AUTO_POWER_SAVE
+ 1387 0234 0000      		.word	0
+ 1388 0236 63        		.byte	99
+ 1389 0237 0000      		.word	0
+ 1390 0239 0000      		.word	gs(AutoPower)
+ 1391 023b 64        		.byte	100
+ 1392 023c 0000      		.word	MT_OPTIONS_KEYCLICK
+ 1393 023e 0000      		.word	0
+ 1394 0240 65        		.byte	101
+ 1395 0241 0000      		.word	0
+ 1396 0243 0000      		.word	gs(KeyClick)
+ 1397 0245 66        		.byte	102
+ 1398 0246 0000      		.word	0
+ 1399 0248 0000      		.word	gs(StateScaleMeasureFunc)
+ 1400 024a 67        		.byte	103
+ 1401 024b 0000      		.word	0
+ 1402 024d 0000      		.word	gs(StateScaleCalibFunc)
+ 1403 024f 00        		.byte	0
+ 1404 0250 0000      		.word	0
+ 1405 0252 0000      		.word	0
+ 1406               	.global	PowerSaveTimeout
+ 1407               		.section	.data.PowerSaveTimeout,"aw",@progbits
+ 1410               	PowerSaveTimeout:
+ 1411 0000 1E        		.byte	30
+ 1412               	.global	AutoPowerSave
+ 1413               		.section	.data.AutoPowerSave,"aw",@progbits
+ 1416               	AutoPowerSave:
+ 1417 0000 01        		.byte	1
+ 1418               	.global	gKeyClickStatus
+ 1419               		.section	.bss.gKeyClickStatus,"aw",@nobits
+ 1422               	gKeyClickStatus:
+ 1423 0000 00        		.skip 1,0
+ 1424               	.global	PowerSave
+ 1425               		.section	.bss.PowerSave,"aw",@nobits
+ 1428               	PowerSave:
+ 1429 0000 00        		.skip 1,0
+ 1430               		.section	.progmem.data
+ 1433               	__c.1710:
+ 1434 0254 4F66 6600 		.string	"Off"
+ 1437               	__c.1708:
+ 1438 0258 4F6E 00   		.string	"On"
+ 1439               		.section	.data.enter.1706,"aw",@progbits
+ 1442               	enter.1706:
+ 1443 0000 01        		.byte	1
+ 1444               		.section	.progmem.data
+ 1447               	__c.1695:
+ 1448 025b 4F66 6600 		.string	"Off"
+ 1451               	__c.1693:
+ 1452 025f 4F66 6600 		.string	"Off"
+ 1453               		.section	.data.enter.1692,"aw",@progbits
+ 1456               	enter.1692:
+ 1457 0000 01        		.byte	1
+ 1458               		.section	.progmem.data
+ 1461               	__c.1676:
+ 1462 0263 5072 6573 		.string	"Press enter to sleep"
+ 1462      7320 656E 
+ 1462      7465 7220 
+ 1462      746F 2073 
+ 1462      6C65 6570 
+ 1463               		.section	.data.enter.1675,"aw",@progbits
+ 1466               	enter.1675:
+ 1467 0000 01        		.byte	1
+ 1468               		.section	.progmem.data
+ 1471               	__c.1666:
+ 1472 0278 4A75 6D70 		.string	"Jump to bootloader"
+ 1472      2074 6F20 
+ 1472      626F 6F74 
+ 1472      6C6F 6164 
+ 1472      6572 00
+ 1473               		.section	.data.enter.1665,"aw",@progbits
+ 1476               	enter.1665:
+ 1477 0000 01        		.byte	1
+ 1478               		.comm state,1,1
+ 1575               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:19     .text.StateMachine:00000000 StateMachine
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1077   .progmem.data:000000c6 menu_nextstate
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:105    .text.Delay:00000000 Delay
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:141    .text.OSCCAL_calibration:00000000 OSCCAL_calibration
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:279    .text.PowerSaveFunc:00000000 PowerSaveFunc
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1448   .data.enter.1671:00000000 enter.1671
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1443   .progmem.data:0000024d __c.1672
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1410   .bss.PowerSave:00000000 PowerSave
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:330    .text.BootFunc:00000000 BootFunc
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1458   .data.enter.1661:00000000 enter.1661
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1453   .progmem.data:00000262 __c.1662
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:380    .text.KeyClick:00000000 KeyClick
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1424   .data.enter.1702:00000000 enter.1702
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1404   .bss.gKeyClickStatus:00000000 gKeyClickStatus
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1419   .progmem.data:00000242 __c.1704
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1415   .progmem.data:0000023e __c.1706
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:455    .text.AutoPowerShowMin:00000000 AutoPowerShowMin
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1392   .data.PowerSaveTimeout:00000000 PowerSaveTimeout
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:517    .text.AutoPower:00000000 AutoPower
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1438   .data.enter.1688:00000000 enter.1688
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1398   .data.AutoPowerSave:00000000 AutoPowerSave
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1433   .progmem.data:00000249 __c.1689
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1429   .progmem.data:00000245 __c.1691
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:619    .text.Initialization:00000000 Initialization
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:675    .text.main:00000000 main
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:19     .text.StateMachine:00000000 StateMachine
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1077   .progmem.data:000000c6 menu_nextstate
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:105    .text.Delay:00000000 Delay
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:141    .text.OSCCAL_calibration:00000000 OSCCAL_calibration
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:279    .text.PowerSaveFunc:00000000 PowerSaveFunc
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1466   .data.enter.1675:00000000 enter.1675
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1461   .progmem.data:00000263 __c.1676
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1428   .bss.PowerSave:00000000 PowerSave
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:330    .text.BootFunc:00000000 BootFunc
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1476   .data.enter.1665:00000000 enter.1665
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1471   .progmem.data:00000278 __c.1666
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:380    .text.KeyClick:00000000 KeyClick
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1442   .data.enter.1706:00000000 enter.1706
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1422   .bss.gKeyClickStatus:00000000 gKeyClickStatus
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1437   .progmem.data:00000258 __c.1708
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1433   .progmem.data:00000254 __c.1710
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:455    .text.AutoPowerShowMin:00000000 AutoPowerShowMin
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1410   .data.PowerSaveTimeout:00000000 PowerSaveTimeout
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:517    .text.AutoPower:00000000 AutoPower
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1456   .data.enter.1692:00000000 enter.1692
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1416   .data.AutoPowerSave:00000000 AutoPowerSave
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1451   .progmem.data:0000025f __c.1693
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1447   .progmem.data:0000025b __c.1695
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:619    .text.Initialization:00000000 Initialization
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:675    .text.main:00000000 main
                             *COM*:00000001 state
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:987    .progmem.data:00000001 MT_TIME
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1282   .progmem.data:0000018f menu_state
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:982    .progmem.data:00000000 MT_AVRBF
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:992    .progmem.data:00000006 MT_TIME_CLOCK
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:997    .progmem.data:0000000c MT_TIME_CLOCK_ADJUST
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1002   .progmem.data:00000019 MT_TIME_CLOCKFORMAT_ADJUST
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1007   .progmem.data:0000002d MT_TIME_DATE
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1012   .progmem.data:00000032 MT_TIME_DATE_ADJUST
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1017   .progmem.data:0000003e MT_TIME_DATEFORMAT_ADJUST
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1022   .progmem.data:00000051 MT_MUSIC
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1027   .progmem.data:00000057 MT_TEMPERATURE
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1032   .progmem.data:00000063 MT_VOLTAGE
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1037   .progmem.data:0000006b MT_LIGHT
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1042   .progmem.data:00000071 MT_OPTIONS
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1047   .progmem.data:00000079 MT_OPTIONS_DISPLAY
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1052   .progmem.data:00000081 MT_OPTIONS_DISPLAY_CONTRAST
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1057   .progmem.data:00000091 MT_OPTIONS_BOOT
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1062   .progmem.data:0000009c MT_OPTIONS_POWER_SAVE
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1067   .progmem.data:000000ac MT_OPTIONS_AUTO_POWER_SAVE
-C:\Users\MainUser\AppData\Local\Temp/ccoqZT7U.s:1072   .progmem.data:000000bc MT_OPTIONS_KEYCLICK
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:987    .progmem.data:00000001 MT_TIME
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1294   .progmem.data:0000019b menu_state
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:982    .progmem.data:00000000 MT_AVRBF
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:992    .progmem.data:00000006 MT_TIME_CLOCK
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:997    .progmem.data:0000000c MT_TIME_CLOCK_ADJUST
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1002   .progmem.data:00000019 MT_TIME_CLOCKFORMAT_ADJUST
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1007   .progmem.data:0000002d MT_TIME_DATE
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1012   .progmem.data:00000032 MT_TIME_DATE_ADJUST
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1017   .progmem.data:0000003e MT_TIME_DATEFORMAT_ADJUST
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1022   .progmem.data:00000051 MT_MUSIC
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1027   .progmem.data:00000057 MT_TEMPERATURE
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1032   .progmem.data:00000063 MT_VOLTAGE
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1037   .progmem.data:0000006b MT_LIGHT
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1042   .progmem.data:00000071 MT_OPTIONS
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1047   .progmem.data:00000079 MT_OPTIONS_DISPLAY
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1052   .progmem.data:00000081 MT_OPTIONS_DISPLAY_CONTRAST
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1057   .progmem.data:00000091 MT_OPTIONS_BOOT
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1062   .progmem.data:0000009c MT_OPTIONS_POWER_SAVE
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1067   .progmem.data:000000ac MT_OPTIONS_AUTO_POWER_SAVE
+C:\Users\MainUser\AppData\Local\Temp/cc6XHGS3.s:1072   .progmem.data:000000bc MT_OPTIONS_KEYCLICK
 
 UNDEFINED SYMBOLS
 LCD_puts_f
@@ -1492,5 +1510,7 @@ TemperatureFunc
 VoltageFunc
 LightFunc
 SetContrast
+StateScaleMeasureFunc
+StateScaleCalibFunc
 __do_copy_data
 __do_clear_bss

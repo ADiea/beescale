@@ -122,15 +122,15 @@
  134               	.LSM20:
  135 0006 1092 7000 		sts 112,__zero_reg__
  136               	.LSM21:
- 137 000a 80E0      		ldi r24,lo8(__c.1486)
- 138 000c 90E0      		ldi r25,hi8(__c.1486)
+ 137 000a 80E0      		ldi r24,lo8(__c.1490)
+ 138 000c 90E0      		ldi r25,hi8(__c.1490)
  139 000e 60E0      		ldi r22,lo8(0)
  140 0010 0E94 0000 		call LCD_puts_f
  141               	.LSM22:
  142 0014 0E94 0000 		call TestWaitEnter
  143               	.LSM23:
- 144 0018 80E0      		ldi r24,lo8(__c.1488)
- 145 001a 90E0      		ldi r25,hi8(__c.1488)
+ 144 0018 80E0      		ldi r24,lo8(__c.1492)
+ 145 001a 90E0      		ldi r25,hi8(__c.1492)
  146 001c 60E0      		ldi r22,lo8(0)
  147 001e 0E94 0000 		call LCD_puts_f
  148               	.L8:
@@ -140,8 +140,8 @@
  152 0026 8330      		cpi r24,lo8(3)
  153 0028 01F4      		brne .L8
  154               	.LSM26:
- 155 002a 80E0      		ldi r24,lo8(__c.1493)
- 156 002c 90E0      		ldi r25,hi8(__c.1493)
+ 155 002a 80E0      		ldi r24,lo8(__c.1497)
+ 156 002c 90E0      		ldi r25,hi8(__c.1497)
  157 002e 60E0      		ldi r22,lo8(0)
  158 0030 0E94 0000 		call LCD_puts_f
  159               	.L9:
@@ -151,8 +151,8 @@
  163 0038 8430      		cpi r24,lo8(4)
  164 003a 01F4      		brne .L9
  165               	.LSM29:
- 166 003c 80E0      		ldi r24,lo8(__c.1498)
- 167 003e 90E0      		ldi r25,hi8(__c.1498)
+ 166 003c 80E0      		ldi r24,lo8(__c.1502)
+ 167 003e 90E0      		ldi r25,hi8(__c.1502)
  168 0040 60E0      		ldi r22,lo8(0)
  169 0042 0E94 0000 		call LCD_puts_f
  170               	.L10:
@@ -162,8 +162,8 @@
  174 004a 8230      		cpi r24,lo8(2)
  175 004c 01F4      		brne .L10
  176               	.LSM32:
- 177 004e 80E0      		ldi r24,lo8(__c.1503)
- 178 0050 90E0      		ldi r25,hi8(__c.1503)
+ 177 004e 80E0      		ldi r24,lo8(__c.1507)
+ 178 0050 90E0      		ldi r25,hi8(__c.1507)
  179 0052 60E0      		ldi r22,lo8(0)
  180 0054 0E94 0000 		call LCD_puts_f
  181               	.L11:
@@ -173,8 +173,8 @@
  185 005c 8530      		cpi r24,lo8(5)
  186 005e 01F4      		brne .L11
  187               	.LSM35:
- 188 0060 80E0      		ldi r24,lo8(__c.1508)
- 189 0062 90E0      		ldi r25,hi8(__c.1508)
+ 188 0060 80E0      		ldi r24,lo8(__c.1512)
+ 189 0062 90E0      		ldi r25,hi8(__c.1512)
  190 0064 60E0      		ldi r22,lo8(0)
  191 0066 0E94 0000 		call LCD_puts_f
  192               	.LSM36:
@@ -213,8 +213,8 @@
  225               	.LSM47:
  226 00aa 1092 8100 		sts 129,__zero_reg__
  227               	.LSM48:
- 228 00ae 80E0      		ldi r24,lo8(__c.1513)
- 229 00b0 90E0      		ldi r25,hi8(__c.1513)
+ 228 00ae 80E0      		ldi r24,lo8(__c.1517)
+ 229 00b0 90E0      		ldi r25,hi8(__c.1517)
  230 00b2 60E0      		ldi r22,lo8(0)
  231 00b4 0E94 0000 		call LCD_puts_f
  232               	.L13:
@@ -266,8 +266,8 @@
  278 0104 9105      		cpc r25,__zero_reg__
  279 0106 00F0      		brlo .L17
  280               	.LSM61:
- 281 0108 80E0      		ldi r24,lo8(__c.1527)
- 282 010a 90E0      		ldi r25,hi8(__c.1527)
+ 281 0108 80E0      		ldi r24,lo8(__c.1531)
+ 282 010a 90E0      		ldi r25,hi8(__c.1531)
  283 010c 60E0      		ldi r22,lo8(0)
  284 010e 0E94 0000 		call LCD_puts_f
  285               	.LSM62:
@@ -294,8 +294,8 @@
  306 0138 4797      		sbiw r24,23
  307 013a 00F0      		brlo .L18
  308               	.LSM70:
- 309 013c 80E0      		ldi r24,lo8(__c.1529)
- 310 013e 90E0      		ldi r25,hi8(__c.1529)
+ 309 013c 80E0      		ldi r24,lo8(__c.1533)
+ 310 013e 90E0      		ldi r25,hi8(__c.1533)
  311 0140 60E0      		ldi r22,lo8(0)
  312 0142 0E94 0000 		call LCD_puts_f
  313               	.LSM71:
@@ -312,8 +312,8 @@
  324 015a 0E94 0000 		call TestWaitEnter
  325               	.L18:
  326               	.LSM76:
- 327 015e 80E0      		ldi r24,lo8(__c.1531)
- 328 0160 90E0      		ldi r25,hi8(__c.1531)
+ 327 015e 80E0      		ldi r24,lo8(__c.1535)
+ 328 0160 90E0      		ldi r25,hi8(__c.1535)
  329 0162 60E0      		ldi r22,lo8(0)
  330 0164 0E94 0000 		call LCD_puts_f
  331               	.LSM77:
@@ -382,8 +382,8 @@
  394 01c8 1817      		cp r17,r24
  395 01ca 01F0      		breq .L21
  396               	.LSM94:
- 397 01cc 80E0      		ldi r24,lo8(__c.1539)
- 398 01ce 90E0      		ldi r25,hi8(__c.1539)
+ 397 01cc 80E0      		ldi r24,lo8(__c.1543)
+ 398 01ce 90E0      		ldi r25,hi8(__c.1543)
  399 01d0 60E0      		ldi r22,lo8(0)
  400 01d2 0E94 0000 		call LCD_puts_f
  401               	.LSM95:
@@ -406,69 +406,69 @@
  418 01ee 00C0      		rjmp .L24
  419               	.LFE3:
  421               		.section	.progmem.data,"a",@progbits
- 424               	__c.1539:
+ 424               	__c.1543:
  425 0000 4572 726F 		.string	"Error DataFlash"
  425      7220 4461 
  425      7461 466C 
  425      6173 6800 
- 428               	__c.1531:
+ 428               	__c.1535:
  429 0010 4C69 6768 		.string	"Light"
  429      7400 
- 432               	__c.1529:
+ 432               	__c.1533:
  433 0016 4572 726F 		.string	"Error Voltage"
  433      7220 566F 
  433      6C74 6167 
  433      6500 
- 436               	__c.1527:
+ 436               	__c.1531:
  437 0024 4572 726F 		.string	"Error Temperature"
  437      7220 5465 
  437      6D70 6572 
  437      6174 7572 
  437      6500 
- 440               	__c.1513:
+ 440               	__c.1517:
  441 0036 4C43 4420 		.string	"LCD test"
  441      7465 7374 
  441      00
- 444               	__c.1508:
+ 444               	__c.1512:
  445 003f 536F 756E 		.string	"Sound"
  445      6400 
- 448               	__c.1503:
+ 448               	__c.1507:
  449 0045 446F 776E 		.string	"Down"
  449      00
- 452               	__c.1498:
+ 452               	__c.1502:
  453 004a 5269 6768 		.string	"Right"
  453      7400 
- 456               	__c.1493:
+ 456               	__c.1497:
  457 0050 5570 00   		.string	"Up"
- 460               	__c.1488:
+ 460               	__c.1492:
  461 0053 4C65 6674 		.string	"Left"
  461      00
- 464               	__c.1486:
+ 464               	__c.1490:
  465 0058 5465 7374 		.string	"Test"
  465      00
  506               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 test.c
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:19     .text.ErrorBeep:00000000 ErrorBeep
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:107    .text.TestWaitEnter:00000000 TestWaitEnter
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:126    .text.Test:00000000 Test
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:464    .progmem.data:00000058 __c.1486
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:460    .progmem.data:00000053 __c.1488
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:456    .progmem.data:00000050 __c.1493
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:452    .progmem.data:0000004a __c.1498
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:448    .progmem.data:00000045 __c.1503
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:444    .progmem.data:0000003f __c.1508
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:440    .progmem.data:00000036 __c.1513
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:436    .progmem.data:00000024 __c.1527
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:432    .progmem.data:00000016 __c.1529
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:428    .progmem.data:00000010 __c.1531
-C:\Users\MainUser\AppData\Local\Temp/cceuF9RO.s:424    .progmem.data:00000000 __c.1539
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:19     .text.ErrorBeep:00000000 ErrorBeep
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:107    .text.TestWaitEnter:00000000 TestWaitEnter
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:126    .text.Test:00000000 Test
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:464    .progmem.data:00000058 __c.1490
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:460    .progmem.data:00000053 __c.1492
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:456    .progmem.data:00000050 __c.1497
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:452    .progmem.data:0000004a __c.1502
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:448    .progmem.data:00000045 __c.1507
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:444    .progmem.data:0000003f __c.1512
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:440    .progmem.data:00000036 __c.1517
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:436    .progmem.data:00000024 __c.1531
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:432    .progmem.data:00000016 __c.1533
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:428    .progmem.data:00000010 __c.1535
+C:\Users\MainUser\AppData\Local\Temp/ccwHfzJk.s:424    .progmem.data:00000000 __c.1543
 
 UNDEFINED SYMBOLS
 Delay

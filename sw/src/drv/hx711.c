@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <avr/io.h>
 #include "main.h"
+#include "hx711.h"
 
 #define HX711_POUT PORTE
 #define HX711_DDR DDRE
@@ -14,38 +15,40 @@
 
 //byte PD_SCK;	// Power Down and Serial Clock Input Pin
 //byte DOUT;		// Serial Data Output Pin
-byte GAIN;		// amplification factor
+char GAIN=1;		// amplification factor
 long OFFSET = 0;	// used for tare weight
-float SCALE = 1; // used to return weight in grams, kg, ounces, whatever
+float SCALE = 1.0f; // used to return weight in grams, kg, ounces, whatever
 
 
 //based on Arduino impl in wiring_shift.c
 char shiftIn() {
 	char value = 0;
 	char i;
+	__asm__ __volatile__ ("nop");
+	__asm__ __volatile__ ("nop");
 
 	for (i = 0; i < 8; ++i) {
 		HX711_POUT |= 1<<HX711_CK;
-		value |= ((HX711_PIN & 1<<HX711_IN)?1:0) << (7 - i);
+		__asm__ __volatile__ ("nop");
+		__asm__ __volatile__ ("nop");
+		if(HX711_PIN & 1<<HX711_IN)
+			value |= 1 << (7 - i);
 		HX711_POUT &= ~(1<<HX711_CK);
+		__asm__ __volatile__ ("nop");
+		__asm__ __volatile__ ("nop");
 	}
 	return value;
 }
 
 void HX711_begin(/*char dout, char pd_sck,*/ char gain) {
-	//PD_SCK = pd_sck;
-	//DOUT = dout;
 
 	HX711_DDR |= 1<<HX711_CK;
 	HX711_DDR &= ~(1<<HX711_IN);
-		
-	//pinMode(PD_SCK, OUTPUT);
-	//pinMode(DOUT, INPUT);
 
 	HX711_set_gain(gain);
 }
 
-bool HX711_is_ready() {
+char HX711_is_ready() {
 	return !(HX711_PIN & 1<<HX711_IN);
 }
 
@@ -72,7 +75,7 @@ long HX711_read() {
 
 	}
 
-	unsigned long value = 0;
+	long value = 0;
 	char data[3] = { 0 };
 	char filler = 0x00;
 
@@ -84,12 +87,16 @@ long HX711_read() {
 	// set the channel and the gain factor for the next reading using the clock pin
 	for (unsigned int i = 0; i < GAIN; i++) {
 		HX711_POUT |= 1<<HX711_CK;
+		__asm__ __volatile__ ("nop");
+		__asm__ __volatile__ ("nop");
 		HX711_POUT &= ~(1<<HX711_CK);
+		__asm__ __volatile__ ("nop");
+		__asm__ __volatile__ ("nop");
 	}
 
 	// Replicate the most significant bit to pad out a 32-bit signed integer
 	if (data[2] & 0x80) {
-		filler = 0xFF;
+		filler = 0xff;
 	} else {
 		filler = 0x00;
 	}
@@ -100,7 +107,7 @@ long HX711_read() {
 			| (unsigned long)(data[1]) << 8
 			| (unsigned long)(data[0]) );
 
-	return (long)(value);
+	return value;
 }
 
 long HX711_read_average(char times) {
@@ -111,7 +118,7 @@ long HX711_read_average(char times) {
 	return sum / times;
 }
 
-double HX711_get_value(char times) {
+long HX711_get_value(char times) {
 	return HX711_read_average(times) - OFFSET;
 }
 
@@ -142,9 +149,14 @@ long HX711_get_offset() {
 
 void HX711_power_down() {
 	HX711_POUT &= ~(1<<HX711_CK);
+	__asm__ __volatile__ ("nop");
+	__asm__ __volatile__ ("nop");
 	HX711_POUT |= 1<<HX711_CK;
+	__asm__ __volatile__ ("nop");
+	__asm__ __volatile__ ("nop");
 }
 
 void HX711_power_up() {
 	HX711_POUT &= ~(1<<HX711_CK);
+	__asm__ __volatile__ ("nop");
 }

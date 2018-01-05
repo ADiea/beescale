@@ -276,14 +276,14 @@
  298               	/* frame size = 0 */
  299 0006 F82E      		mov r15,r24
  300               	.LSM48:
- 301 0008 8091 0000 		lds r24,enter.1458
+ 301 0008 8091 0000 		lds r24,enter.1462
  302               	.LVL19:
  303 000c 8823      		tst r24
  304 000e 01F0      		breq .L35
  305               	.LSM49:
  306 0010 0E94 0000 		call LCD_Clear
  307               	.LSM50:
- 308 0014 1092 0000 		sts enter.1458,__zero_reg__
+ 308 0014 1092 0000 		sts enter.1462,__zero_reg__
  309               	.L35:
  310               	.LSM51:
  311 0018 8091 0000 		lds r24,CONTRAST
@@ -374,7 +374,7 @@
  396 00b8 00C0      		rjmp .L41
  397               	.L40:
  398               	.LSM70:
- 399 00ba F092 0000 		sts enter.1458,r15
+ 399 00ba F092 0000 		sts enter.1462,r15
  400 00be 8CE5      		ldi r24,lo8(92)
  401               	.L41:
  402               	/* epilogue start */
@@ -390,28 +390,28 @@
  413               		.section	.data.CONTRAST,"aw",@progbits
  416               	CONTRAST:
  417 0000 0F        		.byte	15
- 418               		.section	.data.enter.1458,"aw",@progbits
- 421               	enter.1458:
+ 418               		.section	.data.enter.1462,"aw",@progbits
+ 421               	enter.1462:
  422 0000 01        		.byte	1
  503               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 LCD_functions.c
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:2      *ABS*:0000003f __SREG__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:3      *ABS*:0000003e __SP_H__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:4      *ABS*:0000003d __SP_L__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:5      *ABS*:00000034 __CCP__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:19     .text.LCD_puts_f:00000000 LCD_puts_f
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:106    .text.LCD_puts:00000000 LCD_puts
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:180    .text.LCD_putc:00000000 LCD_putc
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:202    .text.LCD_Clear:00000000 LCD_Clear
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:232    .text.LCD_Colon:00000000 LCD_Colon
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:248    .text.LCD_UpdateRequired:00000000 LCD_UpdateRequired
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:275    .text.LCD_FlashReset:00000000 LCD_FlashReset
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:290    .text.SetContrast:00000000 SetContrast
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:421    .data.enter.1458:00000000 enter.1458
-C:\Users\MainUser\AppData\Local\Temp/cc63yr4e.s:416    .data.CONTRAST:00000000 CONTRAST
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:2      *ABS*:0000003f __SREG__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:3      *ABS*:0000003e __SP_H__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:4      *ABS*:0000003d __SP_L__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:5      *ABS*:00000034 __CCP__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:19     .text.LCD_puts_f:00000000 LCD_puts_f
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:106    .text.LCD_puts:00000000 LCD_puts
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:180    .text.LCD_putc:00000000 LCD_putc
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:202    .text.LCD_Clear:00000000 LCD_Clear
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:232    .text.LCD_Colon:00000000 LCD_Colon
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:248    .text.LCD_UpdateRequired:00000000 LCD_UpdateRequired
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:275    .text.LCD_FlashReset:00000000 LCD_FlashReset
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:290    .text.SetContrast:00000000 SetContrast
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:421    .data.enter.1462:00000000 enter.1462
+C:\Users\MainUser\AppData\Local\Temp/cch6pANV.s:416    .data.CONTRAST:00000000 CONTRAST
 
 UNDEFINED SYMBOLS
 gLCD_Update_Required
