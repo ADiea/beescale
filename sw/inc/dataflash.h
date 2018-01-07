@@ -88,10 +88,10 @@ void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigne
 void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr);
 void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr);
 void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr);
-#ifdef MTEXTRAS
+
 void Page_Erase (unsigned int PageAdr); // added by mthomas
 unsigned char Page_Buffer_Compare(unsigned char BufferNo, unsigned int PageAdr); // added by mthomas
-#endif
+
 
 #endif
 // *****************************[ End Of DATAFLASH.H ]*****************************

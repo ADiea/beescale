@@ -4,19 +4,20 @@
 // mt
 #define SWLOWLOW 6
 
-// main.h
+#include "util.h"
 
 void Initialization(void);
 unsigned char StateMachine(char state, unsigned char stimuli);
-char BootFunc(char input);
 char PowerSaveFunc(char input);
 char AutoPower(char input);
-char KeyClick(char input);
 void Delay(unsigned int millisec);
 void OSCCAL_calibration(void);
 
 char StateScaleCalibFunc(char input);
 char StateScaleMeasureFunc(char input);
+char StateScaleAutoMeasureFunc(char input);
+char StateScaleFormat(char input);
+char StateScaleDownload(char input);
 
 #define BOOL    char
 
@@ -58,10 +59,6 @@ char StateScaleMeasureFunc(char input);
 #define ST_TIME_DATE_ADJUST_FUNC        30
 #define ST_TIME_DATEFORMAT_ADJUST       31
 #define ST_TIME_DATEFORMAT_ADJUST_FUNC  32
-#define ST_MUSIC                        40
-#define ST_SOUND_MUSIC                  41
-#define ST_MUSIC_SELECT                 42
-#define ST_MUSIC_PLAY                   43
 #define ST_TEMPERATURE                  60
 #define ST_TEMPERATURE_FUNC             61
 #define ST_VOLTAGE                      70
@@ -72,14 +69,19 @@ char StateScaleMeasureFunc(char input);
 #define ST_OPTIONS_DISPLAY              91
 #define ST_OPTIONS_DISPLAY_CONTRAST     92
 #define ST_OPTIONS_DISPLAY_CONTRAST_FUNC 93
-#define ST_OPTIONS_BOOT                 94
-#define ST_OPTIONS_BOOT_FUNC            95
 #define ST_OPTIONS_POWER_SAVE           96
 #define ST_OPTIONS_POWER_SAVE_FUNC      97
 #define ST_OPTIONS_AUTO_POWER_SAVE      98
 #define ST_OPTIONS_AUTO_POWER_SAVE_FUNC 99
-#define ST_OPTIONS_KEYCLICK             100
-#define ST_OPTIONS_KEYCLICK_FUNC        101
 
-#define ST_SCALE_MEASURE				102
-#define ST_SCALE_CALIB					103
+#define ST_SCALE 						100
+#define ST_SCALE_START					101
+#define ST_SCALE_DOWN					102
+#define ST_SCALE_FORMAT					103
+#define ST_SCALE_WORKING				104
+#define ST_SCALE_DOWN_FUNC				105
+#define ST_SCALE_FORMAT_FUNC			106
+
+
+#define ST_SCALE_MEASURE				107
+#define ST_SCALE_CALIB					108

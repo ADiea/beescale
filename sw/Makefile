@@ -82,11 +82,9 @@ OBJDIR = .
 
 # List C source files here. (C dependencies are automatically generated.)
 SRC = src/$(TARGET).c src/state_scale.c 
-SRC += src/drv/timer0.c src/util/BCD.c src/drv/usart.c src/drv/ADC.c src/drv/RTC.c 
+SRC += src/drv/timer0.c src/util/BCD.c src/util/util.c src/drv/usart.c src/drv/ADC.c src/drv/RTC.c 
 SRC += src/drv/bfeeprom.c src/drv/dataflash.c src/drv/button.c src/drv/hx711.c 
 SRC += src/drv/LCD_functions.c src/drv/LCD_driver.c 
-SRC += src/drv/sound.c 
-SRC += src/util/test.c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC = 

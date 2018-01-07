@@ -346,7 +346,7 @@ ISR(LCD_vect)
 
 
     EOL = FALSE;
-    if (gLCD_Update_Required == TRUE)
+    if (gLCD_Update_Required /*== TRUE*/)
     {
         // Duty cycle of flashing characters
         if (gFlashTimer < (LCD_FLASH_SEED >> 1))

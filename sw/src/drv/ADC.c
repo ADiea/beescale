@@ -41,42 +41,12 @@ const int TEMP_Celsius_pos[] PROGMEM =    // Positive Celsius temperatures (ADC-
 
 const int TEMP_Celsius_neg[] PROGMEM =    // Negative Celsius temperatures (ADC-value)
         {                           // from -1 to -15 degrees
-            815,825,834,843,851,860,868,876,883,891,898,904,911,917,923,
-        };
-
-const int TEMP_Fahrenheit_pos[] PROGMEM =  // Positive Fahrenheit temperatures (ADC-value)
-		{                           // from 0 to 140 degrees
-			938, 935, 932, 929, 926, 923, 920, 916, 913, 909, 906, 902, 898, 
-			894, 891, 887, 882, 878, 874, 870, 865, 861, 856, 851, 847, 842, 
-			837, 832, 827, 822, 816, 811, 806, 800, 795, 789, 783, 778, 772, 
-			766, 760, 754, 748, 742, 735, 729, 723, 716, 710, 703, 697, 690, 
-			684, 677, 670, 663, 657, 650, 643, 636, 629, 622, 616, 609, 602, 
-			595, 588, 581, 574, 567, 560, 553, 546, 539, 533, 526, 519, 512, 
-			505, 498, 492, 485, 478, 472, 465, 459, 452, 446, 439, 433, 426, 
-			420, 414, 408, 402, 396, 390, 384, 378, 372, 366, 360, 355, 349, 
-			344, 338, 333, 327, 322, 317, 312, 307, 302, 297, 292, 287, 282, 
-			277, 273, 268, 264, 259, 255, 251, 246, 242, 238, 234, 230, 226, 
-			222, 219, 215, 211, 207, 204, 200, 197, 194, 190, 187, 
-		};
-
-        
-// mt __flash int LIGHT_ADC[] = // Table used to find the Vref, when using the voltage-reading function 
-const int LIGHT_ADC[] PROGMEM = // Table used to find the Vref, when using the voltage-reading function 
-        { 
-            0x35,0x60,0x80,0x0B0,0x11D,0x13D,0x15A,0x17A,0x197,0x1B9,0x1DA,
-            0x1F9,0x216,0x240,0x26D,0x282,0x2A2,0x2EF,0x332,0x3B0,0x3F2
-        };
-        
-//mt __flash float LIGHT_VOLTAGE[] = // Vref table correspondent to the LIGHT_ADC[] table
-const float LIGHT_VOLTAGE[] PROGMEM = // Vref table correspondent to the LIGHT_ADC[] table
-        {
-            2.818,2.820,2.824,2.827,2.832,2.835,2.839,2.841,2.843,2.847,2.850,
-            2.853,2.857,2.863,2.867,2.870,2.874,2.882,2.893,2.917,2.939
+            815,825,834,843,851,860,868,876,883,891,898,904,911,917,923, 
+			/*UNTESTED*/ 929, 934, 940, 945, 949, 954, 958,  961, 965, 969, 971, 974, 976, 977, 979, 980
         };
 
 
 float Vref = 2.900; // initial value
-char degree = CELSIUS; // char degree = CELCIUS;
 
 
 /*****************************************************************************
@@ -183,89 +153,50 @@ void ADC_periphery(void)
      
     if( ADMUX == TEMPERATURE_SENSOR )
     {
-        if(degree == CELSIUS)
-        {
-            if(ADCresult > 810)         // If it's a negtive temperature
-            {    
-                for (i=0; i<=25; i++)   // Find the temperature
-                {
-                    // mt if (ADCresult <= TEMP_Celcius_neg[i])
-                    if (ADCresult <= (int)pgm_read_word(&TEMP_Celsius_neg[i]))
-                    {
-                        break;
-                    }
-                }
-                
-                LCD_putc(1, '-');       // Put a minus sign in front of the temperature
-            }
-            else if (ADCresult < 800)   // If it's a positive temperature
-            {
-                for (i=0; i<100; i++)  
-                {
-                    // mt if (ADCresult >= TEMP_Celcius_pos[i])
-                    if (ADCresult >= (int)pgm_read_word(&TEMP_Celsius_pos[i]))
-                    {
-                        break;
-                    }
-                }        
-            
-                LCD_putc(1, '+');       // Put a plus sign in front of the temperature
-            }
-            else                        //If the temperature is zero degrees
-            {
-                i = 0;
-                LCD_putc(1, ' ');
-            }
-            
-            Temp = CHAR2BCD2(i);        // Convert from char to bin
-    
-            TL = (Temp & 0x0F) + '0';   // Find the low-byte
-            TH = (Temp >> 4) + '0';     // Find the high-byte
-            
-            LCD_putc(0, ' ');
-            //LCD character 1 is allready written to
-            LCD_putc(2, TH);
-            LCD_putc(3, TL);
-            LCD_putc(4, '*');
-            LCD_putc(5, 'C');
-            LCD_putc(6, '\0');
-        }
-        else if (degree == FAHRENHEIT)
-        {
-            for (i=0; i<=141; i++)   // Find the temperature
-            {
-                // mt if (ADCresult > TEMP_Farenheit_pos[i])
-                if (ADCresult > (int)pgm_read_word(&TEMP_Fahrenheit_pos[i]))
-                {
-                    break;
-                }
-            }        
-        
-            Temp_int = CHAR2BCD3(i);
-        
-            if (i > 99) // if there are three digits
-            {
-                LCD_putc(0, '+');
-                TH = (Temp_int >> 8) + '0';   // Find the high-byte
-                LCD_putc(1, TH);
-            }
-            else    // if only two digits
-            {
-                LCD_putc(0, ' ');
-                LCD_putc(1, '+');
-            }
-            
-            TL = (Temp_int & 0x0F) + '0';   // Find the low-byte
-            TH = ( (Temp_int >> 4) & 0x0F ) + '0';     // Find the high-byte                
+		if(ADCresult > 810)         // If it's a negtive temperature
+		{    
+			for (i=0; i<=31; i++)   // Find the temperature
+			{
+				// mt if (ADCresult <= TEMP_Celcius_neg[i])
+				if (ADCresult <= (int)pgm_read_word(&TEMP_Celsius_neg[i]))
+				{
+					break;
+				}
+			}
+			
+			LCD_putc(1, '-');       // Put a minus sign in front of the temperature
+		}
+		else if (ADCresult < 800)   // If it's a positive temperature
+		{
+			for (i=0; i<100; i++)  
+			{
+				// mt if (ADCresult >= TEMP_Celcius_pos[i])
+				if (ADCresult >= (int)pgm_read_word(&TEMP_Celsius_pos[i]))
+				{
+					break;
+				}
+			}        
+		
+			LCD_putc(1, '+');       // Put a plus sign in front of the temperature
+		}
+		else                        //If the temperature is zero degrees
+		{
+			i = 0;
+			LCD_putc(1, ' ');
+		}
+		
+		Temp = CHAR2BCD2(i);        // Convert from char to bin
 
-            LCD_putc(2, TH);
-            LCD_putc(3, TL);
-            LCD_putc(4, '*');
-            LCD_putc(5, 'F');
-            LCD_putc(6, '\0');
-        
-        }
-
+		TL = (Temp & 0x0F) + '0';   // Find the low-byte
+		TH = (Temp >> 4) + '0';     // Find the high-byte
+		
+		LCD_putc(0, ' ');
+		//LCD character 1 is allready written to
+		LCD_putc(2, TH);
+		LCD_putc(3, TL);
+		LCD_putc(4, '*');
+		LCD_putc(5, 'C');
+		LCD_putc(6, '\0');
 //        Can't set LCD_UpdateRequired = TRUE here cause we are inside the Timer0 interrupt
 //        LCD_UpdateRequired(TRUE, 0);        
 
@@ -274,7 +205,7 @@ void ADC_periphery(void)
     {
         //  Do a Light-measurement first to determine the Vref, 
         //  because the LDR affects the Vref 
-
+/*
         ADCresult_temp = ADCresult;     // Store the ADCresult from the voltage reading
           
         ADC_init(LIGHT_SENSOR);         // Init the ADC to measure light
@@ -329,7 +260,7 @@ void ADC_periphery(void)
         LCD_putc(4, 'V');
         LCD_putc(5, VL);
         LCD_putc(6, '\0');
-        
+*/        
 //        Can't set LCD_UpdateRequired = TRUE here cause we are inside the Timer0 interrupt
 //        LCD_UpdateRequired(TRUE, 0);
                              
@@ -405,17 +336,9 @@ char TemperatureFunc(char input)
     }
     else if (input == KEY_PLUS)
     {   
-        if (degree == FAHRENHEIT)
-            degree = CELSIUS;
-        else
-            degree = FAHRENHEIT;
     }
     else if (input == KEY_MINUS)
     {
-        if (degree == FAHRENHEIT)
-            degree = CELSIUS;
-        else
-            degree = FAHRENHEIT;
     }
     
     return ST_TEMPERATURE_FUNC;

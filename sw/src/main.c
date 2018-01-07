@@ -69,8 +69,7 @@
 #define pLCDREG_test (*(char *)(0xEC))
 
 char PowerSaveTimeout = 30;     // Initial value, enable power save mode after 30 min
-BOOL AutoPowerSave    = TRUE;   // Variable to enable/disable the Auto Power Save func
-volatile BOOL gKeyClickStatus  = FALSE;  // Variable to enable/disable keyclick
+BOOL AutoPowerSave    = FALSE;   // Variable to enable/disable the Auto Power Save func
 
 char PowerSave = FALSE;
 
@@ -176,16 +175,6 @@ __attribute__ ((OS_main)) int main(void)
             }
         }
         
-        
-        // If the joystick is held in the UP and DOWN position at the same time,
-        // activate test-mode
-        // mtA
-        // if( !(PINB & (1<<PORTB7)) && !(PINB & (1<<PORTB6)) )    
-        if( !(PINB & (1<<PINB7)) && !(PINB & (1<<PINB6)) ) {
-            Test();
-        }
-        // mtE
-        
         // Check if the joystick has been in the same position for some time, 
         // then activate auto press of the joystick
         buttons = (~PINB) & PINB_MASK;
@@ -198,7 +187,7 @@ __attribute__ ((OS_main)) int main(void)
         }
         else if( buttons )
         {
-            if( gAutoPressJoystick == TRUE)
+            if( gAutoPressJoystick /*== TRUE*/)
             {
                 PinChangeInterrupt();
                 gAutoPressJoystick = AUTO;
@@ -208,7 +197,7 @@ __attribute__ ((OS_main)) int main(void)
         }
 
         
-        
+        /*
         // go to SLEEP
         if(!gPlaying )              // Do not enter Power save if using UART or playing tunes
         {
@@ -239,6 +228,7 @@ __attribute__ ((OS_main)) int main(void)
            set_sleep_mode(SLEEP_MODE_IDLE);
            sleep_mode();
         }
+		*/
 
     } //End Main loop
 
@@ -337,54 +327,6 @@ void Initialization(void)
         
     LCD_Init();                 // initialize the LCD
 }
-
-
-
-
-
-/*****************************************************************************
-*
-*   Function name : BootFunc
-*
-*   Returns :       char ST_state (to the state-machine)
-*
-*   Parameters :    char input (from joystick)
-*
-*   Purpose :       Reset the ATmega169 which will cause it to start up in the 
-*                   Bootloader-section. (the BOOTRST-fuse must be programmed)
-*
-*****************************************************************************/
-// mt __flash char TEXT_BOOT[]                     
-// mt - as in jw-patch: const char TEXT_BOOT[] PROGMEM	= "Jump to bootloader";
-
-char BootFunc(char input)
-{
-    static char enter = 1;
-    
-    if(enter)
-    {
-        enter = 0;
-        // mt jw LCD_puts_f(TEXT_BOOT, 1);
-        LCD_puts_f(PSTR("Jump to bootloader"), 1);
-    }
-    else if(input == KEY_ENTER)
-    {
-        WDTCR = (1<<WDCE) | (1<<WDE);     //Enable Watchdog Timer to give reset
-        while(1);   // wait for watchdog-reset, since the BOOTRST-fuse is 
-                    // programmed, the Boot-section will be entered upon reset.
-    }
-    else if (input == KEY_PREV)
-    {
-        enter = 1;
-        return ST_OPTIONS_BOOT;
-    }
-    
-    return ST_OPTIONS_BOOT_FUNC;
-}
-
-
-
-
 
 /*****************************************************************************
 *
@@ -514,56 +456,6 @@ char AutoPower(char input)
         
     return ST_OPTIONS_AUTO_POWER_SAVE_FUNC;    
 }
-
-
-
-
-/*****************************************************************************
-*
-*   Function name : KeyClick
-*
-*   Returns :       char ST_state (to the state-machine)
-*
-*   Parameters :    char input (from joystick)
-*
-*   Purpose :       Enable/Disable keyclick
-*
-*****************************************************************************/
-char KeyClick(char input)
-{
-	static uint8_t enter = 1;
-	uint8_t show;
-
-	if ( enter ) {
-		enter = 0;
-		show  = 1;
-	}
-	else {
-		show = 0;
-	}
-		
-	if (input == KEY_ENTER)
-	{
-		enter = 1;
-		return ST_OPTIONS_KEYCLICK;
-	}
-
-	if ( (input == KEY_PLUS) || (input == KEY_MINUS) ) {
-		gKeyClickStatus = ~gKeyClickStatus;
-		show = 1;
-	}
-
-	if ( show ) {
-		if ( gKeyClickStatus )
-			LCD_puts_f(PSTR("On"),1);
-		else
-			LCD_puts_f(PSTR("Off"),1);
-		LCD_UpdateRequired(TRUE, 0);
-	}
-
-	return ST_OPTIONS_KEYCLICK_FUNC;
-}
-
 
 
 

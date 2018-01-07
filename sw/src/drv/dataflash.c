@@ -175,23 +175,14 @@ void Page_To_Buffer (unsigned int PageAdr, unsigned char BufferNo)
 	DF_CS_inactive;												//make sure to toggle CS signal in order
 	DF_CS_active;												//to reset dataflash command decoder
 	
-	if (1 == BufferNo)											//transfer flash page to buffer 1
-	{
-		DF_SPI_RW(FlashToBuf1Transfer);							//transfer to buffer 1 op-code
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
-		DF_SPI_RW(0x00);										//don't cares
-	}
-#ifdef USE_BUFFER2
-	else	
-	if (2 == BufferNo)											//transfer flash page to buffer 2
-	{
-		DF_SPI_RW(FlashToBuf2Transfer);							//transfer to buffer 2 op-code
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
-		DF_SPI_RW(0x00);										//don't cares
-	}
-#endif
+	unsigned char opCode = FlashToBuf1Transfer;
+	if(2 == BufferNo)
+		opCode = FlashToBuf2Transfer;
+	
+	DF_SPI_RW(opCode);							//transfer to buffer 1 op-code
+	DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
+	DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
+	DF_SPI_RW(0x00);										//don't cares
 	
 	DF_CS_inactive;												//initiate the transfer
 	DF_CS_active;
@@ -223,28 +214,16 @@ unsigned char Buffer_Read_Byte (unsigned char BufferNo, unsigned int IntPageAdr)
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
 	
-	if (1 == BufferNo)							//read byte from buffer 1
-	{
-		DF_SPI_RW(Buf1Read);					//buffer 1 read op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(0x00);						//don't cares
-		data = DF_SPI_RW(0x00);					//read byte
-	}
-
-#ifdef USE_BUFFER2
-	else
-	if (2 == BufferNo)							//read byte from buffer 2
-	{
-		DF_SPI_RW(Buf2Read);					//buffer 2 read op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(0x00);						//don't cares
-		data = DF_SPI_RW(0x00);					//read byte
-	}
-#endif
+	unsigned char opCode = Buf1Read;
+	if(2 == BufferNo)
+		opCode = Buf2Read;
+	
+	DF_SPI_RW(opCode);					//buffer 1 read op-code
+	DF_SPI_RW(0x00);						//don't cares
+	DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
+	DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
+	DF_SPI_RW(0x00);						//don't cares
+	data = DF_SPI_RW(0x00);					//read byte
 	
 	return data;								//return the read data byte
 }
@@ -273,37 +252,21 @@ void Buffer_Read_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned 
 
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
+
+	unsigned char opCode = Buf1Read;
+	if(2 == BufferNo)
+		opCode = Buf2Read;
 	
-	if (1 == BufferNo)							//read byte(s) from buffer 1
+	DF_SPI_RW(opCode);					//buffer 1 read op-code
+	DF_SPI_RW(0x00);						//don't cares
+	DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
+	DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
+	DF_SPI_RW(0x00);						//don't cares
+	for( i=0; i<No_of_bytes; i++)
 	{
-		DF_SPI_RW(Buf1Read);					//buffer 1 read op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(0x00);						//don't cares
-		for( i=0; i<No_of_bytes; i++)
-		{
-			*(BufferPtr) = DF_SPI_RW(0x00);		//read byte and put it in AVR buffer pointed to by *BufferPtr
-			BufferPtr++;						//point to next element in AVR buffer
-		}
+		*(BufferPtr) = DF_SPI_RW(0x00);		//read byte and put it in AVR buffer pointed to by *BufferPtr
+		BufferPtr++;						//point to next element in AVR buffer
 	}
-	
-#ifdef USE_BUFFER2
-	else
-	if (2 == BufferNo)							//read byte(s) from buffer 2
-	{
-		DF_SPI_RW(Buf2Read);					//buffer 2 read op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(0x00);						//don't cares
-		for( i=0; i<No_of_bytes; i++)
-		{
-			*(BufferPtr) = DF_SPI_RW(0x00);		//read byte and put it in AVR buffer pointed to by *BufferPtr
-			BufferPtr++;						//point to next element in AVR buffer
-		}
-	}
-#endif
 }
 //NB : Sjekk at (IntAdr + No_of_bytes) < buffersize, hvis ikke blir det bare ball..
 //mtA 
@@ -331,24 +294,14 @@ void Buffer_Write_Enable (unsigned char BufferNo, unsigned int IntPageAdr)
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
 	
-	if (1 == BufferNo)							//write enable to buffer 1
-	{
-		DF_SPI_RW(Buf1Write);					//buffer 1 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-	}
+	unsigned char opCode = Buf1Write;
+	if(2 == BufferNo)
+		opCode = Buf2Write;	
 	
-#ifdef USE_BUFFER2
-	else
-	if (2 == BufferNo)							//write enable to buffer 2
-	{
-		DF_SPI_RW(Buf2Write);					//buffer 2 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-	}
-#endif
+	DF_SPI_RW(opCode);					//buffer 1 write op-code
+	DF_SPI_RW(0x00);						//don't cares
+	DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
+	DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
 }
 
 
@@ -372,27 +325,16 @@ void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigne
 	
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
-	
-	if (1 == BufferNo)							//write byte to buffer 1
-	{
-		DF_SPI_RW(Buf1Write);					//buffer 1 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(Data);						//write data byte
-	}
 
-#ifdef USE_BUFFER2
-	else
-	if (2 == BufferNo)							//write byte to buffer 2
-	{
-		DF_SPI_RW(Buf2Write);					//buffer 2 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		DF_SPI_RW(Data);						//write data byte
-	}		
-#endif
+	unsigned char opCode = Buf1Write;
+	if(2 == BufferNo)
+		opCode = Buf2Write;		
+
+	DF_SPI_RW(opCode);					//buffer 1 write op-code
+	DF_SPI_RW(0x00);						//don't cares
+	DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
+	DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
+	DF_SPI_RW(Data);						//write data byte
 }
 
 
@@ -419,35 +361,20 @@ void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned
 
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
-	
-	if (1 == BufferNo)							//write byte(s) to buffer 1
-	{
-		DF_SPI_RW(Buf1Write);					//buffer 1 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		for( i=0; i<No_of_bytes; i++)
-		{
-			DF_SPI_RW(*(BufferPtr));			//write byte pointed at by *BufferPtr to dataflash buffer 1 location
-			BufferPtr++;						//point to next element in AVR buffer
-		}
-	}
 
-#ifdef USE_BUFFER2
-	else
-	if (2 == BufferNo)							//write byte(s) to buffer 2
+	unsigned char opCode = Buf1Write;
+	if(2 == BufferNo)
+		opCode = Buf2Write;
+	
+	DF_SPI_RW(opCode);					//buffer 1 write op-code
+	DF_SPI_RW(0x00);						//don't cares
+	DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
+	DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
+	for( i=0; i<No_of_bytes; i++)
 	{
-		DF_SPI_RW(Buf2Write);					//buffer 2 write op-code
-		DF_SPI_RW(0x00);						//don't cares
-		DF_SPI_RW((unsigned char)(IntPageAdr>>8));//upper part of internal buffer address
-		DF_SPI_RW((unsigned char)(IntPageAdr));	//lower part of internal buffer address
-		for( i=0; i<No_of_bytes; i++)
-		{
-			DF_SPI_RW(*(BufferPtr));			//write byte pointed at by *BufferPtr to dataflash buffer 2 location
-			BufferPtr++;						//point to next element in AVR buffer
-		}
+		DF_SPI_RW(*(BufferPtr));			//write byte pointed at by *BufferPtr to dataflash buffer 1 location
+		BufferPtr++;						//point to next element in AVR buffer
 	}
-#endif
 }
 //NB : Monitorer busy-flag i status-reg.
 //NB : Sjekk at (IntAdr + No_of_bytes) < buffersize, hvis ikke blir det bare ball..
@@ -473,26 +400,16 @@ void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr)
 {
 	DF_CS_inactive;												//make sure to toggle CS signal in order
 	DF_CS_active;												//to reset dataflash command decoder
-		
-	if (1 == BufferNo)											//program flash page from buffer 1
-	{
-		DF_SPI_RW(Buf1ToFlashWE);								//buffer 1 to flash with erase op-code
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
-		DF_SPI_RW(0x00);										//don't cares
-	}
-
-#ifdef USE_BUFFER2
-	else	
-	if (2 == BufferNo)											//program flash page from buffer 2
-	{
-		DF_SPI_RW(Buf2ToFlashWE);								//buffer 2 to flash with erase op-code
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
-		DF_SPI_RW(0x00);										//don't cares
-	}
-#endif
 	
+	unsigned char opCode = Buf1ToFlashWE;
+	if(2 == BufferNo)
+		opCode = Buf2ToFlashWE;
+	
+	DF_SPI_RW(opCode);								//buffer 1 to flash with erase op-code
+	DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
+	DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
+	DF_SPI_RW(0x00);										//don't cares
+
 	DF_CS_inactive;												//initiate flash page programming
 	DF_CS_active;												
 	
@@ -527,7 +444,6 @@ void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr)
 	DF_SPI_RW(0x00);
 }
 
-#ifdef MTEXTRAS
 /*****************************************************************************
 *
 *	Function name : Page_Buffer_Compare
@@ -550,22 +466,14 @@ unsigned char Page_Buffer_Compare(unsigned char BufferNo, unsigned int PageAdr)
 	DF_CS_inactive;					//make sure to toggle CS signal in order
 	DF_CS_active;					//to reset dataflash command decoder
 	
-	if (1 == BufferNo)									
-	{
-		DF_SPI_RW(FlashToBuf1Compare);	
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address and MSB of int.page adr.
-		DF_SPI_RW(0x00);	// "dont cares"
-	}
-	#ifdef USE_BUFFER2
-	else if (2 == BufferNo)											
-	{
-		DF_SPI_RW(FlashToBuf2Compare);						
-		DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
-		DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address
-		DF_SPI_RW(0x00);										//don't cares
-	}
-	#endif
+	unsigned char opCode = FlashToBuf1Compare;
+	if(2 == BufferNo)
+		opCode = FlashToBuf2Compare;
+
+	DF_SPI_RW(opCode);	
+	DF_SPI_RW((unsigned char)(PageAdr >> (16 - PageBits)));	//upper part of page address
+	DF_SPI_RW((unsigned char)(PageAdr << (PageBits - 8)));	//lower part of page address and MSB of int.page adr.
+	DF_SPI_RW(0x00);	// "dont cares"
 	
 	DF_CS_inactive;												
 	DF_CS_active;		
@@ -605,6 +513,5 @@ void Page_Erase (unsigned int PageAdr)
 
 	while(!(Read_DF_status() & 0x80));							//monitor the status register, wait until busy-flag is high
 }
-#endif
-// MTEXTRAS
+
 // *****************************[ End Of DATAFLASH.C ]*************************
