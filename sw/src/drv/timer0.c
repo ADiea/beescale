@@ -40,6 +40,8 @@ TIMER_CALLBACK_FUNC CallbackFunc[TIMER0_NUM_CALLBACKS];
 // mt char CountDownTimers[TIMER0_NUM_COUNTDOWNTIMERS];
 uint8_t CountDownTimers[TIMER0_NUM_COUNTDOWNTIMERS];
 
+unsigned long gSystemTick = 0;
+
 /*****************************************************************************
 *
 *   Function name : Timer0_Init
@@ -100,6 +102,8 @@ ISR(TIMER0_COMP_vect)
 {
     // mt char i;
     uint8_t i;
+
+    gSystemTick++;
     
     for (i=0; i<TIMER0_NUM_CALLBACKS; i++)
         if (CallbackFunc[i] != NULL)

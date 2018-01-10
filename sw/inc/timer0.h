@@ -10,6 +10,7 @@ void Timer0_Init(void);
 BOOL Timer0_RegisterCallbackFunction(TIMER_CALLBACK_FUNC pFunc);
 BOOL Timer0_RemoveCallbackFunction(TIMER_CALLBACK_FUNC pFunc);
 
+extern unsigned long gSystemTick;
 
 //mt 
 // char Timer0_AllocateCountdownTimer();

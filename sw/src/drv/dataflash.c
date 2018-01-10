@@ -74,6 +74,11 @@ unsigned int dfGetPageCount(void)
 	return 2048;
 }
 
+unsigned int dfGetBlockCount(void)
+{
+	return 2048/8;
+}
+
 unsigned int dfGetPageSize(void)
 {
 	return PageSize;
@@ -180,7 +185,7 @@ unsigned char Read_DF_status (void)
 *	Purpose :		Transfers a page from flash to dataflash SRAM buffer
 *					
 ******************************************************************************/
-void Page_To_Buffer (unsigned int PageAdr, unsigned char BufferNo)
+void dfPageToBuffer (unsigned int PageAdr, unsigned char BufferNo)
 {
 	DF_CS_inactive;												//make sure to toggle CS signal in order
 	DF_CS_active;												//to reset dataflash command decoder
@@ -242,7 +247,7 @@ unsigned char Buffer_Read_Byte (unsigned char BufferNo, unsigned int IntPageAdr)
 
 /*****************************************************************************
 *
-*	Function name : Buffer_Read_Str
+*	Function name : dfBufferReadStream
 *
 *	Returns :		None
 *
@@ -256,7 +261,7 @@ unsigned char Buffer_Read_Byte (unsigned char BufferNo, unsigned int IntPageAdr)
 *					buffer pointed to by *BufferPtr
 *
 ******************************************************************************/
-void Buffer_Read_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr)
+unsigned int dfBufferReadStream (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr)
 {
 	unsigned int i;
 
@@ -277,6 +282,7 @@ void Buffer_Read_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned 
 		*(BufferPtr) = DF_SPI_RW(0x00);		//read byte and put it in AVR buffer pointed to by *BufferPtr
 		BufferPtr++;						//point to next element in AVR buffer
 	}
+	return i;
 }
 //NB : Sjekk at (IntAdr + No_of_bytes) < buffersize, hvis ikke blir det bare ball..
 //mtA 
@@ -299,7 +305,7 @@ void Buffer_Read_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned 
 *					this mode before accessing other dataflash functionalities 
 *
 ******************************************************************************/
-void Buffer_Write_Enable (unsigned char BufferNo, unsigned int IntPageAdr)
+void dfBufferWriteEnable (unsigned char BufferNo, unsigned int IntPageAdr)
 {
 	DF_CS_inactive;								//make sure to toggle CS signal in order
 	DF_CS_active;								//to reset dataflash command decoder
@@ -318,7 +324,7 @@ void Buffer_Write_Enable (unsigned char BufferNo, unsigned int IntPageAdr)
 
 /*****************************************************************************
 *
-*	Function name : Buffer_Write_Byte
+*	Function name : dfBufferWriteByte
 *
 *	Returns :		None
 *
@@ -330,7 +336,7 @@ void Buffer_Write_Enable (unsigned char BufferNo, unsigned int IntPageAdr)
 *					internal SRAM buffers
 *
 ******************************************************************************/
-void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigned char Data)
+void dfBufferWriteByte (unsigned char BufferNo, unsigned int IntPageAdr, unsigned char Data)
 {
 	
 	DF_CS_inactive;								//make sure to toggle CS signal in order
@@ -352,7 +358,7 @@ void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigne
 *
 *	Function name : Buffer_Write_Str
 *
-*	Returns :		None
+*	Returns :		Number of bytes written
 *
 *	Parameters :	BufferNo	->	Decides usage of either buffer 1 or 2
 *					IntPageAdr	->	Internal page address
@@ -365,7 +371,7 @@ void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigne
 *					pointed to by *BufferPtr
 *
 ******************************************************************************/
-void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr)
+unsigned int dfBufferWriteStream (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr)
 {
 	unsigned int i;
 
@@ -385,6 +391,8 @@ void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned
 		DF_SPI_RW(*(BufferPtr));			//write byte pointed at by *BufferPtr to dataflash buffer 1 location
 		BufferPtr++;						//point to next element in AVR buffer
 	}
+	
+	return i;
 }
 //NB : Monitorer busy-flag i status-reg.
 //NB : Sjekk at (IntAdr + No_of_bytes) < buffersize, hvis ikke blir det bare ball..
@@ -396,7 +404,7 @@ void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned
 
 /*****************************************************************************
 *
-*	Function name : Buffer_To_Page
+*	Function name : dfBufferToPage
 *
 *	Returns :		None
 *
@@ -406,7 +414,7 @@ void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned
 *	Purpose :		Transfers a page from dataflash SRAM buffer to flash
 *					
 ******************************************************************************/
-void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr)
+void dfBufferToPage (unsigned char BufferNo, unsigned int PageAdr)
 {
 	DF_CS_inactive;												//make sure to toggle CS signal in order
 	DF_CS_active;												//to reset dataflash command decoder
@@ -429,7 +437,7 @@ void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr)
 
 /*****************************************************************************
 *
-*	Function name : Cont_Flash_Read_Enable
+*	Function name : dfContFlashReadEnable
 *
 *	Returns :		None
 *
@@ -439,7 +447,7 @@ void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr)
 *	Purpose :		Initiates a continuous read from a location in the DataFlash
 *
 ******************************************************************************/
-void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr)
+void dfContFlashReadEnable (unsigned int PageAdr, unsigned int IntPageAdr)
 {
 	DF_CS_inactive;																//make sure to toggle CS signal in order
 	DF_CS_active;																//to reset dataflash command decoder
@@ -456,7 +464,7 @@ void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr)
 
 /*****************************************************************************
 *
-*	Function name : Page_Buffer_Compare
+*	Function name : dfPageBufferCompare
 *
 *	Returns :		0 match, 1 if mismatch
 *
@@ -469,7 +477,7 @@ void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr)
 *   included by ATMEL
 *					
 ******************************************************************************/
-unsigned char Page_Buffer_Compare(unsigned char BufferNo, unsigned int PageAdr)
+unsigned char dfPageBufferCompare(unsigned char BufferNo, unsigned int PageAdr)
 {
 	unsigned char stat;
 	
@@ -523,5 +531,33 @@ void Page_Erase (unsigned int PageAdr)
 
 	while(!(Read_DF_status() & 0x80));							//monitor the status register, wait until busy-flag is high
 }
+
+/*****************************************************************************
+*
+*	Function name : dfBlockErase
+*
+*	Returns :		None
+*
+*	Parameters :	BlockAdr		->	Address of flash block to be erased
+*
+*	Purpose :		Sets all bits in the given block (all bytes are 0xff)
+*
+******************************************************************************/
+void dfBlockErase (unsigned int BlockAdr)
+{
+	DF_CS_inactive;																//make sure to toggle CS signal in order
+	DF_CS_active;																//to reset dataflash command decoder
+
+	DF_SPI_RW(FlashBlockErase);										//Page erase op-code
+	DF_SPI_RW((unsigned char)(BlockAdr >> 4));	//upper part of block address
+	DF_SPI_RW((unsigned char)(BlockAdr << 4));	//lower part of block address 
+	DF_SPI_RW(0x00);	// "dont cares"
+
+	DF_CS_inactive;												//initiate flash block erase
+	DF_CS_active;
+
+	while(!(Read_DF_status() & 0x80));							//monitor the status register, wait until busy-flag is high
+}
+
 
 // *****************************[ End Of DATAFLASH.C ]*************************

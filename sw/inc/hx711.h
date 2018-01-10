@@ -20,6 +20,9 @@ long HX711_read();
 // returns an average reading; times = how many times to read
 long HX711_read_average(char times /*= 10*/);
 
+//return average of 18 values without the min and max (remaining only 16 values)
+long HX711_read_average_filtered();
+
 // returns (read_average() - OFFSET), that is the current value without the tare weight; times = how many readings to do
 long HX711_get_value(char times /*= 1*/);
 

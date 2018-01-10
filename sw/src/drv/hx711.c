@@ -118,6 +118,32 @@ long HX711_read_average(char times) {
 	return sum / times;
 }
 
+//return average of 18 values without the min and max (remaining only 16 values)
+long HX711_read_average_filtered()
+{
+	long sum=0, min, max, sample;
+	
+	for (char i = 0; i < 18; i++) 
+	{
+		sample = HX711_read();
+		
+		if(i == 0)
+			min = max = sample;
+		
+		if(sample < min)
+			min = sample;
+		
+		if(sample > max)
+			max = sample;
+		
+		sum += sample;
+	}
+	
+	sum = sum - min - max;
+	
+	return sum >> 4; //div by 16
+}
+
 long HX711_get_value(char times) {
 	return HX711_read_average(times) - OFFSET;
 }

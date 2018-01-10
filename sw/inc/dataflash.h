@@ -47,6 +47,7 @@
 
 
 //Dataflash opcodes
+#define FlashBlockErase				0x50	//Erase one block of 8 pages
 #define FlashPageRead				0x52	// Main memory page read
 #define FlashToBuf1Transfer 		0x53	// Main memory page to buffer 1 transfer
 #define Buf1Read					0x54	// Buffer 1 read
@@ -80,19 +81,29 @@
 void DF_SPI_init (void);
 unsigned char DF_SPI_RW (unsigned char output);
 unsigned char Read_DF_status (void);
-void Page_To_Buffer (unsigned int PageAdr, unsigned char BufferNo);
+
+//READ
+void dfPageToBuffer (unsigned int PageAdr, unsigned char BufferNo);
 unsigned char Buffer_Read_Byte (unsigned char BufferNo, unsigned int IntPageAdr);
-void Buffer_Read_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr);
-void Buffer_Write_Enable (unsigned char BufferNo, unsigned int IntPageAdr);
-void Buffer_Write_Byte (unsigned char BufferNo, unsigned int IntPageAdr, unsigned char Data);
-void Buffer_Write_Str (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr);
-void Buffer_To_Page (unsigned char BufferNo, unsigned int PageAdr);
-void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr);
+unsigned int dfBufferReadStream (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr);
+void dfContFlashReadEnable (unsigned int PageAdr, unsigned int IntPageAdr);
 
-void Page_Erase (unsigned int PageAdr); // added by mthomas
-unsigned char Page_Buffer_Compare(unsigned char BufferNo, unsigned int PageAdr); // added by mthomas
+//WRITE
+void dfBufferWriteEnable (unsigned char BufferNo, unsigned int IntPageAdr);
+void dfBufferWriteByte (unsigned char BufferNo, unsigned int IntPageAdr, unsigned char Data);
+unsigned int dfBufferWriteStream (unsigned char BufferNo, unsigned int IntPageAdr, unsigned int No_of_bytes, unsigned char *BufferPtr);
+void dfBufferToPage (unsigned char BufferNo, unsigned int PageAdr);
 
+//ERASE
+void Page_Erase (unsigned int PageAdr);
+void dfBlockErase (unsigned int BlockAdr);
+
+//COMPARE
+unsigned char dfPageBufferCompare(unsigned char BufferNo, unsigned int PageAdr);
+
+//UTIL
 unsigned int dfGetPageCount(void);
+unsigned int dfGetBlockCount(void);
 unsigned int dfGetPageSize(void);
 
 

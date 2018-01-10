@@ -20,4 +20,6 @@
 
 // Function declarations
 char CHAR2BCD2(char input);
-unsigned int CHAR2BCD3(char input);
+unsigned int CHAR2BCD3(unsigned int input);
+unsigned int CHAR2BCD4(unsigned int input);
+void CHAR2BCD8_signed(long input, char* out, char sz);
