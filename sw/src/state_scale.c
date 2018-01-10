@@ -3,6 +3,7 @@
 #include "button.h"
 #include "LCD_functions.h"
 #include "usart.h"
+#include "dataflash.h"
 
 void doCalibration(void)
 {
@@ -24,6 +25,21 @@ char StateScaleAutoMeasureFunc(char input)
 
 char StateScaleFormat(char input)
 {
+	unsigned int i;
+	LCD_puts("xx START", 1);
+	
+	char hf[]="0123456789ABCDEF"; //todo progmem
+	unsigned char status = Read_DF_status();
+	
+	LCD_putc(0, hf[status >> 4]);
+	LCD_putc(1, hf[status & 0xF]);
+	
+	LCD_UpdateRequired(1, 1);
+	
+	//for(i=0;i<
+
+	Delay(1500);
+	return ST_SCALE_FORMAT;
 }
 
 char StateScaleDownload(char input)

@@ -92,6 +92,9 @@ void Cont_Flash_Read_Enable (unsigned int PageAdr, unsigned int IntPageAdr);
 void Page_Erase (unsigned int PageAdr); // added by mthomas
 unsigned char Page_Buffer_Compare(unsigned char BufferNo, unsigned int PageAdr); // added by mthomas
 
+unsigned int dfGetPageCount(void);
+unsigned int dfGetPageSize(void);
+
 
 #endif
 // *****************************[ End Of DATAFLASH.H ]*****************************

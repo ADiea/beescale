@@ -69,6 +69,16 @@ unsigned char PageBits = 0;
 unsigned int  PageSize = 0;
 // Functions
 
+unsigned int dfGetPageCount(void)
+{
+	return 2048;
+}
+
+unsigned int dfGetPageSize(void)
+{
+	return PageSize;
+}
+
 /*****************************************************************************
 *
 *	Function name : DF_SPI_init
