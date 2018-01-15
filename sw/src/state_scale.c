@@ -101,8 +101,15 @@ char StateScaleAutoMeasureFunc(char input)
 			LCD_putc(5, (display & 0xF) + '0');
 			LCD_UpdateRequired(1, 0);
 
+			HX711_power_up();
+			sample.scale = HX711_read_average_filtered();	
+
+			//ignore first reading after powerup, redo reading
 			sample.scale = HX711_read_average_filtered();
-			sample.scaleAve = HX711_read_average_window() + 1;
+			sample.scaleAve = HX711_read_average_window();
+			
+			HX711_power_down();
+			
 			sample.temp = ADC_read();
 
 			if(writePtr + sizeof(tScaleSample) >= nPageSz)
