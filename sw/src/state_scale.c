@@ -10,7 +10,7 @@
 #include "ADC.h"
 #include "BCD.h"
 
-#define SCALE_AUTO_MEASURE_INTERVAL (unsigned long)(1000 * 60 * 1)
+#define SCALE_AUTO_MEASURE_INTERVAL (unsigned long)(18000) 
 
 void doCalibration(void)
 {
@@ -66,6 +66,16 @@ char StateScaleAutoMeasureFunc(char input)
 		header.tMonth = gMONTH;
 		header.tYear = gYEAR;
 		
+		LCD_puts("PG    ", 1);
+		display = CHAR2BCD4(i);
+		LCD_putc(2, (display>>12 & 0xF) + '0');
+		LCD_putc(3, (display>>8 & 0xF) + '0');
+		LCD_putc(4, (display>>4 & 0xF) + '0');
+		LCD_putc(5, (display & 0xF) + '0');
+		LCD_UpdateRequired(1, 0);
+		
+		Delay(2000);
+		
 		LCD_puts("TARE", 1);
 		HX711_begin(128); 
 		HX711_power_up();
@@ -76,7 +86,7 @@ char StateScaleAutoMeasureFunc(char input)
 		writePtr += dfBufferWriteStream(1, writePtr, sizeof(tScaleHdr), (unsigned char*)&header);
 
 		//3. start measurements
-		LCD_puts("M xxxx", 1);
+		LCD_puts("M xxxx xxxx", 1);
 		i=0;
 		
 		ADC_init(TEMPERATURE_SENSOR);
@@ -92,6 +102,7 @@ char StateScaleAutoMeasureFunc(char input)
 			LCD_UpdateRequired(1, 0);
 
 			sample.scale = HX711_read_average_filtered();
+			sample.scaleAve = HX711_read_average_window() + 1;
 			sample.temp = ADC_read();
 
 			if(writePtr + sizeof(tScaleSample) >= nPageSz)
@@ -105,8 +116,16 @@ char StateScaleAutoMeasureFunc(char input)
 			writePtr += dfBufferWriteStream(1, writePtr, sizeof(tScaleSample), (unsigned char*)&sample);
 			
 			lastMeasurementTime = gSystemTick;
-			while(gSystemTick - lastMeasurementTime > SCALE_AUTO_MEASURE_INTERVAL)
+			while(gSystemTick - lastMeasurementTime < SCALE_AUTO_MEASURE_INTERVAL)
 			{
+			
+				/*display = CHAR2BCD4(SCALE_AUTO_MEASURE_INTERVAL - (gSystemTick - lastMeasurementTime));
+				LCD_putc(2, (display>>12 & 0xF) + '0');
+				LCD_putc(3, (display>>8 & 0xF) + '0');
+				LCD_putc(4, (display>>4 & 0xF) + '0');
+				LCD_putc(5, (display & 0xF) + '0');
+				LCD_UpdateRequired(1, 1);*/
+			
 				ch = getkey();
 				if(ch == KEY_PREV)
 				{
@@ -189,32 +208,35 @@ char StateScaleFormat(char input)
 char StateScaleDownload(char input)
 {
 	//Usart_puts("TARE");
-	unsigned int i, nPages, nPageSz, display, readPtr=0;
+	unsigned int i, j=0, nPages, nPageSz, display, readPtr=0;
 	char ch, buf[12];
 		
 	tScaleSample sample;
 	tScaleHdr header;
 	
 	LCD_puts("D     ", 1);
+	Usart_puts("DOWNLOAD START\n");
 	
 	nPages = dfGetPageCount();
 	nPageSz = dfGetPageSize();
 
 	for(i=0; i<nPages; ++i)
 	{
-		display = CHAR2BCD4(++i);
+		display = CHAR2BCD4(i);
 		LCD_putc(2, (display>>12 & 0xF) + '0');
 		LCD_putc(3, (display>>8 & 0xF) + '0');
 		LCD_putc(4, (display>>4 & 0xF) + '0');
 		LCD_putc(5, (display & 0xF) + '0');
 		LCD_UpdateRequired(1, 0);
 		
+		j=0;
+		
 		dfContFlashReadEnable(i, 0);
 		ch = DF_SPI_RW(0x00);
 		readPtr = 1;
 		
 		if(ch == PAGE_MAGIC_IS_EMPTY)
-			continue;
+			break;
 		
 		dfPageToBuffer(i, 1);
 		
@@ -222,22 +244,22 @@ char StateScaleDownload(char input)
 		{
 			Usart_puts("HDR\n");
 			//read header
-			readPtr += dfBufferReadStream(1, 1, sizeof(tScaleHdr), (unsigned char*)&header );
+			readPtr += dfBufferReadStream(1, readPtr, sizeof(tScaleHdr), (unsigned char*)&header );
 						
 			CHAR2BCD8_signed(header.version, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
-			CHAR2BCD8_signed(header.tSecond, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
-			CHAR2BCD8_signed(header.tMinute, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
+			Usart_puts(buf); Usart_Tx('|');
 			CHAR2BCD8_signed(header.tHour, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
+			Usart_puts(buf); Usart_Tx(':');
+			CHAR2BCD8_signed(header.tMinute, buf, sizeof(buf));
+			Usart_puts(buf); Usart_Tx(':');
+			CHAR2BCD8_signed(header.tSecond, buf, sizeof(buf));
+			Usart_puts(buf); Usart_Tx('|');
 			CHAR2BCD8_signed(header.tDay, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
+			Usart_puts(buf); Usart_Tx('/');
 			CHAR2BCD8_signed(header.tMonth, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
+			Usart_puts(buf); Usart_Tx('/');
 			CHAR2BCD8_signed(header.tYear, buf, sizeof(buf));
-			Usart_puts(buf); Usart_Tx(',');
+			Usart_puts(buf); Usart_Tx('|');
 			CHAR2BCD8_signed(header.tareValue, buf, sizeof(buf));
 			Usart_puts(buf); Usart_Tx('\n');
 		}
@@ -245,17 +267,32 @@ char StateScaleDownload(char input)
 		while(readPtr + sizeof(tScaleSample) < nPageSz)
 		{
 			readPtr += dfBufferReadStream(1, readPtr, sizeof(tScaleSample), (unsigned char*)&sample );
-			Usart_Tx('(');
+			//Usart_Tx('(');
+			
+			CHAR2BCD8_signed(i, buf, sizeof(buf));
+			Usart_puts(buf);
+			
+			Usart_Tx('|');
+			
+			CHAR2BCD8_signed(++j, buf, sizeof(buf));
+			Usart_puts(buf);
+			
+			Usart_Tx('|');
 			
 			CHAR2BCD8_signed(sample.scale, buf, sizeof(buf));
 			Usart_puts(buf);
 			
-			Usart_Tx(',');
+			Usart_Tx('|');
+			
+			CHAR2BCD8_signed(sample.scaleAve, buf, sizeof(buf));
+			Usart_puts(buf);
+			
+			Usart_Tx('|');
 			
 			CHAR2BCD8_signed(sample.temp, buf, sizeof(buf));
 			Usart_puts(buf);			
 			
-			Usart_Tx(')');
+			Usart_Tx('\n');
 		}
 		
 		

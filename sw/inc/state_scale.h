@@ -5,7 +5,7 @@
 #define PAGE_MAGIC_HAS_HEADER 0x01
 #define PAGE_MAGIC_HAS_DATA 0x02
 
-#define SCALELOG_VERSION 0
+#define SCALELOG_VERSION 1
 
 typedef struct _tScaleHdr
 {
@@ -27,6 +27,7 @@ typedef struct _tScaleHdr
 typedef struct _tScaleSample
 {
 	long scale;
+	long scaleAve;
 	int temp;
 } tScaleSample;
 

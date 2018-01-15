@@ -13,6 +13,25 @@
 #define HX711_CK 6
 #define HX711_IN 5
 
+#define NOP_SCK \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); 
+	
+/*	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); \
+	__asm__ __volatile__ ("nop"); 
+*/
 //byte PD_SCK;	// Power Down and Serial Clock Input Pin
 //byte DOUT;		// Serial Data Output Pin
 char GAIN=1;		// amplification factor
@@ -24,18 +43,16 @@ float SCALE = 1.0f; // used to return weight in grams, kg, ounces, whatever
 char shiftIn() {
 	char value = 0;
 	char i;
-	__asm__ __volatile__ ("nop");
-	__asm__ __volatile__ ("nop");
+	
+	NOP_SCK
 
 	for (i = 0; i < 8; ++i) {
 		HX711_POUT |= 1<<HX711_CK;
-		__asm__ __volatile__ ("nop");
-		__asm__ __volatile__ ("nop");
+		NOP_SCK
 		if(HX711_PIN & 1<<HX711_IN)
 			value |= 1 << (7 - i);
 		HX711_POUT &= ~(1<<HX711_CK);
-		__asm__ __volatile__ ("nop");
-		__asm__ __volatile__ ("nop");
+		NOP_SCK
 	}
 	return value;
 }
@@ -87,11 +104,9 @@ long HX711_read() {
 	// set the channel and the gain factor for the next reading using the clock pin
 	for (unsigned int i = 0; i < GAIN; i++) {
 		HX711_POUT |= 1<<HX711_CK;
-		__asm__ __volatile__ ("nop");
-		__asm__ __volatile__ ("nop");
+		NOP_SCK
 		HX711_POUT &= ~(1<<HX711_CK);
-		__asm__ __volatile__ ("nop");
-		__asm__ __volatile__ ("nop");
+		NOP_SCK
 	}
 
 	// Replicate the most significant bit to pad out a 32-bit signed integer
@@ -144,6 +159,32 @@ long HX711_read_average_filtered()
 	return sum >> 4; //div by 16
 }
 
+//return average of 18 values without the min and max (remaining only 16 values)
+long HX711_read_average_window()
+{
+	long sum=0, min, max, sample;
+	
+	for (char i = 0; i < 18; i++) 
+	{
+		sample = HX711_read_average_filtered();
+		
+		if(i == 0)
+			min = max = sample;
+		
+		if(sample < min)
+			min = sample;
+		
+		if(sample > max)
+			max = sample;
+		
+		sum += sample;
+	}
+	
+	sum = sum - min - max;
+	
+	return sum >> 4; //div by 16
+}
+
 long HX711_get_value(char times) {
 	return HX711_read_average(times) - OFFSET;
 }
@@ -175,14 +216,12 @@ long HX711_get_offset() {
 
 void HX711_power_down() {
 	HX711_POUT &= ~(1<<HX711_CK);
-	__asm__ __volatile__ ("nop");
-	__asm__ __volatile__ ("nop");
+	NOP_SCK
 	HX711_POUT |= 1<<HX711_CK;
-	__asm__ __volatile__ ("nop");
-	__asm__ __volatile__ ("nop");
+	NOP_SCK
 }
 
 void HX711_power_up() {
 	HX711_POUT &= ~(1<<HX711_CK);
-	__asm__ __volatile__ ("nop");
+	NOP_SCK
 }

@@ -130,7 +130,7 @@ unsigned int CHAR2BCD4(unsigned int input)
 void CHAR2BCD8_signed(long input, char* out, char sz)
 {
 	char ngt = (input < 0);
-	unsigned char i=0;
+	unsigned char i=0, nonzerostart=0;
 
 	if(ngt)
 		input = -input;
@@ -151,7 +151,17 @@ void CHAR2BCD8_signed(long input, char* out, char sz)
 			ch++;
 			input -= p;
 		}
-		out[i++] = ch + '0';
+		
+		if(ch == 0 && !nonzerostart)
+		{
+			//; nothing to do
+		}
+		else
+		{
+			nonzerostart = 1;
+			out[i++] = ch + '0';
+		}
+		
 		p /= 10;
 	}
 	out[i++] = input + '0';
